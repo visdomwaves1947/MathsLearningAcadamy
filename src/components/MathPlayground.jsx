@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { quickMathChallenges } from '../data/quizData';
-import { 
-  Trophy, 
-  Flame, 
-  HelpCircle, 
-  CheckCircle, 
-  XCircle, 
-  RotateCcw, 
-  Sparkles, 
-  Award, 
+import {
+  Trophy,
+  Flame,
+  HelpCircle,
+  CheckCircle,
+  XCircle,
+  RotateCcw,
+  Sparkles,
+  Award,
   ArrowRight,
   BrainCircuit
 } from 'lucide-react';
@@ -73,7 +73,7 @@ export default function MathPlayground({ onOpenBooking }) {
   return (
     <section id="speed-quiz" className="py-20 relative bg-[#EBF0F7] border-t border-b border-[#CBD5E1]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border border-purple-200 text-purple-800 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -90,7 +90,7 @@ export default function MathPlayground({ onOpenBooking }) {
 
         {/* Quiz Interactive Box */}
         <div className="bg-[#DFE7F2] rounded-2xl border border-[#BAC9DC] shadow-lg p-6 sm:p-10 relative overflow-hidden">
-          
+
           {/* Top Status Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#CAD8EA]">
             <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export default function MathPlayground({ onOpenBooking }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                 {currentQ.options.map((opt, idx) => {
                   let btnStyle = "bg-[#D2DFEE] border-[#B8CADF] text-slate-900 hover:bg-[#C5D5E7] hover:border-indigo-400";
-                  
+
                   if (isAnswered) {
                     if (idx === currentQ.correct) {
                       btnStyle = "bg-emerald-100 border-emerald-500 text-emerald-950 font-bold shadow-xs";
