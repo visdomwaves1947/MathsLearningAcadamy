@@ -110,38 +110,38 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Outer Glow */}
-              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-300/40 via-purple-300/40 to-sky-300/40 blur-xl"></div>
+              <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-300/40 via-purple-300/40 to-sky-300/40 dark:from-indigo-500/20 dark:via-purple-500/20 dark:to-sky-500/20 blur-xl"></div>
               
               {/* Glass Card in Soft Mist Theme (No Stark White) */}
-              <div className="relative rounded-2xl bg-[#DFE7F2]/90 border border-[#BAC9DC] p-6 shadow-xl backdrop-blur-xl">
+              <div className="relative rounded-2xl bg-[#DFE7F2]/90 dark:bg-[#131927]/95 border border-[#BAC9DC] dark:border-[#243048] p-6 shadow-xl backdrop-blur-xl">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-[#CAD8EA]">
+                <div className="flex items-center justify-between pb-4 border-b border-[#CAD8EA] dark:border-[#1E293B]">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-rose-400"></div>
                     <div className="w-3 h-3 rounded-full bg-amber-400"></div>
                     <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
-                    <span className="text-xs font-mono text-slate-600 ml-2">Visual Theorem Lab</span>
+                    <span className="text-xs font-mono text-slate-600 dark:text-slate-300 ml-2">Visual Theorem Lab</span>
                   </div>
-                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200">
+                  <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/70">
                     Live Demo
                   </span>
                 </div>
 
                 {/* Subtitle inside card */}
                 <div className="mt-4 flex items-center justify-between">
-                  <h2 className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                    <Compass size={16} className="text-indigo-700" />
+                  <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <Compass size={16} className="text-indigo-700 dark:text-indigo-400" />
                     Pythagorean Theorem: a² + b² = c²
                   </h2>
-                  <span className="text-xs font-mono text-emerald-800 font-bold bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200">
+                  <span className="text-xs font-mono text-emerald-800 dark:text-emerald-300 font-bold bg-emerald-100 dark:bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800/70">
                     c = {hypotenuse}
                   </span>
                 </div>
 
                 {/* Triangle SVG Canvas */}
-                <div className="my-5 bg-[#D2DFEE] rounded-xl p-4 border border-[#B8CADF] flex items-center justify-center relative overflow-hidden shadow-inner">
-                  <div className="absolute top-2 left-2 text-[10px] font-mono text-slate-600 font-semibold">
+                <div className="my-5 bg-[#D2DFEE] dark:bg-[#0D121F] rounded-xl p-4 border border-[#B8CADF] dark:border-[#243048] flex items-center justify-center relative overflow-hidden shadow-inner">
+                  <div className="absolute top-2 left-2 text-[10px] font-mono text-slate-600 dark:text-slate-400 font-semibold">
                     θ = {angleDeg}°
                   </div>
                   
@@ -186,7 +186,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                           <text
                             x={(ox + px) / 2}
                             y={oy + 18}
-                            fill="#0369A1"
+                            fill="#0284C7"
                             fontSize="13"
                             fontWeight="bold"
                             textAnchor="middle"
@@ -198,7 +198,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                           <text
                             x={px + 22}
                             y={(oy + qy) / 2 + 4}
-                            fill="#BE123C"
+                            fill="#F43F5E"
                             fontSize="13"
                             fontWeight="bold"
                             textAnchor="middle"
@@ -210,7 +210,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                           <text
                             x={(ox + qx) / 2 - 16}
                             y={(oy + qy) / 2 - 8}
-                            fill="#047857"
+                            fill="#10B981"
                             fontSize="13"
                             fontWeight="bold"
                             textAnchor="middle"
@@ -225,12 +225,12 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                 </div>
 
                 {/* Sliders to manipulate math parameters */}
-                <div className="space-y-3 bg-[#D2DFEE] p-3.5 rounded-xl border border-[#B8CADF]">
+                <div className="space-y-3 bg-[#D2DFEE] dark:bg-[#0D121F] p-3.5 rounded-xl border border-[#B8CADF] dark:border-[#243048]">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-800 font-semibold flex items-center gap-1.5">
+                    <span className="text-slate-800 dark:text-slate-200 font-semibold flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-sky-500"></span> Base (a):
                     </span>
-                    <span className="font-mono font-bold text-sky-700">{sideA} units</span>
+                    <span className="font-mono font-bold text-sky-700 dark:text-sky-400">{sideA} units</span>
                   </div>
                   <input
                     type="range"
@@ -239,14 +239,14 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                     step="1"
                     value={sideA}
                     onChange={(e) => setSideA(Number(e.target.value))}
-                    className="w-full accent-indigo-600 h-1.5 bg-[#B8C8DB] rounded-lg cursor-pointer"
+                    className="w-full accent-indigo-600 h-1.5 bg-[#B8C8DB] dark:bg-slate-700 rounded-lg cursor-pointer"
                   />
 
                   <div className="flex items-center justify-between text-xs pt-1">
-                    <span className="text-slate-800 font-semibold flex items-center gap-1.5">
+                    <span className="text-slate-800 dark:text-slate-200 font-semibold flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span> Height (b):
                     </span>
-                    <span className="font-mono font-bold text-rose-700">{sideB} units</span>
+                    <span className="font-mono font-bold text-rose-700 dark:text-rose-400">{sideB} units</span>
                   </div>
                   <input
                     type="range"
@@ -255,25 +255,25 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                     step="1"
                     value={sideB}
                     onChange={(e) => setSideB(Number(e.target.value))}
-                    className="w-full accent-purple-600 h-1.5 bg-[#B8C8DB] rounded-lg cursor-pointer"
+                    className="w-full accent-purple-600 h-1.5 bg-[#B8C8DB] dark:bg-slate-700 rounded-lg cursor-pointer"
                   />
                 </div>
 
                 {/* Formula Breakdown pill */}
-                <div className="mt-3.5 p-3 rounded-lg bg-indigo-100 border border-indigo-200 text-xs font-mono text-indigo-950 flex items-center justify-between">
+                <div className="mt-3.5 p-3 rounded-lg bg-indigo-100/90 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/70 text-xs font-mono text-indigo-950 dark:text-indigo-200 flex items-center justify-between">
                   <span>√({sideA}² + {sideB}²) = √({sideA * sideA + sideB * sideB})</span>
-                  <span className="font-bold text-emerald-800">={hypotenuse}</span>
+                  <span className="font-bold text-emerald-800 dark:text-emerald-400">={hypotenuse}</span>
                 </div>
 
                 {/* Live Floating Tutor Card */}
-                <div className="mt-4 flex items-center justify-between pt-3 border-t border-[#CAD8EA] text-xs text-slate-600">
+                <div className="mt-4 flex items-center justify-between pt-3 border-t border-[#CAD8EA] dark:border-[#1E293B] text-xs text-slate-600 dark:text-slate-400">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-800 font-bold text-[11px]">
+                    <div className="w-6 h-6 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800/70 flex items-center justify-center text-emerald-800 dark:text-emerald-400 font-bold text-[11px]">
                       ✓
                     </div>
-                    <span className="text-slate-800 font-medium">Live 1-on-1 Concept Visualizer</span>
+                    <span className="text-slate-800 dark:text-slate-200 font-medium">Live 1-on-1 Concept Visualizer</span>
                   </div>
-                  <span className="text-indigo-700 font-bold hover:underline cursor-pointer" onClick={onOpenBooking}>
+                  <span className="text-indigo-700 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 font-bold hover:underline cursor-pointer" onClick={onOpenBooking}>
                     Try with Tutor →
                   </span>
                 </div>

@@ -3,6 +3,7 @@
 @layer base {
   * {
     box-sizing: border-box;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease, fill 0.2s ease;
   }
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -15,7 +16,13 @@
   }
 }
 
-/* Custom Math Grid Background Pattern for Soft Light Theme (No stark white) */
+/* Dark mode body default */
+html.dark body {
+  background-color: #0B0F19;
+  color: #F8FAFC;
+}
+
+/* Custom Math Grid Background Pattern */
 .bg-math-grid {
   background-size: 36px 36px;
   background-image: 
@@ -23,8 +30,18 @@
     linear-gradient(to bottom, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
 }
 
+html.dark .bg-math-grid {
+  background-image: 
+    linear-gradient(to right, rgba(99, 102, 241, 0.14) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(99, 102, 241, 0.14) 1px, transparent 1px);
+}
+
 .bg-radial-glow {
   background: radial-gradient(circle at 50% 15%, rgba(99, 102, 241, 0.12) 0%, rgba(168, 85, 247, 0.06) 35%, transparent 70%);
+}
+
+html.dark .bg-radial-glow {
+  background: radial-gradient(circle at 50% 15%, rgba(99, 102, 241, 0.24) 0%, rgba(168, 85, 247, 0.14) 35%, transparent 70%);
 }
 
 .glass-card {
@@ -33,6 +50,12 @@
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid #BCCADC;
   box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+html.dark .glass-card {
+  background: rgba(19, 25, 39, 0.85);
+  border: 1px solid #243048;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
 }
 
 .glass-card-hover {
@@ -62,7 +85,7 @@
   animation: floatRev 7s ease-in-out infinite;
 }
 
-/* Custom scrollbar for light mist theme */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -75,4 +98,261 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #64748B;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* ============================================================
+   DARK THEME COMPREHENSIVE SECTION & ELEMENT ADAPTATION
+   ============================================================ */
+
+/* Page & Section Backgrounds */
+html.dark [class*="bg-[#EBF0F7]"] {
+  background-color: #0B0F19 !important;
+}
+html.dark [class*="bg-[#E5ECF4]"] {
+  background-color: #0E1322 !important;
+}
+
+/* Cards & Surface Containers */
+html.dark [class*="bg-[#DFE7F2]"] {
+  background-color: #131927 !important;
+}
+html.dark [class*="bg-[#D2DFEE]"] {
+  background-color: #0D121F !important;
+}
+html.dark [class*="bg-[#D6E2F0]"] {
+  background-color: #151D2F !important;
+}
+html.dark [class*="bg-[#E1EAF5]"] {
+  background-color: #182236 !important;
+}
+html.dark [class*="bg-[#C5D5E7]"] {
+  background-color: #1E283D !important;
+}
+html.dark [class*="bg-[#D4E0ED]"] {
+  background-color: #1A2338 !important;
+}
+html.dark [class*="bg-[#D5E1EE]"] {
+  background-color: #161F32 !important;
+}
+html.dark [class*="bg-[#CCD8E6]"] {
+  background-color: #141A29 !important;
+}
+html.dark [class*="bg-[#BACADC]"] {
+  background-color: #1E293B !important;
+}
+html.dark [class*="bg-[#B8C8DB]"] {
+  background-color: #1E293B !important;
+}
+
+/* Gradients in Dark Mode */
+html.dark [class*="from-indigo-100"] {
+  --tw-gradient-from: rgba(30, 27, 75, 0.85) !important;
+  --tw-gradient-to: rgba(30, 27, 75, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+}
+html.dark [class*="via-[#DFE7F2]"] {
+  --tw-gradient-to: rgba(19, 25, 39, 0) !important;
+  --tw-gradient-stops: var(--tw-gradient-from), #131927, var(--tw-gradient-to) !important;
+}
+html.dark [class*="to-purple-100"] {
+  --tw-gradient-to: rgba(59, 7, 100, 0.85) !important;
+}
+
+/* Hover States in Dark Mode */
+html.dark [class*="hover:bg-[#D4E0ED]"]:hover {
+  background-color: #1A2338 !important;
+}
+html.dark [class*="hover:bg-[#C5D5E7]"]:hover {
+  background-color: #1E283D !important;
+}
+html.dark [class*="hover:bg-[#D2DFEE]"]:hover {
+  background-color: #1A2338 !important;
+}
+html.dark [class*="hover:bg-[#D5E1EE]"]:hover {
+  background-color: #161F32 !important;
+}
+
+/* Borders */
+html.dark [class*="border-[#BAC9DC]"] {
+  border-color: #243048 !important;
+}
+html.dark [class*="border-[#CAD8EA]"] {
+  border-color: #1E293B !important;
+}
+html.dark [class*="border-[#CBD5E1]"] {
+  border-color: #1E293B !important;
+}
+html.dark [class*="border-[#B8CADF]"] {
+  border-color: #243048 !important;
+}
+html.dark [class*="border-[#BCCADC]"] {
+  border-color: #243048 !important;
+}
+html.dark [class*="border-[#9AB3CF]"] {
+  border-color: #384A68 !important;
+}
+html.dark [class*="border-[#A7B9CD]"] {
+  border-color: #334155 !important;
+}
+html.dark [class*="hover:border-[#9AB3CF]"]:hover {
+  border-color: #4B6082 !important;
+}
+html.dark [class*="divide-[#CAD8EA]"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #1E293B !important;
+}
+
+/* Typography & Text Contrast */
+html.dark .text-slate-950,
+html.dark .text-slate-900 {
+  color: #F8FAFC !important;
+}
+html.dark .text-slate-800 {
+  color: #E2E8F0 !important;
+}
+html.dark .text-slate-700 {
+  color: #CBD5E1 !important;
+}
+html.dark .text-slate-600 {
+  color: #94A3B8 !important;
+}
+html.dark .text-slate-500 {
+  color: #64748B !important;
+}
+
+/* Accents and Highlight Text */
+html.dark .text-indigo-950 {
+  color: #E0E7FF !important;
+}
+html.dark .text-indigo-900 {
+  color: #C7D2FE !important;
+}
+html.dark .text-indigo-800 {
+  color: #A5B4FC !important;
+}
+html.dark .text-indigo-700 {
+  color: #818CF8 !important;
+}
+html.dark .text-purple-700 {
+  color: #C084FC !important;
+}
+html.dark .text-purple-800 {
+  color: #D8B4FE !important;
+}
+html.dark .text-purple-950 {
+  color: #F3E8FF !important;
+}
+html.dark .text-emerald-700,
+html.dark .text-emerald-800 {
+  color: #34D399 !important;
+}
+html.dark .text-emerald-950 {
+  color: #A7F3D0 !important;
+}
+html.dark .text-amber-700,
+html.dark .text-amber-800 {
+  color: #FBBF24 !important;
+}
+html.dark .text-amber-950 {
+  color: #FDE68A !important;
+}
+html.dark .text-sky-700 {
+  color: #38BDF8 !important;
+}
+
+/* Floating Math Symbols in Hero */
+html.dark .text-indigo-900\/10 {
+  color: rgba(165, 180, 252, 0.16) !important;
+}
+html.dark .text-purple-900\/10 {
+  color: rgba(216, 180, 254, 0.16) !important;
+}
+html.dark .text-sky-900\/10 {
+  color: rgba(125, 211, 252, 0.16) !important;
+}
+
+/* Badges & Micro Pills */
+html.dark [class*="bg-indigo-100"] {
+  background-color: rgba(99, 102, 241, 0.22) !important;
+}
+html.dark [class*="border-indigo-200"] {
+  border-color: rgba(99, 102, 241, 0.35) !important;
+}
+html.dark [class*="bg-emerald-100"] {
+  background-color: rgba(16, 185, 129, 0.22) !important;
+}
+html.dark [class*="border-emerald-200"],
+html.dark [class*="border-emerald-300"] {
+  border-color: rgba(16, 185, 129, 0.35) !important;
+}
+html.dark [class*="bg-purple-100"] {
+  background-color: rgba(168, 85, 247, 0.22) !important;
+}
+html.dark [class*="border-purple-200"],
+html.dark [class*="border-purple-300"] {
+  border-color: rgba(168, 85, 247, 0.35) !important;
+}
+html.dark [class*="bg-amber-100"] {
+  background-color: rgba(245, 158, 11, 0.22) !important;
+}
+html.dark [class*="border-amber-200"],
+html.dark [class*="border-amber-300"] {
+  border-color: rgba(245, 158, 11, 0.35) !important;
+}
+html.dark [class*="bg-rose-100"] {
+  background-color: rgba(244, 63, 94, 0.22) !important;
+}
+html.dark [class*="border-rose-200"],
+html.dark [class*="border-rose-300"] {
+  border-color: rgba(244, 63, 94, 0.35) !important;
+}
+
+/* Hero & Visual Theorem Lab SVG in Dark Mode */
+html.dark #triGradLight stop:first-child {
+  stop-color: #6366F1;
+  stop-opacity: 0.45;
+}
+html.dark #triGradLight stop:last-child {
+  stop-color: #A855F7;
+  stop-opacity: 0.3;
+}
+html.dark polygon[stroke="#4338CA"] {
+  stroke: #818CF8 !important;
+}
+
+/* Interactive Graph Canvas Dark Mode Styles */
+html.dark svg line[stroke="#475569"] {
+  stroke: #64748B !important;
+}
+html.dark svg line[stroke="rgba(0,0,0,0.08)"] {
+  stroke: rgba(255, 255, 255, 0.07) !important;
+}
+html.dark svg text[fill="#334155"] {
+  fill: #94A3B8 !important;
+}
+html.dark svg text[fill="#92400E"] {
+  fill: #FCD34D !important;
+}
+html.dark svg circle[stroke="#EBF0F7"] {
+  stroke: #0D121F !important;
+}
+
+/* Form Inputs & Select in Dark Mode */
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748B !important;
+}
+html.dark input,
+html.dark select,
+html.dark textarea {
+  color-scheme: dark;
 }
