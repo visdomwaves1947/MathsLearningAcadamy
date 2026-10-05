@@ -1,11 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
+  Search, 
+  ChevronDown, 
+  Sun, 
+  Moon, 
+  User, 
+  Menu, 
+  X, 
   Sparkles, 
+  BookOpen, 
+  BrainCircuit, 
+  Calculator, 
+  GraduationCap, 
+  CheckCircle, 
   PhoneCall, 
-  Flame,
-  Sun,
-  Moon
+  LogOut,
+  Layers,
+  Award
 } from 'lucide-react';
+import { VisdomBrand } from './VisdomBrand';
 
 export default function Navbar({ 
   onOpenBooking, 
@@ -17,6 +30,12 @@ export default function Navbar({
   toggleTheme 
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [mobileDropdowns, setMobileDropdowns] = useState({});
+  const dropdownTimeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,31 +45,105 @@ export default function Navbar({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Use onOpenSignIn or fallback to onOpenPortal
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      const el = document.getElementById('courses') || document.getElementById('interactive-lab');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+      setSearchQuery('');
+      setMobileMenuOpen(false);
+    }
+  };
+
+  const handleDropdownEnter = (index) => {
+    if (dropdownTimeoutRef.current) {
+      clearTimeout(dropdownTimeoutRef.current);
+    }
+    setActiveDropdown(index);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 150);
+  };
+
+  const toggleMobileDropdown = (index) => {
+    setMobileDropdowns(prev => ({
+      ...prev,
+      [index]: !prev[index]
+    }));
+  };
+
+  const navLinks = [
+    { name: 'Home', href: '#' },
+    { 
+      name: 'Curriculum', 
+      href: '#courses',
+      dropdown: [
+        { name: 'Primary Mathematics (Grades 1-5)', href: '#courses', desc: 'Number sense, visual arithmetic & logic' },
+        { name: 'Middle School Pre-Algebra', href: '#courses', desc: 'Fractions, geometry & algebraic foundations' },
+        { name: 'High School Algebra & Trig', href: '#courses', desc: 'Quadratic curves, trigonometry & polynomials' },
+        { name: 'AP Calculus AB / BC', href: '#courses', desc: 'Limits, derivatives, integrals & series' },
+        { name: 'Olympiad & AMC 8/10/12', href: '#courses', desc: 'Combinatorics, number theory & proofs' }
+      ]
+    },
+    { 
+      name: 'Math Labs', 
+      href: '#interactive-lab',
+      dropdown: [
+        { name: 'Interactive Graph & Curve Lab', href: '#interactive-lab', desc: 'Real-time 2D formula visualizer' },
+        { name: 'Speed Mental Math Arena', href: '#speed-quiz', desc: 'Timed gamified arithmetic battle' },
+        { name: 'Diagnostic Assessment', href: '#courses', desc: 'Identify skill gaps & placement' }
+      ]
+    },
+    { name: 'Methodology', href: '#methodology' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'FAQ', href: '#faq' }
+  ];
+
   const handleSignInClick = onOpenSignIn || onOpenPortal;
   const handleSignUpClick = onOpenSignUp || onOpenPortal;
 
   return (
     <>
-      {/* Top Banner */}
-      <aside aria-label="Announcement" className="bg-gradient-to-r from-indigo-950 via-indigo-900 to-purple-950 text-slate-100 text-xs sm:text-sm py-2.5 px-3 sm:px-4 font-medium relative z-50 border-b border-indigo-800/40">
+      {/* Top Admissions & Announcement Bar */}
+      <aside 
+        aria-label="Announcement" 
+        className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-100 text-xs py-2 px-3 sm:px-6 font-medium relative z-50 border-b border-black/10 dark:border-cyan-900/40"
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 mx-auto sm:mx-0 text-center sm:text-left">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-400 text-indigo-950 font-bold text-xs animate-pulse shrink-0 shadow-sm shadow-amber-400/50">
-              <Flame size={13} className="text-amber-950 fill-amber-950" />
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-600 text-white font-bold text-[10px] animate-pulse shrink-0 shadow-sm">
+              ★
             </span>
-            <span className="text-[11px] sm:text-xs md:text-sm leading-tight">
-              <strong className="text-white">Spring 2026 Admissions Open:</strong> <span className="text-amber-300 font-semibold">Intermediate (AP & TS) & Olympiad Batch</span> enrolling now!
+            <span className="text-[11px] sm:text-xs leading-tight font-medium">
+              <strong className="text-slate-950 dark:text-white font-bold">2026 Admissions Open:</strong>{' '}
+              <span className="text-cyan-800 dark:text-cyan-300 font-semibold">Intermediate (1st & 2nd Year) & Olympiad Batches</span> enrolling now!
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-4 text-xs text-indigo-200 shrink-0">
-            <a href="tel:+18005556284" className="hover:text-white flex items-center gap-1.5 transition-colors">
-              <PhoneCall size={13} className="text-indigo-300" /> +1 (800) 555-MATH
+          <div className="hidden sm:flex items-center gap-4 text-xs text-slate-800 dark:text-cyan-200 shrink-0 font-medium">
+            <a href="tel:+917997755155" className="hover:text-cyan-700 dark:hover:text-white flex items-center gap-1.5 transition-colors">
+              <PhoneCall size={12} className="text-cyan-700 dark:text-cyan-400" /> +91 79977 55155
             </a>
-            <span className="text-indigo-700">|</span>
+            <span className="text-slate-400 dark:text-cyan-800">|</span>
             <button 
               onClick={handleSignUpClick} 
-              className="text-amber-400 hover:text-amber-300 underline font-bold cursor-pointer transition-colors"
+              className="text-cyan-800 dark:text-cyan-300 hover:underline font-bold cursor-pointer transition-colors"
             >
               Sign Up Online →
             </button>
@@ -58,103 +151,328 @@ export default function Navbar({
         </div>
       </aside>
 
-      {/* Main Navigation */}
+      {/* Main Sticky Navbar */}
       <header 
-        className={`sticky top-0 z-40 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-[#15123A]/95 backdrop-blur-xl border-b border-indigo-800/50 shadow-xl shadow-indigo-950/40 py-2.5 sm:py-3' 
-            : 'bg-[#1E1B4B]/95 backdrop-blur-md py-3 sm:py-4 border-b border-indigo-800/40 shadow-md'
+        className={`sticky top-0 z-40 transition-all duration-300 border-b border-black/20 dark:border-cyan-900/30 bg-[#bae6fd] dark:bg-[#023e50] ${
+          isScrolled ? 'py-2.5 shadow-md backdrop-blur-md' : 'py-3 sm:py-3.5 shadow-sm'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-3 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
             
-            {/* Logo */}
-            <a href="#" className="flex items-center gap-2 sm:gap-3 group shrink-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-purple-500 p-[1px] shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform duration-300 shrink-0">
-                <div className="w-full h-full bg-[#15123A] rounded-[11px] flex items-center justify-center border border-indigo-500/30">
-                  <span className="text-xl sm:text-2xl font-bold font-mono text-white group-hover:rotate-12 transition-transform duration-300 inline-block drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]">
-                    ∑
-                  </span>
-                </div>
-              </div>
-              <div className="flex flex-col justify-center">
-                <div className="flex items-center gap-1.5 sm:gap-2 leading-none">
-                  <span className="font-extrabold text-base sm:text-xl tracking-tight text-white group-hover:text-amber-300 transition-colors">
-                    Maths Learning
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] uppercase tracking-wider font-bold bg-indigo-900/80 text-indigo-200 px-1.5 sm:px-2 py-0.5 rounded-md border border-indigo-700/60 shadow-xs">
-                    Academy
-                  </span>
-                </div>
-                <span className="text-[8.5px] sm:text-[9.5px] text-indigo-200/80 tracking-wider uppercase font-semibold mt-1 hidden xs:block">
-                  Pure Understanding • Proven Mastery
-                </span>
-              </div>
-            </a>
+            {/* Visdom Waves Brand Logo */}
+            <VisdomBrand onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
 
-            {/* Action Buttons */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5">
-              {currentUser ? (
-                <button
-                  onClick={handleSignInClick}
-                  className="flex items-center gap-2 text-xs font-bold text-white px-3 py-2 rounded-xl bg-indigo-900/80 hover:bg-indigo-800 transition-all border border-indigo-600 cursor-pointer shadow-sm"
-                  title="Open Student Dashboard"
+            {/* Desktop Navigation Links */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+              {navLinks.map((link, idx) => (
+                <div 
+                  key={idx}
+                  className="relative"
+                  onMouseEnter={() => link.dropdown && handleDropdownEnter(idx)}
+                  onMouseLeave={() => link.dropdown && handleDropdownLeave()}
                 >
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="max-w-[120px] truncate">{currentUser.name}</span>
-                </button>
+                  {link.dropdown ? (
+                    <button 
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors tracking-wide rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                      onClick={() => setActiveDropdown(activeDropdown === idx ? null : idx)}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown 
+                        size={14} 
+                        className={`transition-transform duration-200 text-slate-700 dark:text-cyan-300 ${activeDropdown === idx ? 'rotate-180 text-cyan-700 dark:text-cyan-300' : ''}`} 
+                      />
+                    </button>
+                  ) : (
+                    <a 
+                      href={link.href}
+                      className="block px-3 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors tracking-wide rounded-lg hover:bg-black/5 dark:hover:bg-white/5"
+                    >
+                      {link.name}
+                    </a>
+                  )}
+
+                  {/* Desktop Dropdown Popover */}
+                  {link.dropdown && activeDropdown === idx && (
+                    <div 
+                      className="absolute top-full left-0 mt-1.5 w-72 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
+                      onMouseEnter={() => handleDropdownEnter(idx)}
+                      onMouseLeave={handleDropdownLeave}
+                    >
+                      <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800 text-[10px] font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                        {link.name} Catalog
+                      </div>
+                      {link.dropdown.map((sub, sIdx) => (
+                        <a
+                          key={sIdx}
+                          href={sub.href}
+                          onClick={() => setActiveDropdown(null)}
+                          className="block px-4 py-2.5 hover:bg-cyan-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white transition-colors group"
+                        >
+                          <div className="text-xs font-bold group-hover:text-cyan-700 dark:group-hover:text-cyan-300">
+                            {sub.name}
+                          </div>
+                          {sub.desc && (
+                            <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                              {sub.desc}
+                            </div>
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+
+            {/* Search Box (Desktop / Tablet) */}
+            <form onSubmit={handleSearchSubmit} className="hidden xl:flex items-center relative max-w-[210px] w-full">
+              <input 
+                type="text"
+                placeholder="Search calculus, algebra..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-full py-2 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xs transition-all"
+              />
+              <button 
+                type="submit" 
+                aria-label="Search"
+                className="absolute right-2.5 text-slate-600 hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-400"
+              >
+                <Search size={15} />
+              </button>
+            </form>
+
+            {/* Right Controls & Actions */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              
+              {/* Dark / Light Mode Toggle Pill Switch */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                className="relative flex items-center w-[52px] xs:w-[60px] h-[28px] xs:h-[32px] rounded-full bg-slate-800 dark:bg-slate-700 transition-colors duration-300 focus:outline-none shadow-inner ring-1 ring-slate-900/10 dark:ring-white/10 cursor-pointer shrink-0"
+                aria-label="Toggle dark mode"
+                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              >
+                {/* Sliding White Knob */}
+                <div 
+                  className={`absolute top-[2px] xs:top-[3px] w-[24px] xs:w-[26px] h-[24px] xs:h-[26px] bg-white rounded-full shadow-md transition-transform duration-300 ease-out z-0 ${
+                    theme === 'dark' ? 'translate-x-[24px] xs:translate-x-[28px]' : 'translate-x-[3px]'
+                  }`}
+                />
+                <div className="relative flex justify-between items-center w-full px-[6px] xs:px-[7px] z-10 pointer-events-none">
+                  <Sun className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === 'dark' ? 'text-slate-400' : 'text-amber-500'}`} />
+                  <Moon className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === 'dark' ? 'text-indigo-600' : 'text-slate-400'}`} />
+                </div>
+              </button>
+
+              {/* User Account / Auth Actions */}
+              {currentUser ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                    className="flex items-center justify-center h-8 w-8 xs:h-9 xs:w-9 rounded-full bg-gradient-to-tr from-cyan-600 to-sky-500 text-white text-xs font-extrabold shadow-md hover:scale-105 transition-all focus:outline-none cursor-pointer border-2 border-white dark:border-slate-800"
+                    title={currentUser.name || 'User Profile'}
+                  >
+                    {currentUser.name ? currentUser.name.slice(0, 2).toUpperCase() : 'ST'}
+                  </button>
+
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-3 z-50 text-slate-900 dark:text-white animate-in fade-in duration-150">
+                      <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
+                        <p className="text-sm font-bold text-slate-950 dark:text-white truncate">
+                          {currentUser.name}
+                        </p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                          {currentUser.email}
+                        </p>
+                        <span className="inline-block mt-1 text-[9px] font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/50 px-2 py-0.5 rounded uppercase">
+                          {currentUser.role || 'Math Scholar'}
+                        </span>
+                      </div>
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            handleSignInClick();
+                          }}
+                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                        >
+                          My Student Portal
+                        </button>
+                        <button
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            onOpenBooking();
+                          }}
+                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                        >
+                          Book 1-on-1 Mentorship
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ) : (
-                <div className="flex items-center gap-1 sm:gap-1.5">
-                  {/* Professional Ghost Sign In Button */}
+                <div className="flex items-center gap-1 sm:gap-2">
                   <button
                     onClick={handleSignInClick}
-                    className="text-xs font-bold text-slate-100 hover:text-white px-3 py-2 rounded-xl hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
+                    className="text-xs font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 px-2.5 sm:px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
                   >
                     Sign In
                   </button>
-
-                  {/* Professional Primary Sign Up Button */}
                   <button
                     onClick={handleSignUpClick}
-                    className="text-xs font-bold text-white px-3.5 sm:px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 border border-indigo-400/40 shadow-sm shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
+                    className="text-xs font-bold text-white px-3 sm:px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-cyan-700 dark:bg-cyan-600 dark:hover:bg-cyan-500 transition-all shadow-sm cursor-pointer active:scale-95"
                   >
                     Sign Up
                   </button>
                 </div>
               )}
-              
-              {/* Book Free Class Button */}
+
+              {/* Book Free Class CTA Button */}
               <button
                 onClick={onOpenBooking}
-                className="hidden md:inline-flex relative group overflow-hidden rounded-xl p-px font-semibold text-xs tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
+                className="hidden md:inline-flex relative group overflow-hidden rounded-xl p-px font-bold text-xs tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-95 shrink-0"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-indigo-500 to-purple-500 group-hover:opacity-100 transition-opacity"></span>
-                <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-[11px] bg-indigo-600 text-white group-hover:bg-indigo-500 transition-all font-bold">
-                  <Sparkles size={14} className="text-amber-300 animate-spin-slow" />
+                <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-sky-500 to-indigo-600 group-hover:opacity-100 transition-opacity"></span>
+                <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-[11px] bg-slate-900 text-white hover:bg-slate-800 dark:bg-cyan-700 dark:hover:bg-cyan-600 transition-all font-bold">
+                  <Sparkles size={14} className="text-cyan-300 animate-spin-slow" />
                   <span>Book Free Class</span>
                 </span>
               </button>
 
-              {/* Theme Toggle Button (Light/Dark mode) */}
+              {/* Mobile Hamburger Toggle Button */}
               <button
                 type="button"
-                onClick={toggleTheme}
-                aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-indigo-900/80 hover:bg-indigo-800/90 text-amber-300 hover:text-amber-200 border border-indigo-700/70 hover:border-indigo-400/80 transition-all duration-200 cursor-pointer shadow-sm flex items-center justify-center shrink-0 active:scale-90"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-1.5 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
               >
-                {theme === 'dark' ? (
-                  <Sun size={16} className="text-amber-300 animate-spin-slow" />
-                ) : (
-                  <Moon size={16} className="text-indigo-200 hover:text-white" />
-                )}
+                {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
+
             </div>
 
           </div>
         </div>
       </header>
+
+      {/* Mobile Slide-Down Drawer */}
+      {mobileMenuOpen && (
+        <div 
+          className="lg:hidden fixed inset-x-0 top-[auto] z-40 bg-[#bae6fd] dark:bg-[#023e50] border-b border-black/20 dark:border-cyan-900/30 shadow-2xl overflow-y-auto max-h-[calc(100vh-100px)] py-4 px-4 animate-in slide-in-from-top duration-200"
+        >
+          {/* Mobile Search */}
+          <form onSubmit={handleSearchSubmit} className="relative flex items-center mb-4">
+            <input 
+              type="text"
+              placeholder="Search curriculum, labs, lessons..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-xl py-2.5 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-sm"
+            />
+            <button 
+              type="submit" 
+              className="absolute right-3 text-slate-600 dark:text-slate-300 hover:text-cyan-600"
+            >
+              <Search size={16} />
+            </button>
+          </form>
+
+          {/* Mobile Navigation List */}
+          <div className="space-y-1">
+            {navLinks.map((link, idx) => (
+              <div key={idx} className="border-b border-black/10 dark:border-cyan-900/20 last:border-b-0 pb-1">
+                {link.dropdown ? (
+                  <div>
+                    <button
+                      onClick={() => toggleMobileDropdown(idx)}
+                      className="w-full flex items-center justify-between py-2.5 px-2 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown 
+                        size={16} 
+                        className={`transition-transform duration-200 ${mobileDropdowns[idx] ? 'rotate-180 text-cyan-700' : ''}`} 
+                      />
+                    </button>
+                    {mobileDropdowns[idx] && (
+                      <div className="pl-4 pr-2 pb-2 space-y-2 bg-white/40 dark:bg-black/20 rounded-xl p-2.5 my-1">
+                        {link.dropdown.map((sub, sIdx) => (
+                          <a
+                            key={sIdx}
+                            href={sub.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="block py-1.5 px-2 text-xs font-semibold text-slate-800 dark:text-cyan-100 hover:text-cyan-700 dark:hover:text-cyan-300"
+                          >
+                            • {sub.name}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block py-2.5 px-2 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Action Buttons */}
+          <div className="mt-5 pt-4 border-t border-black/15 dark:border-cyan-900/30 space-y-2">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenBooking();
+              }}
+              className="w-full py-2.5 px-4 rounded-xl bg-slate-900 dark:bg-cyan-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
+            >
+              <Sparkles size={14} className="text-amber-300" />
+              <span>Book Free Diagnostic Class</span>
+            </button>
+
+            {!currentUser ? (
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleSignInClick();
+                  }}
+                  className="py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs hover:bg-slate-50"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    handleSignUpClick();
+                  }}
+                  className="py-2 px-3 rounded-xl bg-cyan-700 dark:bg-cyan-500 text-white font-bold text-xs hover:bg-cyan-600"
+                >
+                  Sign Up
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleSignInClick();
+                }}
+                className="w-full py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs"
+              >
+                Open Student Portal ({currentUser.name})
+              </button>
+            )}
+          </div>
+
+        </div>
+      )}
     </>
   );
 }

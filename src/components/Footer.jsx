@@ -1,140 +1,228 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, ShieldCheck, Award, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { 
+  MapPin, 
+  Mail, 
+  Phone, 
+  Send, 
+  CheckCircle2, 
+  ArrowUp,
+  ExternalLink,
+  ShieldCheck,
+  BookOpen,
+  Sparkles
+} from 'lucide-react';
+import { VisdomBrand } from './VisdomBrand';
+
+// Social Icon SVGs matching reference site styling
+function FacebookIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 320 512">
+      <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z" />
+    </svg>
+  );
+}
+
+function TwitterXIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 512 512">
+      <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z" />
+    </svg>
+  );
+}
+
+function InstagramIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 448 512">
+      <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+    </svg>
+  );
+}
+
+function YouTubeIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg className={className} fill="currentColor" viewBox="0 0 576 512">
+      <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" />
+    </svg>
+  );
+}
 
 export default function Footer({ onOpenBooking }) {
-  const [emailSub, setEmailSub] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (emailSub.trim()) {
-      setSubscribed(true);
-      setEmailSub('');
-    }
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress((window.scrollY / totalScroll) * 100);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // SVG circular calculation for back to top button
+  const radius = 20;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (scrollProgress / 100) * circumference;
+
   return (
-    <footer className="bg-[#1E1B4B] text-indigo-100 border-t border-indigo-800/60 pt-12 sm:pt-16 pb-12 relative overflow-hidden">
-      {/* Ambient Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-64 bg-radial-glow opacity-40 pointer-events-none"></div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <footer className="relative overflow-hidden transition-all duration-300 border-t border-black/20 dark:border-cyan-900/30 bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-50 font-medium">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         
-        {/* Top Newsletter & Academy Mission Callout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pb-10 sm:pb-12 border-b border-indigo-800/50 items-center">
-          <div className="lg:col-span-6 text-center sm:text-left">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
-              Get Free Weekly Olympiad Math Puzzles
-            </h3>
-            <p className="text-xs sm:text-sm text-indigo-200">
-              Join over 35,000 students and parents receiving our curated weekly brain-teasers with detailed visual solutions.
-            </p>
-          </div>
-
-          <div className="lg:col-span-6 w-full">
-            {!subscribed ? (
-              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto lg:ml-auto">
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your email address"
-                  value={emailSub}
-                  onChange={(e) => setEmailSub(e.target.value)}
-                  className="px-4 py-3 bg-[#15123A] border border-indigo-700/60 rounded-xl text-white placeholder:text-indigo-300/60 text-xs sm:text-sm focus:outline-none focus:border-indigo-400 grow font-medium shadow-inner"
-                />
-                <button
-                  type="submit"
-                  className="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/30 cursor-pointer shrink-0 transition-all active:scale-95"
-                >
-                  <Send size={14} />
-                  <span>Subscribe</span>
-                </button>
-              </form>
-            ) : (
-              <div className="p-3 bg-emerald-950/80 border border-emerald-700/60 rounded-xl text-emerald-300 text-xs sm:text-sm flex items-center gap-2 max-w-md mx-auto lg:ml-auto font-medium shadow-sm">
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0" />
-                <span>You are subscribed! Check your inbox for this week's puzzle.</span>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Main Footer Links */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 py-10 sm:py-12">
+        {/* Main 4 Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           
-          {/* Brand Info */}
-          <div className="col-span-1 sm:col-span-2">
-            <a href="#" className="flex items-center gap-3 mb-4 group inline-block">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 via-indigo-600 to-purple-500 p-px flex items-center justify-center shadow-md shadow-indigo-500/20">
-                <div className="w-full h-full bg-[#15123A] rounded-[11px] flex items-center justify-center">
-                  <span className="text-xl font-bold font-mono text-white">∑</span>
-                </div>
-              </div>
-              <span className="font-extrabold text-lg text-white tracking-tight flex items-center gap-2">
-                Maths Learning <span className="text-indigo-200 font-bold text-xs border border-indigo-700/60 bg-indigo-900/80 px-2 py-0.5 rounded shadow-xs">ACADEMY</span>
-              </span>
-            </a>
-            <p className="text-xs sm:text-sm text-indigo-200 leading-relaxed mb-4 max-w-sm font-normal">
-              Empowering students from primary school to university with joyful mathematical confidence, visual conceptual mastery, and premier Olympiad mentorship.
+          {/* Column 1: Visdom Waves Brand Info */}
+          <div className="space-y-4">
+            <VisdomBrand onClick={scrollToTop} />
+            
+            <p className="text-sm text-slate-900 dark:text-cyan-100 font-normal leading-relaxed">
+              Empowering Intermediate & Competitive Mathematics students with state-of-the-art interactive modules, lessons, visual simulations, live problem solving, and timed online mock tests.
             </p>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs text-indigo-300 font-semibold">
-              <span className="flex items-center gap-1">
-                <ShieldCheck size={14} className="text-emerald-400 shrink-0" /> STEM Accredited
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1">
-                <Award size={14} className="text-amber-400 shrink-0" /> Top Ranked 2026
-              </span>
+
+            {/* Social Circle Badges */}
+            <div className="flex items-center gap-3 pt-1">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 border-2 border-black dark:border-cyan-800 hover:bg-cyan-500 dark:hover:bg-cyan-600 hover:text-white flex items-center justify-center text-slate-950 dark:text-white transition-all duration-200 shadow-xs"
+              >
+                <FacebookIcon className="h-4 w-4" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter X"
+                className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 border-2 border-black dark:border-cyan-800 hover:bg-cyan-500 dark:hover:bg-cyan-600 hover:text-white flex items-center justify-center text-slate-950 dark:text-white transition-all duration-200 shadow-xs"
+              >
+                <TwitterXIcon className="h-4 w-4" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 border-2 border-black dark:border-cyan-800 hover:bg-cyan-500 dark:hover:bg-cyan-600 hover:text-white flex items-center justify-center text-slate-950 dark:text-white transition-all duration-200 shadow-xs"
+              >
+                <InstagramIcon className="h-4 w-4" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="h-9 w-9 rounded-full bg-white dark:bg-slate-950 border-2 border-black dark:border-cyan-800 hover:bg-cyan-500 dark:hover:bg-cyan-600 hover:text-white flex items-center justify-center text-slate-950 dark:text-white transition-all duration-200 shadow-xs"
+              >
+                <YouTubeIcon className="h-4 w-4" />
+              </a>
             </div>
           </div>
 
-          {/* Curriculum Tracks */}
+          {/* Column 2: Courses & Academics */}
           <div>
-            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 sm:mb-4">Curriculum</h4>
-            <ul className="space-y-2 text-xs font-medium">
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">Elementary (Grades 1-5)</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">Middle School Pre-Algebra</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">High School Algebra & Trig</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">AP Calculus AB / BC</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">AMC 8/10/12 & Olympiad</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">SAT & ACT Math 800 Prep</a></li>
+            <h3 className="text-slate-950 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4 border-l-4 border-cyan-500 pl-3">
+              Courses & Academics
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-900 dark:text-cyan-100 font-medium">
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  1st Year Intermediate Mathematics (1A & 1B)
+                </a>
+              </li>
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  2nd Year Intermediate Mathematics (2A & 2B)
+                </a>
+              </li>
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  AP Calculus AB / BC Advanced Placement
+                </a>
+              </li>
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  IIT-JEE Main & Advanced Mathematics
+                </a>
+              </li>
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Revision Notes, Formula Sheets & Summaries
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Interactive Tools */}
+          {/* Column 3: Tools & Assessment */}
           <div>
-            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 sm:mb-4">Math Labs</h4>
-            <ul className="space-y-2 text-xs font-medium">
-              <li><a href="#interactive-lab" className="text-indigo-200 hover:text-white transition-colors">Function & Curve Lab</a></li>
-              <li><a href="#speed-quiz" className="text-indigo-200 hover:text-white transition-colors">Speed Mental Math Quiz</a></li>
-              <li><a href="#courses" className="text-indigo-200 hover:text-white transition-colors">Diagnostic Assessment</a></li>
-              <li><a href="#methodology" className="text-indigo-200 hover:text-white transition-colors">Visual Pedagogy</a></li>
-              <li><a href="#reviews" className="text-indigo-200 hover:text-white transition-colors">Student Case Studies</a></li>
+            <h3 className="text-slate-950 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4 border-l-4 border-cyan-500 pl-3">
+              Tools & Assessment
+            </h3>
+            <ul className="space-y-2.5 text-sm text-slate-900 dark:text-cyan-100 font-medium">
+              <li>
+                <a href="#interactive-lab" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Interactive Graph & Curve Visualizer Lab
+                </a>
+              </li>
+              <li>
+                <a href="#speed-quiz" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Speed Mental Math Arena & Practice Quiz
+                </a>
+              </li>
+              <li>
+                <a href="#courses" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Online Timed Mock Exams & Test Series
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Previous Board & Olympiad Question Papers
+                </a>
+              </li>
+              <li>
+                <a href="#methodology" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  Step-by-Step Proofs & Problem Visualizers
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Contact & Support */}
+          {/* Column 4: Contact Us */}
           <div>
-            <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3 sm:mb-4">Contact & Help</h4>
-            <ul className="space-y-2 text-xs font-medium">
-              <li className="flex items-center gap-2 text-indigo-200">
-                <Phone size={13} className="text-indigo-400 shrink-0" />
-                <span>+1 (800) 555-MATH</span>
+            <h3 className="text-slate-950 dark:text-white font-semibold text-sm uppercase tracking-wider mb-4 border-l-4 border-cyan-500 pl-3">
+              Contact Us
+            </h3>
+            <ul className="space-y-3 text-sm text-slate-900 dark:text-cyan-100 font-medium">
+              <li className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-cyan-700 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
+                <span>Hyderabad, Telangana, India</span>
               </li>
-              <li className="flex items-center gap-2 text-indigo-200">
-                <Mail size={13} className="text-indigo-400 shrink-0" />
-                <span className="break-all">admissions@mathslearningacademy.com</span>
+              <li className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-cyan-700 dark:text-cyan-400 flex-shrink-0" />
+                <a href="mailto:info@visdomwaves.com" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors break-all">
+                  info@visdomwaves.com
+                </a>
               </li>
-              <li className="flex items-center gap-2 text-indigo-200">
-                <MapPin size={13} className="text-indigo-400 shrink-0" />
-                <span>Boston & SF (Global Online)</span>
+              <li className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-cyan-700 dark:text-cyan-400 flex-shrink-0" />
+                <a href="tel:+917997755155" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+                  +91 79977 55155
+                </a>
               </li>
               <li className="pt-2">
                 <button
                   onClick={onOpenBooking}
-                  className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-all cursor-pointer shadow-md shadow-indigo-600/30 active:scale-95"
+                  className="px-4 py-2 rounded-xl bg-slate-900 dark:bg-cyan-600 hover:bg-cyan-700 dark:hover:bg-cyan-500 text-white font-bold text-xs transition-all cursor-pointer shadow-sm active:scale-95"
                 >
-                  Book 1-on-1 Class
+                  Book 1-on-1 Free Class
                 </button>
               </li>
             </ul>
@@ -142,19 +230,83 @@ export default function Footer({ onOpenBooking }) {
 
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-6 sm:pt-8 border-t border-indigo-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-indigo-300 font-medium text-center sm:text-left">
-          <div>
-            © {new Date().getFullYear()} Maths Learning Academy Inc. All rights reserved.
+        {/* Bottom Decorative Divider & Copyright */}
+        <div className="border-t border-black/20 dark:border-cyan-800/40 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          
+          {/* Copyright line */}
+          <p className="text-xs text-slate-900 dark:text-cyan-100 text-center md:text-left md:flex-1 font-medium">
+            © {new Date().getFullYear()} Maths Learning Academy. All rights reserved.
+          </p>
+
+          {/* Mathematics Slogan Centerpiece */}
+          <div className="flex items-center gap-2 select-none md:flex-1 justify-center">
+            {/* Left Decorative Line */}
+            <div className="flex items-center">
+              <span className="text-cyan-700 dark:text-cyan-400 font-mono font-bold text-sm sm:text-base mr-1.5">∑</span>
+              <div className="h-[1.5px] w-8 sm:w-16 bg-cyan-700 dark:bg-cyan-400" />
+            </div>
+
+            {/* Maths Slogan */}
+            <span className="text-xs sm:text-sm md:text-base font-extrabold text-cyan-800 dark:text-cyan-300 tracking-wider whitespace-nowrap px-1 font-sans">
+              Pure Understanding • Proven Mastery
+            </span>
+
+            {/* Right Decorative Line */}
+            <div className="flex items-center">
+              <div className="h-[1.5px] w-8 sm:w-16 bg-cyan-700 dark:bg-cyan-400" />
+              <span className="text-cyan-700 dark:text-cyan-400 font-mono font-bold text-sm sm:text-base ml-1.5">∞</span>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
-            <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#safety" className="hover:text-white transition-colors">Child Online Safety</a>
+
+          {/* Quick Legal Links */}
+          <div className="flex gap-3 text-xs text-slate-900 dark:text-cyan-100 md:flex-1 justify-center md:justify-end font-semibold">
+            <a href="#methodology" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+              About Us
+            </a>
+            <span>•</span>
+            <a href="mailto:info@visdomwaves.com" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+              Contact Us
+            </a>
+            <span>•</span>
+            <a href="#privacy" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+              Privacy Policy
+            </a>
+            <span>•</span>
+            <a href="#terms" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+              Terms
+            </a>
           </div>
+
         </div>
 
       </div>
+
+      {/* Floating Back to Top Button with Progress Ring */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          aria-label="Back to top"
+          className="fixed bottom-6 right-6 z-50 p-2 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 text-cyan-600 dark:text-cyan-400 hover:text-white hover:bg-cyan-600 transition-all duration-200 flex items-center justify-center focus:outline-none cursor-pointer group"
+        >
+          <svg className="absolute w-12 h-12 transform -rotate-90 pointer-events-none">
+            <circle
+              cx="24"
+              cy="24"
+              r="20"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              fill="transparent"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              className="text-cyan-500 transition-all duration-75"
+            />
+          </svg>
+          <div className="h-8 w-8 flex items-center justify-center z-10">
+            <ArrowUp className="h-4 w-4 group-hover:-translate-y-0.5 transition-transform" />
+          </div>
+        </button>
+      )}
+
     </footer>
   );
 }
