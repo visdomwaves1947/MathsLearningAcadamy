@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import InteractiveGraphExplorer from './components/InteractiveGraphExplorer';
-import MathPlayground from './components/MathPlayground';
-import CoursesSection from './components/CoursesSection';
-import Methodology from './components/Methodology';
 import Testimonials from './components/Testimonials';
 import PricingSection from './components/PricingSection';
 import FaqSection from './components/FaqSection';
@@ -13,6 +9,10 @@ import BookingModal from './components/BookingModal';
 import StudentPortalModal from './components/StudentPortalModal';
 import VideoDemoModal from './components/VideoDemoModal';
 import AuthModal from './components/AuthModal';
+import WhyChooseUs from './components/WhyChooseUs';
+import StatsBar from './components/StatsBar';
+import RoadmapsGrid from './components/exam-planner/RoadmapsGrid';
+import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -32,6 +32,8 @@ export default function App() {
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState('');
   const [videoDemoOpen, setVideoDemoOpen] = useState(false);
+  const [isPlannerOpen, setIsPlannerOpen] = useState(false);
+  const [selectedRoadmap, setSelectedRoadmap] = useState(null);
 
   // Unified Auth & Registration Modal State
   const [authModalOpen, setAuthModalOpen] = useState(false);
@@ -119,28 +121,28 @@ export default function App() {
           onOpenVideoDemo={() => setVideoDemoOpen(true)}
         />
 
-        {/* Live Interactive Function & Curve Explorer Lab */}
-        <InteractiveGraphExplorer 
-          onOpenBooking={() => handleOpenBooking('Interactive Math Lab Enrollment')}
+        {/* Why Choose Us Grid (Premium 12-Card Section) */}
+        <WhyChooseUs 
+          onOpenBooking={() => handleOpenBooking()} 
         />
 
-        {/* Interactive Speed Quiz & Math Arena */}
-        <MathPlayground 
-          onOpenBooking={() => handleOpenBooking('Diagnostic Math Assessment')}
-        />
-
-        {/* Courses & Curriculum Pathway Explorer */}
-        <CoursesSection 
-          onOpenBooking={handleOpenBooking}
-        />
-
-        {/* Learning Methodology & Comparison */}
-        <Methodology />
+        {/* Premium Roadmaps Grid */}
+        <div className="bg-[#F8FAFC] dark:bg-[#0B0F19] py-8 sm:py-16 border-t border-b border-slate-200 dark:border-slate-800">
+          <RoadmapsGrid 
+            onSelectPlan={(plan) => {
+              setSelectedRoadmap(plan);
+              setIsPlannerOpen(true);
+            }} 
+          />
+        </div>
 
         {/* Student Results & Parent Testimonials */}
         <Testimonials 
           onOpenBooking={() => handleOpenBooking()}
         />
+
+        {/* Stats Bar moved under Testimonials as requested */}
+        <StatsBar />
 
         {/* Tuition Plans & Pricing */}
         <PricingSection 
@@ -179,6 +181,12 @@ export default function App() {
         isOpen={videoDemoOpen} 
         onClose={() => setVideoDemoOpen(false)}
         onOpenBooking={() => handleOpenBooking('Classroom Experience')}
+      />
+
+      <ExamPlannerModal 
+        isOpen={isPlannerOpen}
+        onClose={() => setIsPlannerOpen(false)}
+        selectedRoadmap={selectedRoadmap}
       />
     </div>
   );

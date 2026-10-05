@@ -75,9 +75,7 @@ export default function Methodology() {
             <Brain size={14} className="text-emerald-700" />
             The Academy Pedagogical Framework
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
-            Engineered for Deep Mathematical Mastery
-          </h2>
+
           <p className="text-slate-700 mt-4 text-base sm:text-lg">
             Traditional tutoring drills formulas until the test is over. We build mathematical intuition that lasts for a lifetime of STEM success.
           </p>
