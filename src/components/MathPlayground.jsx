@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { quickMathChallenges } from '../data/quizData';
-import { 
-  Trophy, 
-  Flame, 
-  HelpCircle, 
-  CheckCircle, 
-  XCircle, 
-  RotateCcw, 
-  Sparkles, 
-  Award, 
+import {
+  Trophy,
+  Flame,
+  HelpCircle,
+  CheckCircle,
+  XCircle,
+  RotateCcw,
+  Sparkles,
+  Award,
   ArrowRight,
   BrainCircuit
 } from 'lucide-react';
@@ -73,7 +73,7 @@ export default function MathPlayground({ onOpenBooking }) {
   return (
     <section id="speed-quiz" className="py-20 relative bg-[#EBF0F7] border-t border-b border-[#CBD5E1]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border border-purple-200 text-purple-800 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -90,7 +90,7 @@ export default function MathPlayground({ onOpenBooking }) {
 
         {/* Quiz Interactive Box */}
         <div className="bg-[#DFE7F2] rounded-2xl border border-[#BAC9DC] shadow-lg p-6 sm:p-10 relative overflow-hidden">
-          
+
           {/* Top Status Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-[#CAD8EA]">
             <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export default function MathPlayground({ onOpenBooking }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                 {currentQ.options.map((opt, idx) => {
                   let btnStyle = "bg-[#D2DFEE] border-[#B8CADF] text-slate-900 hover:bg-[#C5D5E7] hover:border-indigo-400";
-                  
+
                   if (isAnswered) {
                     if (idx === currentQ.correct) {
                       btnStyle = "bg-emerald-100 border-emerald-500 text-emerald-950 font-bold shadow-xs";
@@ -164,21 +164,21 @@ export default function MathPlayground({ onOpenBooking }) {
 
               {/* Answer Explanation & Hint Area */}
               {isAnswered && (
-                <div className="p-4 rounded-xl bg-indigo-100/80 border border-indigo-200 text-slate-900 text-sm animate-fadeIn">
-                  <div className="font-bold text-indigo-950 flex items-center gap-1.5 mb-1">
-                    <Sparkles size={16} className="text-amber-600" />
+                <div className="p-4 rounded-xl bg-indigo-100/80 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/70 text-slate-900 dark:text-white text-sm animate-fadeIn">
+                  <div className="font-bold text-indigo-950 dark:text-indigo-200 flex items-center gap-1.5 mb-1">
+                    <Sparkles size={16} className="text-amber-500" />
                     Conceptual Breakdown:
                   </div>
-                  <p className="font-mono text-xs sm:text-sm text-indigo-950 font-semibold">{currentQ.hint}</p>
+                  <p className="font-mono text-xs sm:text-sm text-indigo-950 dark:text-indigo-200 font-semibold">{currentQ.hint}</p>
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-4 border-t border-[#CAD8EA]">
+              <div className="flex items-center justify-between pt-4 border-t border-[#CAD8EA] dark:border-[#1E293B]">
                 {!isAnswered ? (
                   <button
                     onClick={() => setShowHint(!showHint)}
-                    className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1.5 transition-colors cursor-pointer font-semibold"
+                    className="text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer font-semibold"
                   >
                     <HelpCircle size={15} />
                     <span>{showHint ? 'Hide Hint' : 'Need a Hint?'}</span>
@@ -188,7 +188,7 @@ export default function MathPlayground({ onOpenBooking }) {
                 )}
 
                 {showHint && !isAnswered && (
-                  <span className="text-xs text-amber-900 bg-amber-100 px-3 py-1 rounded-md border border-amber-300 font-semibold">
+                  <span className="text-xs text-amber-900 dark:text-amber-200 bg-amber-100 dark:bg-amber-950/70 px-3 py-1 rounded-md border border-amber-300 dark:border-amber-800/70 font-semibold">
                     💡 Tip: Break down numbers into manageable algebraic components!
                   </span>
                 )}
@@ -208,26 +208,26 @@ export default function MathPlayground({ onOpenBooking }) {
             /* Quiz Completion State */
             <div className="py-8 text-center space-y-6 animate-fadeIn">
               <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-400 to-indigo-500 p-0.5 mx-auto shadow-md shadow-amber-500/20">
-                <div className="w-full h-full bg-[#D2DFEE] rounded-full flex items-center justify-center text-amber-600">
+                <div className="w-full h-full bg-[#D2DFEE] dark:bg-[#0D121F] rounded-full flex items-center justify-center text-amber-500">
                   <Award size={36} />
                 </div>
               </div>
 
               <div>
-                <h3 className="text-2xl font-black text-slate-900">Challenge Completed!</h3>
-                <p className="text-slate-700 text-sm mt-1">
-                  You earned <span className="font-bold text-amber-700 font-mono">{score} points</span> with a top streak of <span className="font-bold text-emerald-700">{streak}</span>!
+                <h3 className="text-2xl font-black text-slate-900 dark:text-white">Challenge Completed!</h3>
+                <p className="text-slate-700 dark:text-slate-300 text-sm mt-1">
+                  You earned <span className="font-bold text-amber-700 dark:text-amber-400 font-mono">{score} points</span> with a top streak of <span className="font-bold text-emerald-700 dark:text-emerald-400">{streak}</span>!
                 </p>
               </div>
 
-              <div className="max-w-md mx-auto p-4 rounded-xl bg-indigo-100 border border-indigo-200 text-slate-800 text-xs sm:text-sm text-left">
-                💡 <strong>Instructor Insight:</strong> You demonstrated sharp intuition! Our mentors help students systematically organize these concepts so exams feel effortless.
+              <div className="max-w-md mx-auto p-4 rounded-xl bg-indigo-100 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/70 text-slate-800 dark:text-indigo-200 text-xs sm:text-sm text-left">
+                💡 <strong className="text-slate-950 dark:text-white">Instructor Insight:</strong> You demonstrated sharp intuition! Our mentors help students systematically organize these concepts so exams feel effortless.
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <button
                   onClick={handleRestart}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#D2DFEE] hover:bg-[#C5D5E7] text-slate-800 font-bold text-sm flex items-center justify-center gap-2 border border-[#B8CADF] cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#D2DFEE] dark:bg-[#0D121F] hover:bg-[#C5D5E7] dark:hover:bg-[#1A2338] text-slate-800 dark:text-slate-200 font-bold text-sm flex items-center justify-center gap-2 border border-[#B8CADF] dark:border-[#243048] cursor-pointer"
                 >
                   <RotateCcw size={15} />
                   <span>Try Again</span>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import InteractiveGraphExplorer from './components/InteractiveGraphExplorer';
@@ -12,12 +12,86 @@ import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import StudentPortalModal from './components/StudentPortalModal';
 import VideoDemoModal from './components/VideoDemoModal';
+import AuthModal from './components/AuthModal';
 
 export default function App() {
+  const [theme, setTheme] = useState(() => {
+    try {
+      const savedTheme = localStorage.getItem('mla_theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme;
+      }
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    } catch {
+      return 'light';
+    }
+  });
+
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState('');
-  const [portalOpen, setPortalOpen] = useState(false);
   const [videoDemoOpen, setVideoDemoOpen] = useState(false);
+
+  // Unified Auth & Registration Modal State
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('signin'); // 'signin' | 'signup' | 'portal'
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('mla_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleLoginSuccess = (user) => {
+    setCurrentUser(user);
+    try {
+      localStorage.setItem('mla_user', JSON.stringify(user));
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem('mla_user');
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const handleOpenSignIn = () => {
+    setAuthMode(currentUser ? 'portal' : 'signin');
+    setAuthModalOpen(true);
+  };
+
+  const handleOpenSignUp = () => {
+    setAuthMode('signup');
+    setAuthModalOpen(true);
+  };
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+    }
+    try {
+      localStorage.setItem('mla_theme', theme);
+    } catch (e) {
+      console.warn('LocalStorage not available', e);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const handleOpenBooking = (track = '') => {
     setSelectedTrack(typeof track === 'string' ? track : '');
@@ -29,7 +103,12 @@ export default function App() {
       {/* Navigation Header */}
       <Navbar 
         onOpenBooking={() => handleOpenBooking()} 
-        onOpenPortal={() => setPortalOpen(true)} 
+        onOpenPortal={handleOpenSignIn}
+        onOpenSignIn={handleOpenSignIn}
+        onOpenSignUp={handleOpenSignUp}
+        currentUser={currentUser}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       {/* Main Content */}
@@ -86,9 +165,14 @@ export default function App() {
         preselectedTrack={selectedTrack}
       />
 
-      <StudentPortalModal 
-        isOpen={portalOpen} 
-        onClose={() => setPortalOpen(false)}
+      {/* Unified Student Auth & Sign Up Wizard Modal */}
+      <AuthModal 
+        isOpen={authModalOpen} 
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authMode}
+        currentUser={currentUser}
+        onLoginSuccess={handleLoginSuccess}
+        onLogout={handleLogout}
       />
 
       <VideoDemoModal 

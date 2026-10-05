@@ -110,29 +110,29 @@ export default function Methodology() {
         </div>
 
         {/* Comparison Table */}
-        <div className="bg-[#DFE7F2] rounded-2xl border border-[#BAC9DC] shadow-md overflow-hidden max-w-4xl mx-auto">
-          <div className="p-6 bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 border-b border-[#CAD8EA] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="bg-[#DFE7F2] dark:bg-[#131927] rounded-2xl border border-[#BAC9DC] dark:border-[#243048] shadow-md overflow-hidden max-w-4xl mx-auto">
+          <div className="p-6 bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 dark:from-indigo-950/80 dark:via-[#131927] dark:to-purple-950/80 border-b border-[#CAD8EA] dark:border-[#1E293B] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-              <h3 className="text-xl font-bold text-slate-900">How We Compare</h3>
-              <p className="text-xs text-slate-600 font-medium">Why thousands of parents choose Maths Learning Academy</p>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">How We Compare</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 font-medium">Why thousands of parents choose Maths Learning Academy</p>
             </div>
             <span className="text-xs font-mono font-bold bg-indigo-600 text-white px-3 py-1 rounded-full shadow-2xs self-start sm:self-auto">
               Pedagogy Comparison
             </span>
           </div>
 
-          <div className="divide-y divide-[#CAD8EA] text-sm">
+          <div className="divide-y divide-[#CAD8EA] dark:divide-[#1E293B] text-sm">
             {comparison.map((item, idx) => (
-              <div key={idx} className="grid grid-cols-1 md:grid-cols-12 p-4 sm:p-5 gap-3 hover:bg-[#D5E1EE] transition-colors">
-                <div className="md:col-span-3 font-bold text-slate-900 flex items-center">
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-12 p-4 sm:p-5 gap-3 hover:bg-[#D5E1EE] dark:hover:bg-[#1A2338] transition-colors">
+                <div className="md:col-span-3 font-bold text-slate-900 dark:text-white flex items-center">
                   {item.feature}
                 </div>
-                <div className="md:col-span-4 text-slate-600 flex items-start gap-2 text-xs sm:text-sm">
+                <div className="md:col-span-4 text-slate-600 dark:text-slate-400 flex items-start gap-2 text-xs sm:text-sm">
                   <X size={16} className="text-rose-500 shrink-0 mt-0.5 font-bold" />
                   <span>{item.traditional}</span>
                 </div>
-                <div className="md:col-span-5 text-indigo-950 font-semibold flex items-start gap-2 text-xs sm:text-sm bg-[#D2DFEE] p-2.5 rounded-lg border border-[#BAC9DC]">
-                  <Check size={16} className="text-emerald-700 shrink-0 mt-0.5 font-bold" />
+                <div className="md:col-span-5 text-indigo-950 dark:text-indigo-200 font-semibold flex items-start gap-2 text-xs sm:text-sm bg-[#D2DFEE] dark:bg-[#0D121F] p-2.5 rounded-lg border border-[#BAC9DC] dark:border-[#243048]">
+                  <Check size={16} className="text-emerald-700 dark:text-emerald-400 shrink-0 mt-0.5 font-bold" />
                   <span>{item.academy}</span>
                 </div>
               </div>

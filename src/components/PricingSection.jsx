@@ -179,12 +179,12 @@ export default function PricingSection({ onOpenBooking }) {
         </div>
 
         {/* Guarantee Banner */}
-        <div className="mt-14 max-w-3xl mx-auto p-5 rounded-2xl bg-[#D6E2F0] border border-[#BAC9DC] flex items-center gap-4 text-slate-800 text-xs sm:text-sm shadow-xs">
+        <div className="mt-14 max-w-3xl mx-auto p-5 rounded-2xl bg-[#D6E2F0] dark:bg-[#151D2F] border border-[#BAC9DC] dark:border-[#243048] flex items-center gap-4 text-slate-800 dark:text-slate-300 text-xs sm:text-sm shadow-xs">
           <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
             <Shield size={24} />
           </div>
           <div>
-            <strong className="text-slate-950 block text-sm font-bold">100% 30-Day Grade Improvement Guarantee</strong>
+            <strong className="text-slate-950 dark:text-white block text-sm font-bold">100% 30-Day Grade Improvement Guarantee</strong>
             If your student attends scheduled sessions and doesn't see tangible clarity and grade improvement within 30 days, we'll refund your tuition completely. No questions asked.
           </div>
         </div>

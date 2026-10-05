@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { courseCategories, courses } from '../data/coursesData';
-import { 
-  Star, 
-  ArrowRight, 
+import {
+  Star,
+  ArrowRight,
   Layers,
   GraduationCap
 } from 'lucide-react';
@@ -17,7 +17,7 @@ export default function CoursesSection({ onOpenBooking }) {
   return (
     <section id="courses" className="py-24 relative bg-[#E5ECF4] border-t border-b border-[#CBD5E1]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-100 border border-indigo-200 text-indigo-800 text-xs font-semibold uppercase tracking-wider mb-3">
@@ -37,11 +37,10 @@ export default function CoursesSection({ onOpenBooking }) {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
-                  selectedCategory === cat.id
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${selectedCategory === cat.id
                     ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/25 scale-105'
                     : 'bg-[#D2DFEE] text-slate-800 hover:text-slate-950 hover:bg-[#C5D5E7] border border-[#B8CADF]'
-                }`}
+                  }`}
               >
                 {cat.label}
               </button>
@@ -143,14 +142,14 @@ export default function CoursesSection({ onOpenBooking }) {
         </div>
 
         {/* Custom Curriculum Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 border border-indigo-200 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 dark:from-indigo-950/80 dark:via-[#131927] dark:to-purple-950/80 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
               <GraduationCap size={24} />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-slate-900">Need a customized syllabus for your school curriculum?</h4>
-              <p className="text-sm text-slate-700">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white">Need a customized syllabus for your school curriculum?</h4>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
                 We adapt 1-on-1 sessions to IB, Cambridge IGCSE, AP, Common Core, and CBSE syllabi.
               </p>
             </div>
