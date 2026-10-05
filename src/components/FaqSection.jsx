@@ -57,20 +57,20 @@ export default function FaqSection({ onOpenBooking }) {
             return (
               <div
                 key={idx}
-                className="bg-[#DFE7F2] border border-[#BAC9DC] rounded-xl overflow-hidden transition-all duration-200 shadow-xs"
+                className="bg-[#DFE7F2] dark:bg-[#131927] border border-[#BAC9DC] dark:border-[#243048] rounded-xl overflow-hidden transition-all duration-200 shadow-xs"
               >
                 <button
                   onClick={() => setOpenIdx(isOpen ? -1 : idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 hover:text-indigo-700 transition-colors cursor-pointer"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-white hover:text-indigo-700 dark:hover:text-indigo-400 transition-colors cursor-pointer"
                 >
                   <span className="text-base sm:text-lg">{faq.q}</span>
-                  <div className={`w-8 h-8 rounded-full bg-[#D2DFEE] flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-indigo-600 text-white' : 'text-slate-700'}`}>
+                  <div className={`w-8 h-8 rounded-full bg-[#D2DFEE] dark:bg-[#0D121F] flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-indigo-600 dark:bg-indigo-600 text-white' : 'text-slate-700 dark:text-slate-300'}`}>
                     <ChevronDown size={18} />
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 text-slate-800 text-sm leading-relaxed border-t border-[#CAD8EA] pt-4 animate-fadeIn font-medium">
+                  <div className="px-5 pb-5 text-slate-800 dark:text-slate-300 text-sm leading-relaxed border-t border-[#CAD8EA] dark:border-[#1E293B] pt-4 animate-fadeIn font-medium">
                     {faq.a}
                   </div>
                 )}
@@ -80,9 +80,9 @@ export default function FaqSection({ onOpenBooking }) {
         </div>
 
         {/* Quick Contact Box */}
-        <div className="mt-12 text-center p-6 rounded-2xl bg-[#D2DFEE] border border-[#BAC9DC] shadow-xs">
-          <h4 className="text-base font-bold text-slate-900 mb-1">Still have a specific question?</h4>
-          <p className="text-xs text-slate-700 mb-4">Our academic advisors are available 7 days a week to help evaluate your child's goals.</p>
+        <div className="mt-12 text-center p-6 rounded-2xl bg-[#D2DFEE] dark:bg-[#131927] border border-[#BAC9DC] dark:border-[#243048] shadow-xs">
+          <h4 className="text-base font-bold text-slate-900 dark:text-white mb-1">Still have a specific question?</h4>
+          <p className="text-xs text-slate-700 dark:text-slate-300 mb-4">Our academic advisors are available 7 days a week to help evaluate your child's goals.</p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <button
               onClick={onOpenBooking}

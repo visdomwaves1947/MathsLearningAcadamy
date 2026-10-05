@@ -78,39 +78,39 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
           <div className="lg:col-span-5 space-y-6">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase font-bold text-slate-600 tracking-wider">Formula Equation</span>
-                <span className="text-xs font-mono font-bold text-indigo-800 bg-indigo-100 px-2 py-0.5 rounded border border-indigo-200">Quadratic Function</span>
+                <span className="text-xs uppercase font-bold text-slate-600 dark:text-slate-300 tracking-wider">Formula Equation</span>
+                <span className="text-xs font-mono font-bold text-indigo-800 dark:text-indigo-300 bg-indigo-100 dark:bg-indigo-950/80 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800/70">Quadratic Function</span>
               </div>
-              <div className="text-2xl font-mono font-bold text-slate-950 mt-1 bg-[#D2DFEE] p-3.5 rounded-xl border border-[#B8CADF] shadow-xs">
+              <div className="text-2xl font-mono font-bold text-slate-950 dark:text-white mt-1 bg-[#D2DFEE] dark:bg-[#0D121F] p-3.5 rounded-xl border border-[#B8CADF] dark:border-[#243048] shadow-xs">
                 f(x) = {a}x² {b >= 0 ? `+ ${b}x` : `- ${Math.abs(b)}x`} {c >= 0 ? `+ ${c}` : `- ${Math.abs(c)}`}
               </div>
             </div>
 
             {/* Presets */}
             <div>
-              <span className="text-xs font-semibold text-slate-600 block mb-2">Try Quick Presets:</span>
+              <span className="text-xs font-semibold text-slate-600 dark:text-slate-300 block mb-2">Try Quick Presets:</span>
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => applyPreset(1, 0, -4)}
-                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] hover:bg-[#C5D5E7] text-slate-800 border border-[#B8CADF] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
+                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] hover:bg-[#C5D5E7] dark:hover:bg-[#1A2338] text-slate-800 dark:text-slate-200 border border-[#B8CADF] dark:border-[#243048] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
                 >
                   Standard Parabola
                 </button>
                 <button
                   onClick={() => applyPreset(-1, 0, 5)}
-                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] hover:bg-[#C5D5E7] text-slate-800 border border-[#B8CADF] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
+                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] hover:bg-[#C5D5E7] dark:hover:bg-[#1A2338] text-slate-800 dark:text-slate-200 border border-[#B8CADF] dark:border-[#243048] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
                 >
                   Inverted Arch
                 </button>
                 <button
                   onClick={() => applyPreset(1, -4, 4)}
-                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] hover:bg-[#C5D5E7] text-slate-800 border border-[#B8CADF] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
+                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] hover:bg-[#C5D5E7] dark:hover:bg-[#1A2338] text-slate-800 dark:text-slate-200 border border-[#B8CADF] dark:border-[#243048] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
                 >
                   Tangent Root (Δ=0)
                 </button>
                 <button
                   onClick={() => applyPreset(1, 2, 4)}
-                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] hover:bg-[#C5D5E7] text-slate-800 border border-[#B8CADF] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
+                  className="px-2.5 py-1 text-xs rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] hover:bg-[#C5D5E7] dark:hover:bg-[#1A2338] text-slate-800 dark:text-slate-200 border border-[#B8CADF] dark:border-[#243048] font-mono transition-colors cursor-pointer shadow-xs font-semibold"
                 >
                   Complex Floating
                 </button>
@@ -118,12 +118,12 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
             </div>
 
             {/* Parameter Sliders */}
-            <div className="space-y-4 bg-[#D2DFEE] p-4 rounded-xl border border-[#B8CADF] shadow-xs">
+            <div className="space-y-4 bg-[#D2DFEE] dark:bg-[#0D121F] p-4 rounded-xl border border-[#B8CADF] dark:border-[#243048] shadow-xs">
               {/* Parameter a */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5 font-semibold">
-                  <span className="text-slate-800">Curvature & Direction (a):</span>
-                  <span className="font-mono font-bold text-sky-700">{a}</span>
+                  <span className="text-slate-800 dark:text-slate-200">Curvature & Direction (a):</span>
+                  <span className="font-mono font-bold text-sky-700 dark:text-sky-400">{a}</span>
                 </div>
                 <input
                   type="range"
@@ -135,15 +135,15 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
                     const val = Number(e.target.value);
                     setA(val === 0 ? 0.5 : val);
                   }}
-                  className="w-full accent-sky-600 h-1.5 bg-[#B8C8DB] rounded-lg cursor-pointer"
+                  className="w-full accent-sky-600 h-1.5 bg-[#B8C8DB] dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
 
               {/* Parameter b */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5 font-semibold">
-                  <span className="text-slate-800">Linear Shift (b):</span>
-                  <span className="font-mono font-bold text-purple-700">{b}</span>
+                  <span className="text-slate-800 dark:text-slate-200">Linear Shift (b):</span>
+                  <span className="font-mono font-bold text-purple-700 dark:text-purple-400">{b}</span>
                 </div>
                 <input
                   type="range"
@@ -152,15 +152,15 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
                   step="0.5"
                   value={b}
                   onChange={(e) => setB(Number(e.target.value))}
-                  className="w-full accent-purple-600 h-1.5 bg-[#B8C8DB] rounded-lg cursor-pointer"
+                  className="w-full accent-purple-600 h-1.5 bg-[#B8C8DB] dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
 
               {/* Parameter c */}
               <div>
                 <div className="flex justify-between text-xs mb-1.5 font-semibold">
-                  <span className="text-slate-800">Y-Intercept (c):</span>
-                  <span className="font-mono font-bold text-emerald-700">{c}</span>
+                  <span className="text-slate-800 dark:text-slate-200">Y-Intercept (c):</span>
+                  <span className="font-mono font-bold text-emerald-700 dark:text-emerald-400">{c}</span>
                 </div>
                 <input
                   type="range"
@@ -169,39 +169,39 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
                   step="0.5"
                   value={c}
                   onChange={(e) => setC(Number(e.target.value))}
-                  className="w-full accent-emerald-600 h-1.5 bg-[#B8C8DB] rounded-lg cursor-pointer"
+                  className="w-full accent-emerald-600 h-1.5 bg-[#B8C8DB] dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Calculated Key Metrics */}
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-lg bg-[#D2DFEE] border border-[#B8CADF] shadow-xs">
-                <span className="text-slate-600 block mb-0.5 font-semibold">Vertex (Extrema):</span>
-                <span className="font-mono font-bold text-amber-700 text-sm">
+              <div className="p-3 rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] border border-[#B8CADF] dark:border-[#243048] shadow-xs">
+                <span className="text-slate-600 dark:text-slate-400 block mb-0.5 font-semibold">Vertex (Extrema):</span>
+                <span className="font-mono font-bold text-amber-700 dark:text-amber-400 text-sm">
                   ({vertexX}, {vertexY})
                 </span>
               </div>
-              <div className="p-3 rounded-lg bg-[#D2DFEE] border border-[#B8CADF] shadow-xs">
-                <span className="text-slate-600 block mb-0.5 font-semibold">Discriminant (Δ = b² - 4ac):</span>
-                <span className="font-mono font-bold text-indigo-700 text-sm">
+              <div className="p-3 rounded-lg bg-[#D2DFEE] dark:bg-[#0D121F] border border-[#B8CADF] dark:border-[#243048] shadow-xs">
+                <span className="text-slate-600 dark:text-slate-400 block mb-0.5 font-semibold">Discriminant (Δ = b² - 4ac):</span>
+                <span className="font-mono font-bold text-indigo-700 dark:text-indigo-400 text-sm">
                   {discriminant.toFixed(1)}
                 </span>
               </div>
             </div>
 
-            <div className="p-3 rounded-lg bg-indigo-100/90 border border-indigo-200 text-xs">
-              <span className="text-indigo-950 font-semibold block mb-1">Roots / Zeroes:</span>
-              <span className="font-mono font-bold text-emerald-800 text-sm">{rootsDisplay}</span>
+            <div className="p-3 rounded-lg bg-indigo-100/90 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/70 text-xs">
+              <span className="text-indigo-950 dark:text-indigo-200 font-semibold block mb-1">Roots / Zeroes:</span>
+              <span className="font-mono font-bold text-emerald-800 dark:text-emerald-400 text-sm">{rootsDisplay}</span>
             </div>
 
           </div>
 
           {/* SVG Graph Canvas Column */}
           <div className="lg:col-span-7 flex flex-col items-center">
-            <div className="w-full bg-[#D6E2F0] rounded-xl p-4 border border-[#B8CADF] relative shadow-inner overflow-hidden">
+            <div className="w-full bg-[#D6E2F0] dark:bg-[#0D121F] rounded-xl p-4 border border-[#B8CADF] dark:border-[#243048] relative shadow-inner overflow-hidden">
               
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 mb-2 font-semibold">
+              <div className="flex items-center justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400 mb-2 font-semibold">
                 <span>Cartesian Grid [-6, +6] × [-8, +8]</span>
                 <span className="text-indigo-700 font-bold flex items-center gap-1">
                   <TrendingUp size={13} /> Real-Time Rendering
@@ -323,26 +323,26 @@ export default function InteractiveGraphExplorer({ onOpenBooking }) {
               </svg>
 
               {/* Bottom Legend */}
-              <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-700 mt-2 pt-2 border-t border-[#CAD8EA]">
+              <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-700 dark:text-slate-300 mt-2 pt-2 border-t border-[#CAD8EA] dark:border-[#1E293B]">
                 <div className="flex items-center gap-3">
                   <span className="flex items-center gap-1 font-semibold">
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-600 inline-block"></span> Vertex
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block"></span> Vertex
                   </span>
                   <span className="flex items-center gap-1 font-semibold">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-700 inline-block"></span> Roots (x-intercepts)
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Roots (x-intercepts)
                   </span>
                 </div>
-                <span className="text-slate-600">Drag sliders to test variations</span>
+                <span className="text-slate-600 dark:text-slate-400">Drag sliders to test variations</span>
               </div>
             </div>
 
-            <div className="w-full mt-4 flex items-center justify-between p-3.5 rounded-xl bg-[#D2DFEE] border border-[#B8CADF] shadow-xs">
-              <span className="text-xs text-slate-800 font-semibold">
+            <div className="w-full mt-4 flex items-center justify-between p-3.5 rounded-xl bg-[#D2DFEE] dark:bg-[#0D121F] border border-[#B8CADF] dark:border-[#243048] shadow-xs">
+              <span className="text-xs text-slate-800 dark:text-slate-200 font-semibold">
                 Want to learn advanced 3D graphing, polar coordinates & calculus integration?
               </span>
               <button
                 onClick={onOpenBooking}
-                className="text-xs font-bold text-indigo-700 hover:text-indigo-900 underline cursor-pointer"
+                className="text-xs font-bold text-indigo-700 dark:text-indigo-400 hover:text-indigo-900 dark:hover:text-indigo-300 underline cursor-pointer"
               >
                 Join Math Lab →
               </button>

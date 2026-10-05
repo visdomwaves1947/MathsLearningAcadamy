@@ -142,14 +142,14 @@ export default function CoursesSection({ onOpenBooking }) {
         </div>
 
         {/* Custom Curriculum Banner */}
-        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 border border-indigo-200 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-indigo-100 via-[#DFE7F2] to-purple-100 dark:from-indigo-950/80 dark:via-[#131927] dark:to-purple-950/80 border border-indigo-200 dark:border-indigo-900/60 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-md">
               <GraduationCap size={24} />
             </div>
             <div>
-              <h4 className="text-lg font-bold text-slate-900">Need a customized syllabus for your school curriculum?</h4>
-              <p className="text-sm text-slate-700">
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white">Need a customized syllabus for your school curriculum?</h4>
+              <p className="text-sm text-slate-700 dark:text-slate-300">
                 We adapt 1-on-1 sessions to IB, Cambridge IGCSE, AP, Common Core, and CBSE syllabi.
               </p>
             </div>

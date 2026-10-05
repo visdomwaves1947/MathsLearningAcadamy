@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import InteractiveGraphExplorer from './components/InteractiveGraphExplorer';
@@ -14,10 +14,44 @@ import StudentPortalModal from './components/StudentPortalModal';
 import VideoDemoModal from './components/VideoDemoModal';
 
 export default function App() {
+  const [theme, setTheme] = useState(() => {
+    try {
+      const savedTheme = localStorage.getItem('mla_theme');
+      if (savedTheme === 'dark' || savedTheme === 'light') {
+        return savedTheme;
+      }
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+    } catch {
+      return 'light';
+    }
+  });
+
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState('');
   const [portalOpen, setPortalOpen] = useState(false);
   const [videoDemoOpen, setVideoDemoOpen] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+    }
+    try {
+      localStorage.setItem('mla_theme', theme);
+    } catch (e) {
+      console.warn('LocalStorage not available', e);
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const handleOpenBooking = (track = '') => {
     setSelectedTrack(typeof track === 'string' ? track : '');
@@ -29,7 +63,9 @@ export default function App() {
       {/* Navigation Header */}
       <Navbar 
         onOpenBooking={() => handleOpenBooking()} 
-        onOpenPortal={() => setPortalOpen(true)} 
+        onOpenPortal={() => setPortalOpen(true)}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       {/* Main Content */}
