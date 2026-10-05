@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { 
   Sparkles, 
   PhoneCall, 
-  Flame
+  Flame,
+  Sun,
+  Moon
 } from 'lucide-react';
 
-export default function Navbar({ onOpenBooking, onOpenPortal }) {
+export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', toggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -87,6 +89,7 @@ export default function Navbar({ onOpenBooking, onOpenPortal }) {
               >
                 Student Login
               </button>
+              
               <button
                 onClick={onOpenBooking}
                 className="relative group overflow-hidden rounded-xl p-px font-semibold text-xs tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
@@ -96,6 +99,21 @@ export default function Navbar({ onOpenBooking, onOpenPortal }) {
                   <Sparkles size={14} className="text-amber-300 animate-spin-slow" />
                   <span>Book Free Class</span>
                 </span>
+              </button>
+
+              {/* Theme Toggle Button (Light/Dark mode) */}
+              <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-900/80 hover:bg-indigo-800/90 text-amber-300 hover:text-amber-200 border border-indigo-700/70 hover:border-indigo-400/80 transition-all duration-200 cursor-pointer shadow-sm flex items-center justify-center shrink-0 active:scale-90"
+              >
+                {theme === 'dark' ? (
+                  <Sun size={17} className="text-amber-300 animate-spin-slow" />
+                ) : (
+                  <Moon size={17} className="text-indigo-200 hover:text-white" />
+                )}
               </button>
             </div>
 
