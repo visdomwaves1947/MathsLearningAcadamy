@@ -7,7 +7,15 @@ import {
   Moon
 } from 'lucide-react';
 
-export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', toggleTheme }) {
+export default function Navbar({ 
+  onOpenBooking, 
+  onOpenPortal, 
+  onOpenSignIn, 
+  onOpenSignUp, 
+  currentUser = null, 
+  theme = 'light', 
+  toggleTheme 
+}) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,6 +25,10 @@ export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', t
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Use onOpenSignIn or fallback to onOpenPortal
+  const handleSignInClick = onOpenSignIn || onOpenPortal;
+  const handleSignUpClick = onOpenSignUp || onOpenPortal;
 
   return (
     <>
@@ -28,7 +40,7 @@ export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', t
               <Flame size={13} className="text-amber-950 fill-amber-950" />
             </span>
             <span className="text-[11px] sm:text-xs md:text-sm leading-tight">
-              <strong className="text-white">Spring 2026 Admissions Open:</strong> <span className="text-amber-300 font-semibold">Free 1-on-1 Math Assessment</span> this week!
+              <strong className="text-white">Spring 2026 Admissions Open:</strong> <span className="text-amber-300 font-semibold">Intermediate (AP & TS) & Olympiad Batch</span> enrolling now!
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-xs text-indigo-200 shrink-0">
@@ -37,10 +49,10 @@ export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', t
             </a>
             <span className="text-indigo-700">|</span>
             <button 
-              onClick={onOpenBooking} 
+              onClick={handleSignUpClick} 
               className="text-amber-400 hover:text-amber-300 underline font-bold cursor-pointer transition-colors"
             >
-              Claim Spot →
+              Sign Up Online →
             </button>
           </div>
         </div>
@@ -82,20 +94,43 @@ export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', t
             </a>
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                onClick={onOpenPortal}
-                className="text-xs font-semibold text-indigo-100 hover:text-white px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-xl bg-indigo-900/70 hover:bg-indigo-800 transition-all border border-indigo-700/60 hover:border-indigo-500 cursor-pointer shadow-sm"
-              >
-                Student Login
-              </button>
+            <div className="flex items-center gap-1.5 sm:gap-2.5">
+              {currentUser ? (
+                <button
+                  onClick={handleSignInClick}
+                  className="flex items-center gap-2 text-xs font-bold text-white px-3 py-2 rounded-xl bg-indigo-900/80 hover:bg-indigo-800 transition-all border border-indigo-600 cursor-pointer shadow-sm"
+                  title="Open Student Dashboard"
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span className="max-w-[120px] truncate">{currentUser.name}</span>
+                </button>
+              ) : (
+                <div className="flex items-center gap-1 sm:gap-1.5">
+                  {/* Professional Ghost Sign In Button */}
+                  <button
+                    onClick={handleSignInClick}
+                    className="text-xs font-bold text-slate-100 hover:text-white px-3 py-2 rounded-xl hover:bg-white/10 active:scale-95 transition-all cursor-pointer"
+                  >
+                    Sign In
+                  </button>
+
+                  {/* Professional Primary Sign Up Button */}
+                  <button
+                    onClick={handleSignUpClick}
+                    className="text-xs font-bold text-white px-3.5 sm:px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 border border-indigo-400/40 shadow-sm shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
+                  >
+                    Sign Up
+                  </button>
+                </div>
+              )}
               
+              {/* Book Free Class Button */}
               <button
                 onClick={onOpenBooking}
-                className="relative group overflow-hidden rounded-xl p-px font-semibold text-xs tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
+                className="hidden md:inline-flex relative group overflow-hidden rounded-xl p-px font-semibold text-xs tracking-wide shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 active:scale-95 transition-all cursor-pointer"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-purple-500 to-amber-400 group-hover:opacity-100 transition-opacity"></span>
-                <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[11px] bg-indigo-600 text-white group-hover:bg-indigo-500 transition-all">
+                <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-indigo-500 to-purple-500 group-hover:opacity-100 transition-opacity"></span>
+                <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-[11px] bg-indigo-600 text-white group-hover:bg-indigo-500 transition-all font-bold">
                   <Sparkles size={14} className="text-amber-300 animate-spin-slow" />
                   <span>Book Free Class</span>
                 </span>
@@ -107,12 +142,12 @@ export default function Navbar({ onOpenBooking, onOpenPortal, theme = 'light', t
                 onClick={toggleTheme}
                 aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
                 title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-900/80 hover:bg-indigo-800/90 text-amber-300 hover:text-amber-200 border border-indigo-700/70 hover:border-indigo-400/80 transition-all duration-200 cursor-pointer shadow-sm flex items-center justify-center shrink-0 active:scale-90"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-indigo-900/80 hover:bg-indigo-800/90 text-amber-300 hover:text-amber-200 border border-indigo-700/70 hover:border-indigo-400/80 transition-all duration-200 cursor-pointer shadow-sm flex items-center justify-center shrink-0 active:scale-90"
               >
                 {theme === 'dark' ? (
-                  <Sun size={17} className="text-amber-300 animate-spin-slow" />
+                  <Sun size={16} className="text-amber-300 animate-spin-slow" />
                 ) : (
-                  <Moon size={17} className="text-indigo-200 hover:text-white" />
+                  <Moon size={16} className="text-indigo-200 hover:text-white" />
                 )}
               </button>
             </div>

@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
 import StudentPortalModal from './components/StudentPortalModal';
 import VideoDemoModal from './components/VideoDemoModal';
+import AuthModal from './components/AuthModal';
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -30,8 +31,47 @@ export default function App() {
 
   const [bookingOpen, setBookingOpen] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState('');
-  const [portalOpen, setPortalOpen] = useState(false);
   const [videoDemoOpen, setVideoDemoOpen] = useState(false);
+
+  // Unified Auth & Registration Modal State
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState('signin'); // 'signin' | 'signup' | 'portal'
+  const [currentUser, setCurrentUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem('mla_user');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  const handleLoginSuccess = (user) => {
+    setCurrentUser(user);
+    try {
+      localStorage.setItem('mla_user', JSON.stringify(user));
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem('mla_user');
+    } catch (e) {
+      console.warn(e);
+    }
+  };
+
+  const handleOpenSignIn = () => {
+    setAuthMode(currentUser ? 'portal' : 'signin');
+    setAuthModalOpen(true);
+  };
+
+  const handleOpenSignUp = () => {
+    setAuthMode('signup');
+    setAuthModalOpen(true);
+  };
 
   useEffect(() => {
     const root = document.documentElement;
@@ -63,7 +103,10 @@ export default function App() {
       {/* Navigation Header */}
       <Navbar 
         onOpenBooking={() => handleOpenBooking()} 
-        onOpenPortal={() => setPortalOpen(true)}
+        onOpenPortal={handleOpenSignIn}
+        onOpenSignIn={handleOpenSignIn}
+        onOpenSignUp={handleOpenSignUp}
+        currentUser={currentUser}
         theme={theme}
         toggleTheme={toggleTheme}
       />
@@ -122,9 +165,14 @@ export default function App() {
         preselectedTrack={selectedTrack}
       />
 
-      <StudentPortalModal 
-        isOpen={portalOpen} 
-        onClose={() => setPortalOpen(false)}
+      {/* Unified Student Auth & Sign Up Wizard Modal */}
+      <AuthModal 
+        isOpen={authModalOpen} 
+        onClose={() => setAuthModalOpen(false)}
+        initialMode={authMode}
+        currentUser={currentUser}
+        onLoginSuccess={handleLoginSuccess}
+        onLogout={handleLogout}
       />
 
       <VideoDemoModal 

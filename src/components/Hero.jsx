@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  Play, 
-  Star, 
+import {
+  Sparkles,
+  ArrowRight,
+  Play,
+  Star,
   Compass
 } from 'lucide-react';
 
@@ -19,7 +19,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
       {/* Ambient glowing orbs */}
       <div className="absolute top-10 left-1/4 w-96 h-96 bg-indigo-200/50 rounded-full blur-3xl pointer-events-none -z-10 animate-pulse-subtle"></div>
       <div className="absolute bottom-10 right-1/4 w-96 h-96 bg-purple-200/50 rounded-full blur-3xl pointer-events-none -z-10"></div>
-      
+
       {/* Floating Math Symbols */}
       <div className="absolute top-16 left-8 text-4xl text-indigo-900/10 font-mono font-bold select-none pointer-events-none hidden md:block animate-float-slow">
         ∫ e^x dx
@@ -33,7 +33,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
+
           {/* Left Column: Headlines & Trust */}
           <div className="lg:col-span-7 text-center lg:text-left">
             {/* Top Pill */}
@@ -108,13 +108,13 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
           {/* Right Column: Interactive Math Visualizer Card */}
           <div className="lg:col-span-5">
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              
+
               {/* Outer Glow */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-indigo-300/40 via-purple-300/40 to-sky-300/40 dark:from-indigo-500/20 dark:via-purple-500/20 dark:to-sky-500/20 blur-xl"></div>
-              
+
               {/* Glass Card in Soft Mist Theme (No Stark White) */}
               <div className="relative rounded-2xl bg-[#DFE7F2]/90 dark:bg-[#131927]/95 border border-[#BAC9DC] dark:border-[#243048] p-6 shadow-xl backdrop-blur-xl">
-                
+
                 {/* Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-[#CAD8EA] dark:border-[#1E293B]">
                   <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                   <div className="absolute top-2 left-2 text-[10px] font-mono text-slate-600 dark:text-slate-400 font-semibold">
                     θ = {angleDeg}°
                   </div>
-                  
+
                   <svg viewBox="0 0 280 180" className="w-full max-w-[260px] h-[160px]">
                     <defs>
                       <linearGradient id="triGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -152,7 +152,7 @@ export default function Hero({ onOpenBooking, onOpenVideoDemo }) {
                         <stop offset="100%" stopColor="#9333EA" stopOpacity="0.2" />
                       </linearGradient>
                     </defs>
-                    
+
                     {(() => {
                       const scale = 14;
                       const ox = 45;
