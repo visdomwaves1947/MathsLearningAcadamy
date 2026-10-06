@@ -507,10 +507,10 @@ export default function AuthModal({
             <div className="mb-4">
               <div className="flex items-center gap-2">
                 <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  Maths Learning
+                  My
                 </span>
                 <span className="text-2xl sm:text-3xl font-black text-sky-400 tracking-tight">
-                  Academy
+                  Marks
                 </span>
               </div>
               <div className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-sky-300/80 mt-1">
