@@ -154,9 +154,46 @@ export default function App() {
           />
 
           {/* English Page */}
-          <Route path="/mymarks/Englsih" element={<English />} />
-          <Route path="/mymarks/English" element={<English />} />
-          <Route path="/mymarks/english" element={<English />} />
+          <Route 
+            path="/mymarks/Englsih" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/English" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/english" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/eng" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
 
           {/* Root & Fallback: Redirect to /mymarks/maths */}
           <Route path="/" element={<Navigate to="/mymarks/maths" replace />} />
