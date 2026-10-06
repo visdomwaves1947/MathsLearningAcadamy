@@ -8,6 +8,7 @@ import AuthModal from './components/AuthModal';
 import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
 import MathsPage from './pages/MathsPage';
 import DemoPage from './pages/DemoPage';
+import English from './pages/English';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -151,6 +152,11 @@ export default function App() {
               />
             } 
           />
+
+          {/* English Page */}
+          <Route path="/mymarks/Englsih" element={<English />} />
+          <Route path="/mymarks/English" element={<English />} />
+          <Route path="/mymarks/english" element={<English />} />
 
           {/* Root & Fallback: Redirect to /mymarks/maths */}
           <Route path="/" element={<Navigate to="/mymarks/maths" replace />} />
