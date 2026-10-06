@@ -121,7 +121,19 @@ export default function Navbar({
     }));
   };
 
-  const navLinks = [];
+  const navLinks = [
+    { name: "Mathematics", href: "/mymarks/maths" },
+    { name: "English", href: "/mymarks/english" },
+    { name: "Demo", href: "/mymarks/demo" },
+  ];
+
+  const isLinkActive = (href) => {
+    const p = location.pathname.toLowerCase();
+    if (href.includes("demo")) return p.includes("demo");
+    if (href.includes("english")) return p.includes("eng");
+    if (href.includes("maths")) return p.includes("maths") || p === "/";
+    return false;
+  };
 
   const handleSignInClick = onOpenSignIn || onOpenPortal;
   const handleSignUpClick = onOpenSignUp || onOpenPortal;
@@ -215,10 +227,7 @@ export default function Navbar({
                       href={link.href}
                       onClick={(e) => handleLinkNavigation(e, link.href)}
                       className={`block px-3 py-2 text-sm font-semibold transition-colors tracking-wide rounded-lg cursor-pointer ${
-                        (link.href.includes("demo") &&
-                          location.pathname.toLowerCase().includes("demo")) ||
-                        (link.name === "Home" &&
-                          !location.pathname.toLowerCase().includes("demo"))
+                        isLinkActive(link.href)
                           ? "text-cyan-700 dark:text-cyan-300 font-bold bg-black/5 dark:bg-white/10"
                           : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/5"
                       }`}
@@ -479,10 +488,7 @@ export default function Navbar({
                       handleLinkNavigation(e, link.href);
                     }}
                     className={`block py-2.5 px-2 text-sm font-bold transition-colors cursor-pointer ${
-                      (link.href.includes("demo") &&
-                        location.pathname.toLowerCase().includes("demo")) ||
-                      (link.name === "Home" &&
-                        !location.pathname.toLowerCase().includes("demo"))
+                      isLinkActive(link.href)
                         ? "text-cyan-700 dark:text-cyan-300"
                         : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300"
                     }`}
