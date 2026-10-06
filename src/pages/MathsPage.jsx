@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/Hero';
 import WhyChooseUs from '../components/WhyChooseUs';
+import IntermediateSubjects from '../components/IntermediateSubjects';
 import RoadmapsGrid from '../components/exam-planner/RoadmapsGrid';
 import Testimonials from '../components/Testimonials';
 import StatsBar from '../components/StatsBar';
@@ -31,6 +32,11 @@ export default function MathsPage({ onOpenBooking, onOpenVideoDemo, onSelectRoad
       {/* Why Choose Us Grid */}
       <WhyChooseUs 
         onOpenBooking={onOpenBooking} 
+      />
+
+      {/* AP/TS Intermediate Subjects Grid */}
+      <IntermediateSubjects 
+        onEnroll={(subjectName) => onOpenBooking(`Enroll in ${subjectName}`)}
       />
 
       {/* Premium Roadmaps Grid */}
