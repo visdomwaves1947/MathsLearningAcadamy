@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Testimonials from './components/Testimonials';
-import PricingSection from './components/PricingSection';
-import FaqSection from './components/FaqSection';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
-import StudentPortalModal from './components/StudentPortalModal';
 import VideoDemoModal from './components/VideoDemoModal';
 import AuthModal from './components/AuthModal';
-import WhyChooseUs from './components/WhyChooseUs';
-import StatsBar from './components/StatsBar';
-import RoadmapsGrid from './components/exam-planner/RoadmapsGrid';
 import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
+import MathsPage from './pages/MathsPage';
+import DemoPage from './pages/DemoPage';
+
+// Automatic scroll-to-top on route changes unless an anchor hash exists
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+  return null;
+}
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -100,9 +106,16 @@ export default function App() {
     setBookingOpen(true);
   };
 
+  const handleSelectRoadmap = (plan) => {
+    setSelectedRoadmap(plan);
+    setIsPlannerOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-[#EBF0F7] text-slate-900 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
-      {/* Navigation Header */}
+      <ScrollToTop />
+
+      {/* Shared Navigation Header */}
       <Navbar 
         onOpenBooking={() => handleOpenBooking()} 
         onOpenPortal={handleOpenSignIn}
@@ -113,61 +126,50 @@ export default function App() {
         toggleTheme={toggleTheme}
       />
 
-      {/* Main Content */}
+      {/* Routed Main Content */}
       <main className="grow">
-        {/* Hero Section */}
-        <Hero 
-          onOpenBooking={() => handleOpenBooking()} 
-          onOpenVideoDemo={() => setVideoDemoOpen(true)}
-        />
-
-        {/* Why Choose Us Grid (Premium 12-Card Section) */}
-        <WhyChooseUs 
-          onOpenBooking={() => handleOpenBooking()} 
-        />
-
-        {/* Premium Roadmaps Grid */}
-        <div className="bg-[#F8FAFC] dark:bg-[#0B0F19] py-8 sm:py-16 border-t border-b border-slate-200 dark:border-slate-800">
-          <RoadmapsGrid 
-            onSelectPlan={(plan) => {
-              setSelectedRoadmap(plan);
-              setIsPlannerOpen(true);
-            }} 
+        <Routes>
+          {/* Main Maths Academy Curriculum (Image 1) */}
+          <Route 
+            path="/mymarks/maths" 
+            element={
+              <MathsPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
           />
-        </div>
 
-        {/* Student Results & Parent Testimonials */}
-        <Testimonials 
-          onOpenBooking={() => handleOpenBooking()}
-        />
+          {/* Demo Page: Keeps Navbar, Footer, and displays "Demo" on Hero section */}
+          <Route 
+            path="/mymarks/demo" 
+            element={
+              <DemoPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              />
+            } 
+          />
 
-        {/* Stats Bar moved under Testimonials as requested */}
-        <StatsBar />
-
-        {/* Tuition Plans & Pricing */}
-        <PricingSection 
-          onOpenBooking={(planName) => handleOpenBooking(`Plan: ${planName}`)}
-        />
-
-        {/* Frequently Asked Questions */}
-        <FaqSection 
-          onOpenBooking={() => handleOpenBooking()}
-        />
+          {/* Root & Fallback: Redirect to /mymarks/maths */}
+          <Route path="/" element={<Navigate to="/mymarks/maths" replace />} />
+          <Route path="*" element={<Navigate to="/mymarks/maths" replace />} />
+        </Routes>
       </main>
 
-      {/* Footer */}
+      {/* Shared Footer */}
       <Footer 
-        onOpenBooking={() => handleOpenBooking()}
+        onOpenBooking={() => handleOpenBooking()} 
       />
 
-      {/* Interactive Modals */}
+      {/* Shared Interactive Modals */}
       <BookingModal 
         isOpen={bookingOpen} 
         onClose={() => setBookingOpen(false)}
         preselectedTrack={selectedTrack}
       />
 
-      {/* Unified Student Auth & Sign Up Wizard Modal */}
       <AuthModal 
         isOpen={authModalOpen} 
         onClose={() => setAuthModalOpen(false)}

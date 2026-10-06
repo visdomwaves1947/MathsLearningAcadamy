@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   Search, 
   ChevronDown, 
@@ -36,6 +37,35 @@ export default function Navbar({
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileDropdowns, setMobileDropdowns] = useState({});
   const dropdownTimeoutRef = useRef(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLinkNavigation = (e, href) => {
+    e.preventDefault();
+    if (!href || href === '#') {
+      if (location.pathname.toLowerCase().includes('demo')) {
+        navigate('/mymarks/maths');
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (href.startsWith('#')) {
+      if (location.pathname.toLowerCase().includes('demo')) {
+        navigate(`/mymarks/maths${href}`);
+      } else {
+        const id = href.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else {
+      navigate(href);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -90,7 +120,7 @@ export default function Navbar({
   };
 
   const navLinks = [
-    { name: 'Home', href: '#' },
+    { name: 'Home', href: '/mymarks/maths' },
     { 
       name: 'Curriculum', 
       href: '#courses',
@@ -108,12 +138,14 @@ export default function Navbar({
       dropdown: [
         { name: 'Interactive Graph & Curve Lab', href: '#interactive-lab', desc: 'Real-time 2D formula visualizer' },
         { name: 'Speed Mental Math Arena', href: '#speed-quiz', desc: 'Timed gamified arithmetic battle' },
-        { name: 'Diagnostic Assessment', href: '#courses', desc: 'Identify skill gaps & placement' }
+        { name: 'Diagnostic Assessment', href: '#courses', desc: 'Identify skill gaps & placement' },
+        { name: 'Live Interactive Demo', href: '/mymarks/demo', desc: 'Test interactive demo playground' }
       ]
     },
     { name: 'Methodology', href: '#methodology' },
     { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' }
+    { name: 'FAQ', href: '#faq' },
+    { name: 'Demo', href: '/mymarks/demo' }
   ];
 
   const handleSignInClick = onOpenSignIn || onOpenPortal;
@@ -161,7 +193,7 @@ export default function Navbar({
           <div className="flex items-center justify-between gap-2 sm:gap-4">
             
             {/* Visdom Waves Brand Logo */}
-            <VisdomBrand onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+            <VisdomBrand onClick={() => { navigate('/mymarks/maths'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
@@ -186,7 +218,13 @@ export default function Navbar({
                   ) : (
                     <a 
                       href={link.href}
-                      className="block px-3 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors tracking-wide rounded-lg hover:bg-black/5 dark:hover:bg-white/5"
+                      onClick={(e) => handleLinkNavigation(e, link.href)}
+                      className={`block px-3 py-2 text-sm font-semibold transition-colors tracking-wide rounded-lg cursor-pointer ${
+                        (link.href.includes('demo') && location.pathname.toLowerCase().includes('demo')) ||
+                        (link.name === 'Home' && !location.pathname.toLowerCase().includes('demo'))
+                          ? 'text-cyan-700 dark:text-cyan-300 font-bold bg-black/5 dark:bg-white/10'
+                          : 'text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/5'
+                      }`}
                     >
                       {link.name}
                     </a>
@@ -206,8 +244,11 @@ export default function Navbar({
                         <a
                           key={sIdx}
                           href={sub.href}
-                          onClick={() => setActiveDropdown(null)}
-                          className="block px-4 py-2.5 hover:bg-cyan-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white transition-colors group"
+                          onClick={(e) => {
+                            setActiveDropdown(null);
+                            handleLinkNavigation(e, sub.href);
+                          }}
+                          className="block px-4 py-2.5 hover:bg-cyan-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white transition-colors group cursor-pointer"
                         >
                           <div className="text-xs font-bold group-hover:text-cyan-700 dark:group-hover:text-cyan-300">
                             {sub.name}
@@ -402,8 +443,11 @@ export default function Navbar({
                           <a
                             key={sIdx}
                             href={sub.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block py-1.5 px-2 text-xs font-semibold text-slate-800 dark:text-cyan-100 hover:text-cyan-700 dark:hover:text-cyan-300"
+                            onClick={(e) => {
+                              setMobileMenuOpen(false);
+                              handleLinkNavigation(e, sub.href);
+                            }}
+                            className="block py-1.5 px-2 text-xs font-semibold text-slate-800 dark:text-cyan-100 hover:text-cyan-700 dark:hover:text-cyan-300 cursor-pointer"
                           >
                             • {sub.name}
                           </a>
@@ -414,8 +458,16 @@ export default function Navbar({
                 ) : (
                   <a
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block py-2.5 px-2 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                    onClick={(e) => {
+                      setMobileMenuOpen(false);
+                      handleLinkNavigation(e, link.href);
+                    }}
+                    className={`block py-2.5 px-2 text-sm font-bold transition-colors cursor-pointer ${
+                      (link.href.includes('demo') && location.pathname.toLowerCase().includes('demo')) ||
+                      (link.name === 'Home' && !location.pathname.toLowerCase().includes('demo'))
+                        ? 'text-cyan-700 dark:text-cyan-300'
+                        : 'text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300'
+                    }`}
                   >
                     {link.name}
                   </a>
