@@ -19,10 +19,10 @@ export default function IntermediateSubjects({ onEnroll }) {
 
   const handleCardClick = (subject) => {
     if (subject.id === 'maths') {
-      navigate('/mymarks/maths');
+      navigate('/maths');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'eng') {
-      navigate('/mymarks/english');
+      navigate('/english');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(activeExplore === subject.id ? null : subject.id);
@@ -31,10 +31,10 @@ export default function IntermediateSubjects({ onEnroll }) {
 
   const handleExploreClick = (subject) => {
     if (subject.id === 'maths') {
-      navigate('/mymarks/maths');
+      navigate('/maths');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'eng') {
-      navigate('/mymarks/english');
+      navigate('/english');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(subject.id);

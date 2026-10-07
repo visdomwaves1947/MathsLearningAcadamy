@@ -45,7 +45,7 @@ export default function Navbar({
     e.preventDefault();
     if (!href || href === "#") {
       if (location.pathname.toLowerCase().includes("demo")) {
-        navigate("/mymarks/maths");
+        navigate("/maths");
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -54,7 +54,7 @@ export default function Navbar({
 
     if (href.startsWith("#")) {
       if (location.pathname.toLowerCase().includes("demo")) {
-        navigate(`/mymarks/maths${href}`);
+        navigate(`/maths${href}`);
       } else {
         const id = href.replace("#", "");
         const el = document.getElementById(id);
@@ -122,9 +122,9 @@ export default function Navbar({
   };
 
   const navLinks = [
-    { name: "Mathematics", href: "/mymarks/maths" },
-    { name: "English", href: "/mymarks/english" },
-    { name: "Demo", href: "/mymarks/demo" },
+    { name: "Mathematics", href: "/maths" },
+    { name: "English", href: "/english" },
+    { name: "Demo", href: "/demo" },
   ];
 
   const isLinkActive = (href) => {
@@ -195,7 +195,7 @@ export default function Navbar({
           <div className="flex items-center shrink-0">
             <VisdomBrand
               onClick={() => {
-                navigate("/mymarks/maths");
+                navigate("/maths");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             />

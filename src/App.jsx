@@ -130,9 +130,9 @@ export default function App() {
       {/* Routed Main Content */}
       <main className="grow">
         <Routes>
-          {/* Main Maths Academy Curriculum (Image 1) */}
+          {/* Main Maths Academy Curriculum */}
           <Route 
-            path="/mymarks/maths" 
+            path="/maths" 
             element={
               <MathsPage 
                 onOpenBooking={handleOpenBooking}
@@ -144,7 +144,7 @@ export default function App() {
 
           {/* Demo Page: Keeps Navbar, Footer, and displays "Demo" on Hero section */}
           <Route 
-            path="/mymarks/demo" 
+            path="/demo" 
             element={
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
@@ -155,7 +155,7 @@ export default function App() {
 
           {/* English Page */}
           <Route 
-            path="/mymarks/Englsih" 
+            path="/english" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
@@ -165,7 +165,7 @@ export default function App() {
             } 
           />
           <Route 
-            path="/mymarks/English" 
+            path="/English" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
@@ -175,17 +175,7 @@ export default function App() {
             } 
           />
           <Route 
-            path="/mymarks/english" 
-            element={
-              <English 
-                onOpenBooking={handleOpenBooking}
-                onOpenVideoDemo={() => setVideoDemoOpen(true)}
-                onSelectRoadmap={handleSelectRoadmap}
-              />
-            } 
-          />
-          <Route 
-            path="/mymarks/eng" 
+            path="/eng" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
@@ -195,9 +185,15 @@ export default function App() {
             } 
           />
 
-          {/* Root & Fallback: Redirect to /mymarks/maths */}
-          <Route path="/" element={<Navigate to="/mymarks/maths" replace />} />
-          <Route path="*" element={<Navigate to="/mymarks/maths" replace />} />
+          {/* Backward compatibility redirects for /mymarks/* */}
+          <Route path="/mymarks/maths" element={<Navigate to="/maths" replace />} />
+          <Route path="/mymarks/demo" element={<Navigate to="/demo" replace />} />
+          <Route path="/mymarks/english" element={<Navigate to="/english" replace />} />
+          <Route path="/mymarks/*" element={<Navigate to="/maths" replace />} />
+
+          {/* Root & Fallback: Redirect to /maths */}
+          <Route path="/" element={<Navigate to="/maths" replace />} />
+          <Route path="*" element={<Navigate to="/maths" replace />} />
         </Routes>
       </main>
 
