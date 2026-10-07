@@ -42,15 +42,7 @@ export default function IntermediateSubjects({ onEnroll }) {
   };
 
   const handleEnrollClick = (subject) => {
-    if (subject.id === 'maths') {
-      navigate('/mymarks/maths');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'eng') {
-      navigate('/mymarks/english');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      setActiveEnroll(subject.id);
-    }
+    setActiveEnroll(subject.id);
   };
 
   const renderSubjectCard = (subject) => {

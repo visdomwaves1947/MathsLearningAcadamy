@@ -4,7 +4,7 @@ export function VisdomBrand({ onClick, className = "" }) {
   return (
     <div 
       onClick={onClick}
-      className={`flex items-center gap-2 sm:gap-2.5 cursor-pointer group shrink-0 select-none ${className}`}
+      className={`flex items-center gap-2.5 cursor-pointer group shrink-0 select-none ${className}`}
     >
       {/* Exact uploaded logo image */}
       <img 
@@ -15,14 +15,14 @@ export function VisdomBrand({ onClick, className = "" }) {
 
       {/* Brand Typography */}
       <div className="flex flex-col items-start justify-center shrink-0">
-        <h1 className="text-slate-950 dark:text-white font-extrabold text-xs sm:text-sm md:text-base lg:text-[1.1rem] tracking-wide whitespace-nowrap leading-none font-sans">
+        <h1 className="text-slate-950 dark:text-white font-bold text-xs sm:text-sm md:text-base lg:text-[1.12rem] tracking-tight whitespace-nowrap leading-none font-sans drop-shadow-2xs">
           Visdom Waves
         </h1>
-        <h2 className="text-slate-800 dark:text-slate-100 font-medium text-[9px] sm:text-[10px] md:text-xs whitespace-nowrap mt-0.5 leading-none font-sans">
+        <h2 className="text-slate-950 dark:text-cyan-100 font-semibold text-[9.5px] sm:text-[10.5px] md:text-xs whitespace-nowrap mt-0.5 leading-none font-sans">
           Innovations Private Limited
         </h2>
         <div className="flex whitespace-nowrap pointer-events-none mt-0.5">
-          <span className="text-[7.5px] sm:text-[8.5px] md:text-[9.5px] text-slate-700 dark:text-slate-300 font-medium whitespace-pre flex tracking-[0.1em]">
+          <span className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-900 dark:text-cyan-300 font-semibold whitespace-pre flex tracking-[0.08em]">
             Driven by vision
           </span>
         </div>
