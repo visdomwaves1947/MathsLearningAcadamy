@@ -1,4 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/mymarks/maths",
+      "destination": "/maths",
+      "permanent": true
+    },
+    {
+      "source": "/mymarks/demo",
+      "destination": "/demo",
+      "permanent": true
+    },
+    {
+      "source": "/mymarks/english",
+      "destination": "/english",
+      "permanent": true
+    },
+    {
+      "source": "/mymarks/:path*",
+      "destination": "/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
