@@ -1,7 +1,27 @@
 import { courses as fallbackCourses } from '../data/coursesData';
 import { quickMathChallenges as fallbackChallenges } from '../data/quizData';
 
-export const API_BASE_URL = (import.meta.env.VITE_API_URL || 'https://mymarks-backend.vercel.app').replace(/\/$/, '');
+export const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL.replace(/\/$/, '');
+  }
+  if (typeof window !== 'undefined') {
+    const host = window.location.hostname;
+    if (
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host.startsWith('192.168.') ||
+      host.startsWith('10.') ||
+      host.startsWith('172.') ||
+      host.endsWith('.local')
+    ) {
+      return 'http://localhost:5000';
+    }
+  }
+  return 'https://mymarks-backend.vercel.app';
+};
+
+export const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Check backend API health status
@@ -160,3 +180,76 @@ export async function triggerSeed() {
     return null;
   }
 }
+
+/**
+ * User Login API call
+ */
+export async function loginUserApi(credentials) {
+  const baseUrl = getApiBaseUrl();
+  try {
+    const res = await fetch(`${baseUrl}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || 'Login failed');
+    }
+    return data;
+  } catch (err) {
+    if (baseUrl !== 'http://localhost:5000') {
+      try {
+        const localRes = await fetch(`http://localhost:5000/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(credentials),
+        });
+        const localData = await localRes.json();
+        if (localRes.ok && localData.success) {
+          return localData;
+        }
+      } catch (e) {
+        // Fallback failed, throw original error
+      }
+    }
+    throw err;
+  }
+}
+
+/**
+ * User Registration API call
+ */
+export async function registerUserApi(userData) {
+  const baseUrl = getApiBaseUrl();
+  try {
+    const res = await fetch(`${baseUrl}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userData),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || 'Registration failed');
+    }
+    return data;
+  } catch (err) {
+    if (baseUrl !== 'http://localhost:5000') {
+      try {
+        const localRes = await fetch(`http://localhost:5000/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData),
+        });
+        const localData = await localRes.json();
+        if (localRes.ok && localData.success) {
+          return localData;
+        }
+      } catch (e) {
+        // Fallback failed, throw original error
+      }
+    }
+    throw err;
+  }
+}
+

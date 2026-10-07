@@ -121,11 +121,7 @@ export default function Navbar({
     }));
   };
 
-  const navLinks = [
-    { name: "Mathematics", href: "/mymarks/maths" },
-    { name: "English", href: "/mymarks/english" },
-    { name: "Demo", href: "/mymarks/demo" },
-  ];
+  const navLinks = [];
 
   const isLinkActive = (href) => {
     const p = location.pathname.toLowerCase();

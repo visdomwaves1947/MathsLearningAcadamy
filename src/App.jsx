@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
@@ -22,6 +22,8 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const navigate = useNavigate();
+
   const [theme, setTheme] = useState(() => {
     try {
       const savedTheme = localStorage.getItem('mla_theme');
@@ -42,9 +44,12 @@ export default function App() {
   const [isPlannerOpen, setIsPlannerOpen] = useState(false);
   const [selectedRoadmap, setSelectedRoadmap] = useState(null);
 
-  // Unified Auth & Registration Modal State
-  const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [authMode, setAuthMode] = useState('signin'); // 'signin' | 'signup' | 'portal'
+  const location = useLocation();
+  const path = location.pathname.toLowerCase();
+  
+  const isAuthRoute = ['/signin', '/signup', '/portal'].includes(path);
+  const authMode = isAuthRoute ? path.substring(1) : 'signin'; 
+
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('mla_user');
@@ -61,6 +66,8 @@ export default function App() {
     } catch (e) {
       console.warn(e);
     }
+    const from = location.state?.from || '/mymarks/demo';
+    navigate(from);
   };
 
   const handleLogout = () => {
@@ -70,16 +77,21 @@ export default function App() {
     } catch (e) {
       console.warn(e);
     }
+    const from = location.state?.from || '/mymarks/demo';
+    navigate(from);
   };
 
   const handleOpenSignIn = () => {
-    setAuthMode(currentUser ? 'portal' : 'signin');
-    setAuthModalOpen(true);
+    navigate(currentUser ? '/portal' : '/signin', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/mymarks/demo') } });
   };
 
   const handleOpenSignUp = () => {
-    setAuthMode('signup');
-    setAuthModalOpen(true);
+    navigate('/signup', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/mymarks/demo') } });
+  };
+  
+  const handleCloseAuth = () => {
+    const from = location.state?.from || '/mymarks/demo';
+    navigate(from);
   };
 
   useEffect(() => {
@@ -195,6 +207,35 @@ export default function App() {
             } 
           />
 
+          {/* Auth Routes: Render DemoPage in the background so the modal overlays it nicely */}
+          <Route 
+            path="/signin" 
+            element={
+              <DemoPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              />
+            } 
+          />
+          <Route 
+            path="/signup" 
+            element={
+              <DemoPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              />
+            } 
+          />
+          <Route 
+            path="/portal" 
+            element={
+              <DemoPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              />
+            } 
+          />
+
           {/* Root & Fallback: Redirect to /mymarks/maths */}
           <Route path="/" element={<Navigate to="/mymarks/maths" replace />} />
           <Route path="*" element={<Navigate to="/mymarks/maths" replace />} />
@@ -214,8 +255,8 @@ export default function App() {
       />
 
       <AuthModal 
-        isOpen={authModalOpen} 
-        onClose={() => setAuthModalOpen(false)}
+        isOpen={isAuthRoute} 
+        onClose={handleCloseAuth}
         initialMode={authMode}
         currentUser={currentUser}
         onLoginSuccess={handleLoginSuccess}
