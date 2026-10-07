@@ -143,38 +143,38 @@ export default function Navbar({
       {/* Top Admissions & Announcement Bar */}
       <aside
         aria-label="Announcement"
-        className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-100 text-xs py-2 px-3 sm:px-6 lg:px-8 font-medium relative z-50 border-b border-black/10 dark:border-cyan-900/40"
+        className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-950 dark:text-cyan-50 text-xs py-2 px-3 sm:px-6 lg:px-8 font-semibold relative z-50 border-b border-black/15 dark:border-cyan-900/50"
       >
         <div className="w-full flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 text-left">
-            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-600 text-white font-bold text-[10px] animate-pulse shrink-0 shadow-sm">
+            <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-700 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold text-[10px] animate-pulse shrink-0 shadow-xs">
               ★
             </span>
-            <span className="text-[11px] sm:text-xs leading-tight font-medium">
+            <span className="text-[11px] sm:text-xs leading-tight font-medium text-slate-950 dark:text-cyan-100">
               <strong className="text-slate-950 dark:text-white font-bold">
                 2026 Admissions Open:
               </strong>{" "}
-              <span className="text-cyan-800 dark:text-cyan-300 font-semibold">
+              <span className="text-cyan-950 dark:text-cyan-200 font-bold">
                 Intermediate (1st & 2nd Year) & Olympiad Batches
               </span>{" "}
               enrolling now!
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-4 text-xs text-slate-800 dark:text-cyan-200 shrink-0 font-medium">
+          <div className="hidden sm:flex items-center gap-4 text-xs text-slate-950 dark:text-cyan-100 shrink-0 font-bold">
             <a
               href="tel:+917997755155"
-              className="hover:text-cyan-700 dark:hover:text-white flex items-center gap-1.5 transition-colors"
+              className="hover:text-cyan-900 dark:hover:text-white flex items-center gap-1.5 transition-colors"
             >
               <PhoneCall
                 size={12}
-                className="text-cyan-700 dark:text-cyan-400"
+                className="text-cyan-900 dark:text-cyan-300"
               />{" "}
               +91 79977 55155
             </a>
-            <span className="text-slate-400 dark:text-cyan-800">|</span>
+            <span className="text-slate-500 dark:text-cyan-800">|</span>
             <button
               onClick={handleSignUpClick}
-              className="text-cyan-800 dark:text-cyan-300 hover:underline font-bold cursor-pointer transition-colors"
+              className="text-cyan-950 dark:text-cyan-300 hover:underline font-extrabold cursor-pointer transition-colors"
             >
               Sign Up Online →
             </button>
@@ -184,10 +184,10 @@ export default function Navbar({
 
       {/* Main Sticky Navbar */}
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 border-b border-black/20 dark:border-cyan-900/30 bg-[#bae6fd] dark:bg-[#023e50] ${
+        className={`sticky top-0 z-40 transition-all duration-300 border-b border-black/20 dark:border-cyan-900/40 bg-[#bae6fd] dark:bg-[#023e50] ${
           isScrolled
             ? "py-2.5 shadow-md backdrop-blur-md"
-            : "py-3 sm:py-3.5 shadow-sm"
+            : "py-3 sm:py-3.5 shadow-xs"
         }`}
       >
         <div className="w-full px-3 sm:px-6 lg:px-8 relative z-10 flex items-center justify-between gap-3 sm:gap-6">
@@ -202,9 +202,9 @@ export default function Navbar({
           </div>
 
           {/* Right: Navigation, Search, Controls & Actions */}
-          <div className="flex items-center gap-2 sm:gap-3 lg:gap-5 ml-auto">
+          <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 ml-auto">
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
               {navLinks.map((link, idx) => (
                 <div
                   key={idx}
@@ -214,25 +214,25 @@ export default function Navbar({
                 >
                   {link.dropdown ? (
                     <button
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors tracking-wide rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
+                      className="flex items-center gap-1 px-3.5 py-2 text-[14px] font-bold text-slate-950 dark:text-white hover:text-cyan-900 dark:hover:text-cyan-300 transition-colors tracking-tight rounded-lg hover:bg-black/5 dark:hover:bg-white/10 cursor-pointer"
                       onClick={() =>
                         setActiveDropdown(activeDropdown === idx ? null : idx)
                       }
                     >
                       <span>{link.name}</span>
                       <ChevronDown
-                        size={14}
-                        className={`transition-transform duration-200 text-slate-700 dark:text-cyan-300 ${activeDropdown === idx ? "rotate-180 text-cyan-700 dark:text-cyan-300" : ""}`}
+                        size={15}
+                        className={`transition-transform duration-200 text-slate-950 dark:text-cyan-300 ${activeDropdown === idx ? "rotate-180 text-cyan-900 dark:text-cyan-300" : ""}`}
                       />
                     </button>
                   ) : (
                     <a
                       href={link.href}
                       onClick={(e) => handleLinkNavigation(e, link.href)}
-                      className={`block px-3 py-2 text-sm font-semibold transition-colors tracking-wide rounded-lg cursor-pointer ${
+                      className={`block px-3.5 py-2 text-[14px] transition-colors tracking-tight rounded-lg cursor-pointer ${
                         isLinkActive(link.href)
-                          ? "text-cyan-700 dark:text-cyan-300 font-bold bg-black/5 dark:bg-white/10"
-                          : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/5"
+                          ? "text-slate-950 dark:text-cyan-100 font-extrabold bg-white/80 dark:bg-white/20 shadow-xs"
+                          : "text-slate-950 dark:text-white font-bold hover:text-cyan-900 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/10"
                       }`}
                     >
                       {link.name}
@@ -246,7 +246,7 @@ export default function Navbar({
                       onMouseEnter={() => handleDropdownEnter(idx)}
                       onMouseLeave={handleDropdownLeave}
                     >
-                      <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800 text-[10px] font-bold text-cyan-700 dark:text-cyan-400 uppercase tracking-wider">
+                      <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800 text-[10px] font-extrabold text-cyan-800 dark:text-cyan-400 uppercase tracking-wider">
                         {link.name} Catalog
                       </div>
                       {link.dropdown.map((sub, sIdx) => (
@@ -257,13 +257,13 @@ export default function Navbar({
                             setActiveDropdown(null);
                             handleLinkNavigation(e, sub.href);
                           }}
-                          className="block px-4 py-2.5 hover:bg-cyan-50 dark:hover:bg-slate-900 text-slate-900 dark:text-white transition-colors group cursor-pointer"
+                          className="block px-4 py-2.5 hover:bg-cyan-50 dark:hover:bg-slate-900 text-slate-950 dark:text-white transition-colors group cursor-pointer"
                         >
-                          <div className="text-xs font-bold group-hover:text-cyan-700 dark:group-hover:text-cyan-300">
+                          <div className="text-xs font-bold group-hover:text-cyan-800 dark:group-hover:text-cyan-300">
                             {sub.name}
                           </div>
                           {sub.desc && (
-                            <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 truncate">
+                            <div className="text-[10px] text-slate-600 dark:text-slate-400 mt-0.5 truncate">
                               {sub.desc}
                             </div>
                           )}
@@ -278,31 +278,31 @@ export default function Navbar({
             {/* Search Box (Desktop / Tablet) */}
             <form
               onSubmit={handleSearchSubmit}
-              className="hidden xl:flex items-center relative max-w-[210px] w-full"
+              className="hidden xl:flex items-center relative max-w-[190px] w-full"
             >
               <input
                 type="text"
                 placeholder="Search calculus, algebra..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-full py-2 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xs transition-all"
+                className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-400 dark:border-cyan-700 rounded-full py-2 pl-3.5 pr-8 text-slate-950 dark:text-white placeholder-slate-600 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-600 shadow-xs transition-all font-semibold"
               />
               <button
                 type="submit"
                 aria-label="Search"
-                className="absolute right-2.5 text-slate-600 hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-400"
+                className="absolute right-2.5 text-slate-800 hover:text-cyan-900 dark:text-slate-300 dark:hover:text-cyan-400 cursor-pointer"
               >
-                <Search size={15} />
+                <Search size={14} />
               </button>
             </form>
 
             {/* Right Controls & Actions */}
-            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
               {/* Dark / Light Mode Toggle Pill Switch */}
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="relative flex items-center w-[52px] xs:w-[60px] h-[28px] xs:h-[32px] rounded-full bg-slate-800 dark:bg-slate-700 transition-colors duration-300 focus:outline-none shadow-inner ring-1 ring-slate-900/10 dark:ring-white/10 cursor-pointer shrink-0"
+                className="relative flex items-center w-[52px] xs:w-[58px] h-[28px] xs:h-[30px] rounded-full bg-slate-900 dark:bg-slate-700 transition-colors duration-300 focus:outline-none shadow-inner ring-1 ring-slate-900/15 dark:ring-white/20 cursor-pointer shrink-0"
                 aria-label="Toggle dark mode"
                 title={
                   theme === "dark"
@@ -312,28 +312,28 @@ export default function Navbar({
               >
                 {/* Sliding White Knob */}
                 <div
-                  className={`absolute top-[2px] xs:top-[3px] w-[24px] xs:w-[26px] h-[24px] xs:h-[26px] bg-white rounded-full shadow-md transition-transform duration-300 ease-out z-0 ${
+                  className={`absolute top-[2.5px] w-[23px] xs:w-[25px] h-[23px] xs:h-[25px] bg-white rounded-full shadow-md transition-transform duration-300 ease-out z-0 ${
                     theme === "dark"
-                      ? "translate-x-[24px] xs:translate-x-[28px]"
-                      : "translate-x-[3px]"
+                      ? "translate-x-[25px] xs:translate-x-[29px]"
+                      : "translate-x-[2.5px]"
                   }`}
                 />
                 <div className="relative flex justify-between items-center w-full px-[6px] xs:px-[7px] z-10 pointer-events-none">
                   <Sun
-                    className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === "dark" ? "text-slate-400" : "text-amber-500"}`}
+                    className={`w-3.5 h-3.5 transition-colors duration-300 ${theme === "dark" ? "text-slate-400" : "text-amber-500 font-bold"}`}
                   />
                   <Moon
-                    className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === "dark" ? "text-indigo-600" : "text-slate-400"}`}
+                    className={`w-3.5 h-3.5 transition-colors duration-300 ${theme === "dark" ? "text-indigo-600 font-bold" : "text-slate-400"}`}
                   />
                 </div>
               </button>
 
-              {/* User Account / Auth Actions */}
+              {/* User Account / Unified Auth Action */}
               {currentUser ? (
                 <div className="relative">
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center justify-center h-8 w-8 xs:h-9 xs:w-9 rounded-full bg-gradient-to-tr from-cyan-600 to-sky-500 text-white text-xs font-extrabold shadow-md hover:scale-105 transition-all focus:outline-none cursor-pointer border-2 border-white dark:border-slate-800"
+                    className="flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-tr from-cyan-600 to-sky-500 text-white text-xs font-extrabold shadow-sm hover:scale-105 transition-all focus:outline-none cursor-pointer border border-white dark:border-slate-800"
                     title={currentUser.name || "User Profile"}
                   >
                     {currentUser.name
@@ -342,15 +342,15 @@ export default function Navbar({
                   </button>
 
                   {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-3 z-50 text-slate-900 dark:text-white animate-in fade-in duration-150">
+                    <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-3 z-50 text-slate-950 dark:text-white animate-in fade-in duration-150">
                       <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
                         <p className="text-sm font-bold text-slate-950 dark:text-white truncate">
                           {currentUser.name}
                         </p>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate">
                           {currentUser.email}
                         </p>
-                        <span className="inline-block mt-1 text-[9px] font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/50 px-2 py-0.5 rounded uppercase">
+                        <span className="inline-block mt-1 text-[9px] font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/50 px-2 py-0.5 rounded uppercase">
                           {currentUser.role || "Math Scholar"}
                         </span>
                       </div>
@@ -360,7 +360,7 @@ export default function Navbar({
                             setUserDropdownOpen(false);
                             handleSignInClick();
                           }}
-                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-800 dark:hover:text-cyan-300 transition-colors cursor-pointer"
                         >
                           My Student Portal
                         </button>
@@ -369,7 +369,7 @@ export default function Navbar({
                             setUserDropdownOpen(false);
                             onOpenBooking();
                           }}
-                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-800 dark:hover:text-cyan-300 transition-colors cursor-pointer"
                         >
                           Book 1-on-1 Mentorship
                         </button>
@@ -378,42 +378,29 @@ export default function Navbar({
                   )}
                 </div>
               ) : (
-                <div className="flex items-center gap-1 sm:gap-2">
-                  <button
-                    onClick={handleSignInClick}
-                    className="text-xs font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 px-2.5 sm:px-3 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    onClick={handleSignUpClick}
-                    className="text-xs font-bold text-white px-3 sm:px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-cyan-700 dark:bg-cyan-600 dark:hover:bg-cyan-500 transition-all shadow-sm cursor-pointer active:scale-95"
-                  >
-                    Sign Up
-                  </button>
-                </div>
+                /* Unified Single Sign In / Sign Up Button */
+                <button
+                  onClick={handleSignInClick}
+                  className="text-xs font-bold text-slate-950 dark:text-white bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-400 dark:border-cyan-600/80 px-3.5 sm:px-4 py-2 rounded-lg transition-all shadow-xs cursor-pointer active:scale-95 flex items-center gap-1.5 shrink-0"
+                >
+                  <User size={13} className="text-cyan-900 dark:text-cyan-300" />
+                  <span>Sign In / Sign Up</span>
+                </button>
               )}
 
-              {/* Book Free Class CTA Button */}
+              {/* Book Free Class CTA Button - Professional & Clean (No Star Icon) */}
               <button
                 onClick={onOpenBooking}
-                className="hidden md:inline-flex relative group overflow-hidden rounded-xl p-px font-bold text-xs tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer active:scale-95 shrink-0"
+                className="hidden md:inline-flex items-center justify-center px-4 sm:px-5 py-2 rounded-lg bg-cyan-700 hover:bg-cyan-800 dark:bg-cyan-500 dark:hover:bg-cyan-400 text-white dark:text-slate-950 font-bold text-xs tracking-wide shadow-sm hover:shadow transition-all cursor-pointer active:scale-95 border border-cyan-800 dark:border-cyan-400 shrink-0"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-sky-500 to-indigo-600 group-hover:opacity-100 transition-opacity"></span>
-                <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-[11px] bg-slate-900 text-white hover:bg-slate-800 dark:bg-cyan-700 dark:hover:bg-cyan-600 transition-all font-bold">
-                  <Sparkles
-                    size={14}
-                    className="text-cyan-300 animate-spin-slow"
-                  />
-                  <span>Book Free Class</span>
-                </span>
+                <span>Book Free Class</span>
               </button>
 
               {/* Mobile Hamburger Toggle Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="lg:hidden p-1.5 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                className="lg:hidden p-1.5 rounded-lg text-slate-950 dark:text-white hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
               >
                 {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -436,11 +423,11 @@ export default function Navbar({
               placeholder="Search curriculum, labs, lessons..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-xl py-2.5 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-sm"
+              className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-400 dark:border-cyan-800 rounded-xl py-2.5 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-600 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-600 shadow-sm font-semibold"
             />
             <button
               type="submit"
-              className="absolute right-3 text-slate-600 dark:text-slate-300 hover:text-cyan-600"
+              className="absolute right-3 text-slate-800 dark:text-slate-300 hover:text-cyan-800"
             >
               <Search size={16} />
             </button>
@@ -457,16 +444,16 @@ export default function Navbar({
                   <div>
                     <button
                       onClick={() => toggleMobileDropdown(idx)}
-                      className="w-full flex items-center justify-between py-2.5 px-2 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
+                      className="w-full flex items-center justify-between py-2.5 px-2 text-sm font-bold text-slate-950 dark:text-white hover:text-cyan-900 dark:hover:text-cyan-300 transition-colors"
                     >
                       <span>{link.name}</span>
                       <ChevronDown
                         size={16}
-                        className={`transition-transform duration-200 ${mobileDropdowns[idx] ? "rotate-180 text-cyan-700" : ""}`}
+                        className={`transition-transform duration-200 ${mobileDropdowns[idx] ? "rotate-180 text-cyan-900" : ""}`}
                       />
                     </button>
                     {mobileDropdowns[idx] && (
-                      <div className="pl-4 pr-2 pb-2 space-y-2 bg-white/40 dark:bg-black/20 rounded-xl p-2.5 my-1">
+                      <div className="pl-4 pr-2 pb-2 space-y-2 bg-white/50 dark:bg-black/30 rounded-xl p-2.5 my-1">
                         {link.dropdown.map((sub, sIdx) => (
                           <a
                             key={sIdx}
@@ -475,7 +462,7 @@ export default function Navbar({
                               setMobileMenuOpen(false);
                               handleLinkNavigation(e, sub.href);
                             }}
-                            className="block py-1.5 px-2 text-xs font-semibold text-slate-800 dark:text-cyan-100 hover:text-cyan-700 dark:hover:text-cyan-300 cursor-pointer"
+                            className="block py-1.5 px-2 text-xs font-bold text-slate-950 dark:text-cyan-100 hover:text-cyan-800 dark:hover:text-cyan-300 cursor-pointer"
                           >
                             • {sub.name}
                           </a>
@@ -492,8 +479,8 @@ export default function Navbar({
                     }}
                     className={`block py-2.5 px-2 text-sm font-bold transition-colors cursor-pointer ${
                       isLinkActive(link.href)
-                        ? "text-cyan-700 dark:text-cyan-300"
-                        : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300"
+                        ? "text-cyan-950 dark:text-cyan-200 font-extrabold"
+                        : "text-slate-950 dark:text-white hover:text-cyan-900 dark:hover:text-cyan-300"
                     }`}
                   >
                     {link.name}
@@ -510,40 +497,29 @@ export default function Navbar({
                 setMobileMenuOpen(false);
                 onOpenBooking();
               }}
-              className="w-full py-2.5 px-4 rounded-xl bg-slate-900 dark:bg-cyan-600 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md"
+              className="w-full py-2.5 px-4 rounded-xl bg-cyan-700 hover:bg-cyan-800 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold text-xs flex items-center justify-center shadow-xs transition-colors"
             >
-              <Sparkles size={14} className="text-amber-300" />
               <span>Book Free Diagnostic Class</span>
             </button>
 
             {!currentUser ? (
-              <div className="grid grid-cols-2 gap-2 pt-1">
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleSignInClick();
-                  }}
-                  className="py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs hover:bg-slate-50"
-                >
-                  Sign In
-                </button>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    handleSignUpClick();
-                  }}
-                  className="py-2 px-3 rounded-xl bg-cyan-700 dark:bg-cyan-500 text-white font-bold text-xs hover:bg-cyan-600"
-                >
-                  Sign Up
-                </button>
-              </div>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  handleSignInClick();
+                }}
+                className="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-400 dark:border-slate-700 text-slate-950 dark:text-white font-bold text-xs flex items-center justify-center gap-2 hover:bg-slate-50 transition-colors shadow-xs"
+              >
+                <User size={14} className="text-cyan-800 dark:text-cyan-400" />
+                <span>Sign In / Sign Up</span>
+              </button>
             ) : (
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
                   handleSignInClick();
                 }}
-                className="w-full py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white font-bold text-xs"
+                className="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-950 dark:text-white font-bold text-xs transition-colors"
               >
                 Open Student Portal ({currentUser.name})
               </button>
