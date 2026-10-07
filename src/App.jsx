@@ -9,6 +9,7 @@ import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
 import MathsPage from './pages/MathsPage';
 import DemoPage from './pages/DemoPage';
 import English from './pages/English';
+import Physics from './pages/Physics';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -185,10 +186,43 @@ export default function App() {
             } 
           />
 
+          {/* Physics Page */}
+          <Route 
+            path="/physics" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Physics" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/phy" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
           {/* Backward compatibility redirects for /mymarks/* */}
           <Route path="/mymarks/maths" element={<Navigate to="/maths" replace />} />
           <Route path="/mymarks/demo" element={<Navigate to="/demo" replace />} />
           <Route path="/mymarks/english" element={<Navigate to="/english" replace />} />
+          <Route path="/mymarks/physics" element={<Navigate to="/physics" replace />} />
           <Route path="/mymarks/*" element={<Navigate to="/maths" replace />} />
 
           {/* Root & Fallback: Redirect to /maths */}

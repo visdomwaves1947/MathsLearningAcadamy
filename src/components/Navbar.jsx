@@ -123,6 +123,7 @@ export default function Navbar({
 
   const navLinks = [
     { name: "Mathematics", href: "/maths" },
+    { name: "Physics", href: "/physics" },
     { name: "English", href: "/english" },
     { name: "Demo", href: "/demo" },
   ];
@@ -130,6 +131,7 @@ export default function Navbar({
   const isLinkActive = (href) => {
     const p = location.pathname.toLowerCase();
     if (href.includes("demo")) return p.includes("demo");
+    if (href.includes("physics")) return p.includes("phy");
     if (href.includes("english")) return p.includes("eng");
     if (href.includes("maths")) return p.includes("maths") || p === "/";
     return false;

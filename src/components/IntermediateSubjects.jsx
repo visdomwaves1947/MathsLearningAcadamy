@@ -21,6 +21,9 @@ export default function IntermediateSubjects({ onEnroll }) {
     if (subject.id === 'maths') {
       navigate('/maths');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'phy') {
+      navigate('/physics');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'eng') {
       navigate('/english');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -32,6 +35,9 @@ export default function IntermediateSubjects({ onEnroll }) {
   const handleExploreClick = (subject) => {
     if (subject.id === 'maths') {
       navigate('/maths');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'phy') {
+      navigate('/physics');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'eng') {
       navigate('/english');
