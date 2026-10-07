@@ -142,9 +142,9 @@ export default function App() {
       {/* Routed Main Content */}
       <main className="grow">
         <Routes>
-          {/* Main Maths Academy Curriculum (Image 1) */}
+          {/* Main Maths Academy Curriculum */}
           <Route 
-            path="/mymarks/maths" 
+            path="/maths" 
             element={
               <MathsPage 
                 onOpenBooking={handleOpenBooking}
@@ -156,7 +156,7 @@ export default function App() {
 
           {/* Demo Page: Keeps Navbar, Footer, and displays "Demo" on Hero section */}
           <Route 
-            path="/mymarks/demo" 
+            path="/demo" 
             element={
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
@@ -167,7 +167,7 @@ export default function App() {
 
           {/* English Page */}
           <Route 
-            path="/mymarks/Englsih" 
+            path="/english" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
@@ -177,7 +177,7 @@ export default function App() {
             } 
           />
           <Route 
-            path="/mymarks/English" 
+            path="/English" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
@@ -187,17 +187,7 @@ export default function App() {
             } 
           />
           <Route 
-            path="/mymarks/english" 
-            element={
-              <English 
-                onOpenBooking={handleOpenBooking}
-                onOpenVideoDemo={() => setVideoDemoOpen(true)}
-                onSelectRoadmap={handleSelectRoadmap}
-              />
-            } 
-          />
-          <Route 
-            path="/mymarks/eng" 
+            path="/eng" 
             element={
               <English 
                 onOpenBooking={handleOpenBooking}
