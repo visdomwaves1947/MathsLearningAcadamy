@@ -143,10 +143,10 @@ export default function Navbar({
       {/* Top Admissions & Announcement Bar */}
       <aside
         aria-label="Announcement"
-        className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-100 text-xs py-2 px-3 sm:px-6 font-medium relative z-50 border-b border-black/10 dark:border-cyan-900/40"
+        className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-100 text-xs py-2 px-3 sm:px-6 lg:px-8 font-medium relative z-50 border-b border-black/10 dark:border-cyan-900/40"
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 mx-auto sm:mx-0 text-center sm:text-left">
+        <div className="w-full flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 text-left">
             <span className="flex items-center justify-center w-5 h-5 rounded-full bg-cyan-600 text-white font-bold text-[10px] animate-pulse shrink-0 shadow-sm">
               ★
             </span>
@@ -190,16 +190,19 @@ export default function Navbar({
             : "py-3 sm:py-3.5 shadow-sm"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex items-center justify-between gap-2 sm:gap-4">
-            {/* Visdom Waves Brand Logo */}
+        <div className="w-full px-3 sm:px-6 lg:px-8 relative z-10 flex items-center justify-between gap-3 sm:gap-6">
+          {/* Left: Visdom Waves Brand Logo */}
+          <div className="flex items-center shrink-0">
             <VisdomBrand
               onClick={() => {
                 navigate("/mymarks/maths");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             />
+          </div>
 
+          {/* Right: Navigation, Search, Controls & Actions */}
+          <div className="flex items-center gap-2 sm:gap-3 lg:gap-5 ml-auto">
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {navLinks.map((link, idx) => (

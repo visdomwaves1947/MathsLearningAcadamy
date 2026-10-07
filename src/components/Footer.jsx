@@ -73,7 +73,7 @@ export default function Footer({ onOpenBooking }) {
 
   return (
     <footer className="relative overflow-hidden transition-all duration-300 border-t border-black/20 dark:border-cyan-900/30 bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-50 font-medium">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         
         {/* Main 4 Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

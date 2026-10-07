@@ -17,6 +17,42 @@ export default function IntermediateSubjects({ onEnroll }) {
     { id: 'san', name: 'Sanskrit', category: 'Languages', image: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop', color: 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400', desc: 'Learn ancient texts, fundamental grammar rules, and translation strategies to score 98+ marks easily in your language board exams.' }
   ];
 
+  const handleCardClick = (subject) => {
+    if (subject.id === 'maths') {
+      navigate('/mymarks/maths');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'eng') {
+      navigate('/mymarks/english');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveExplore(activeExplore === subject.id ? null : subject.id);
+    }
+  };
+
+  const handleExploreClick = (subject) => {
+    if (subject.id === 'maths') {
+      navigate('/mymarks/maths');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'eng') {
+      navigate('/mymarks/english');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveExplore(subject.id);
+    }
+  };
+
+  const handleEnrollClick = (subject) => {
+    if (subject.id === 'maths') {
+      navigate('/mymarks/maths');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'eng') {
+      navigate('/mymarks/english');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveEnroll(subject.id);
+    }
+  };
+
   const renderSubjectCard = (subject) => {
     const isEnrolling = activeEnroll === subject.id;
     const isExploring = activeExplore === subject.id;
@@ -25,7 +61,7 @@ export default function IntermediateSubjects({ onEnroll }) {
       <div key={subject.id} className="flex flex-col bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800 h-[380px] group hover:-translate-y-1 relative">
         <div 
           className="h-40 w-full overflow-hidden relative shrink-0 cursor-pointer"
-          onClick={() => navigate(`/mymarks/${subject.id}`)}
+          onClick={() => handleCardClick(subject)}
         >
           <img src={subject.image} alt={subject.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
@@ -40,7 +76,7 @@ export default function IntermediateSubjects({ onEnroll }) {
           </div>
           <h4 
             className="text-xl font-bold text-slate-900 dark:text-white mb-3 cursor-pointer hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-            onClick={() => navigate(`/mymarks/${subject.id}`)}
+            onClick={() => handleCardClick(subject)}
           >
             {subject.name}
           </h4>
@@ -52,13 +88,13 @@ export default function IntermediateSubjects({ onEnroll }) {
             </p>
             <div className="flex gap-2">
               <button 
-                onClick={() => setActiveExplore(subject.id)}
+                onClick={() => handleExploreClick(subject)}
                 className="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Info size={16} /> Explore
               </button>
               <button 
-                onClick={() => setActiveEnroll(subject.id)}
+                onClick={() => handleEnrollClick(subject)}
                 className="flex-1 py-2.5 rounded-xl bg-slate-900 hover:bg-cyan-600 dark:bg-cyan-700 dark:hover:bg-cyan-500 text-white text-sm font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer"
               >
                 Enroll <ArrowRight size={16} />
