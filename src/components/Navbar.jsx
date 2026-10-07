@@ -1,40 +1,40 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { 
-  Search, 
-  ChevronDown, 
-  Sun, 
-  Moon, 
-  User, 
-  Menu, 
-  X, 
-  Sparkles, 
-  BookOpen, 
-  BrainCircuit, 
-  Calculator, 
-  GraduationCap, 
-  CheckCircle, 
-  PhoneCall, 
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import {
+  Search,
+  ChevronDown,
+  Sun,
+  Moon,
+  User,
+  Menu,
+  X,
+  Sparkles,
+  BookOpen,
+  BrainCircuit,
+  Calculator,
+  GraduationCap,
+  CheckCircle,
+  PhoneCall,
   LogOut,
   Layers,
-  Award
-} from 'lucide-react';
-import { VisdomBrand } from './VisdomBrand';
+  Award,
+} from "lucide-react";
+import { VisdomBrand } from "./VisdomBrand";
 
-export default function Navbar({ 
-  onOpenBooking, 
-  onOpenPortal, 
-  onOpenSignIn, 
-  onOpenSignUp, 
-  currentUser = null, 
-  theme = 'light', 
-  toggleTheme 
+export default function Navbar({
+  onOpenBooking,
+  onOpenPortal,
+  onOpenSignIn,
+  onOpenSignUp,
+  currentUser = null,
+  theme = "light",
+  toggleTheme,
 }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [mobileDropdowns, setMobileDropdowns] = useState({});
   const dropdownTimeoutRef = useRef(null);
 
@@ -43,23 +43,23 @@ export default function Navbar({
 
   const handleLinkNavigation = (e, href) => {
     e.preventDefault();
-    if (!href || href === '#') {
-      if (location.pathname.toLowerCase().includes('demo')) {
-        navigate('/mymarks/maths');
+    if (!href || href === "#") {
+      if (location.pathname.toLowerCase().includes("demo")) {
+        navigate("/mymarks/maths");
       } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
       return;
     }
 
-    if (href.startsWith('#')) {
-      if (location.pathname.toLowerCase().includes('demo')) {
+    if (href.startsWith("#")) {
+      if (location.pathname.toLowerCase().includes("demo")) {
         navigate(`/mymarks/maths${href}`);
       } else {
-        const id = href.replace('#', '');
+        const id = href.replace("#", "");
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          el.scrollIntoView({ behavior: "smooth" });
         }
       }
     } else {
@@ -71,30 +71,32 @@ export default function Navbar({
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [mobileMenuOpen]);
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      const el = document.getElementById('courses') || document.getElementById('interactive-lab');
+      const el =
+        document.getElementById("courses") ||
+        document.getElementById("interactive-lab");
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
+        el.scrollIntoView({ behavior: "smooth" });
       }
-      setSearchQuery('');
+      setSearchQuery("");
       setMobileMenuOpen(false);
     }
   };
@@ -113,40 +115,25 @@ export default function Navbar({
   };
 
   const toggleMobileDropdown = (index) => {
-    setMobileDropdowns(prev => ({
+    setMobileDropdowns((prev) => ({
       ...prev,
-      [index]: !prev[index]
+      [index]: !prev[index],
     }));
   };
 
   const navLinks = [
-    { name: 'Home', href: '/mymarks/maths' },
-    { 
-      name: 'Curriculum', 
-      href: '#courses',
-      dropdown: [
-        { name: 'Primary Mathematics (Grades 1-5)', href: '#courses', desc: 'Number sense, visual arithmetic & logic' },
-        { name: 'Middle School Pre-Algebra', href: '#courses', desc: 'Fractions, geometry & algebraic foundations' },
-        { name: 'High School Algebra & Trig', href: '#courses', desc: 'Quadratic curves, trigonometry & polynomials' },
-        { name: 'AP Calculus AB / BC', href: '#courses', desc: 'Limits, derivatives, integrals & series' },
-        { name: 'Olympiad & AMC 8/10/12', href: '#courses', desc: 'Combinatorics, number theory & proofs' }
-      ]
-    },
-    { 
-      name: 'Math Labs', 
-      href: '#interactive-lab',
-      dropdown: [
-        { name: 'Interactive Graph & Curve Lab', href: '#interactive-lab', desc: 'Real-time 2D formula visualizer' },
-        { name: 'Speed Mental Math Arena', href: '#speed-quiz', desc: 'Timed gamified arithmetic battle' },
-        { name: 'Diagnostic Assessment', href: '#courses', desc: 'Identify skill gaps & placement' },
-        { name: 'Live Interactive Demo', href: '/mymarks/demo', desc: 'Test interactive demo playground' }
-      ]
-    },
-    { name: 'Methodology', href: '#methodology' },
-    { name: 'Pricing', href: '#pricing' },
-    { name: 'FAQ', href: '#faq' },
-    { name: 'Demo', href: '/mymarks/demo' }
+    { name: "Mathematics", href: "/mymarks/maths" },
+    { name: "English", href: "/mymarks/english" },
+    { name: "Demo", href: "/mymarks/demo" },
   ];
+
+  const isLinkActive = (href) => {
+    const p = location.pathname.toLowerCase();
+    if (href.includes("demo")) return p.includes("demo");
+    if (href.includes("english")) return p.includes("eng");
+    if (href.includes("maths")) return p.includes("maths") || p === "/";
+    return false;
+  };
 
   const handleSignInClick = onOpenSignIn || onOpenPortal;
   const handleSignUpClick = onOpenSignUp || onOpenPortal;
@@ -154,8 +141,8 @@ export default function Navbar({
   return (
     <>
       {/* Top Admissions & Announcement Bar */}
-      <aside 
-        aria-label="Announcement" 
+      <aside
+        aria-label="Announcement"
         className="bg-[#bae6fd] dark:bg-[#023e50] text-slate-900 dark:text-cyan-100 text-xs py-2 px-3 sm:px-6 font-medium relative z-50 border-b border-black/10 dark:border-cyan-900/40"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
@@ -164,17 +151,29 @@ export default function Navbar({
               ★
             </span>
             <span className="text-[11px] sm:text-xs leading-tight font-medium">
-              <strong className="text-slate-950 dark:text-white font-bold">2026 Admissions Open:</strong>{' '}
-              <span className="text-cyan-800 dark:text-cyan-300 font-semibold">Intermediate (1st & 2nd Year) & Olympiad Batches</span> enrolling now!
+              <strong className="text-slate-950 dark:text-white font-bold">
+                2026 Admissions Open:
+              </strong>{" "}
+              <span className="text-cyan-800 dark:text-cyan-300 font-semibold">
+                Intermediate (1st & 2nd Year) & Olympiad Batches
+              </span>{" "}
+              enrolling now!
             </span>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-xs text-slate-800 dark:text-cyan-200 shrink-0 font-medium">
-            <a href="tel:+917997755155" className="hover:text-cyan-700 dark:hover:text-white flex items-center gap-1.5 transition-colors">
-              <PhoneCall size={12} className="text-cyan-700 dark:text-cyan-400" /> +91 79977 55155
+            <a
+              href="tel:+917997755155"
+              className="hover:text-cyan-700 dark:hover:text-white flex items-center gap-1.5 transition-colors"
+            >
+              <PhoneCall
+                size={12}
+                className="text-cyan-700 dark:text-cyan-400"
+              />{" "}
+              +91 79977 55155
             </a>
             <span className="text-slate-400 dark:text-cyan-800">|</span>
-            <button 
-              onClick={handleSignUpClick} 
+            <button
+              onClick={handleSignUpClick}
               className="text-cyan-800 dark:text-cyan-300 hover:underline font-bold cursor-pointer transition-colors"
             >
               Sign Up Online →
@@ -184,46 +183,53 @@ export default function Navbar({
       </aside>
 
       {/* Main Sticky Navbar */}
-      <header 
+      <header
         className={`sticky top-0 z-40 transition-all duration-300 border-b border-black/20 dark:border-cyan-900/30 bg-[#bae6fd] dark:bg-[#023e50] ${
-          isScrolled ? 'py-2.5 shadow-md backdrop-blur-md' : 'py-3 sm:py-3.5 shadow-sm'
+          isScrolled
+            ? "py-2.5 shadow-md backdrop-blur-md"
+            : "py-3 sm:py-3.5 shadow-sm"
         }`}
       >
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
           <div className="flex items-center justify-between gap-2 sm:gap-4">
-            
             {/* Visdom Waves Brand Logo */}
-            <VisdomBrand onClick={() => { navigate('/mymarks/maths'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} />
+            <VisdomBrand
+              onClick={() => {
+                navigate("/mymarks/maths");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
 
             {/* Desktop Navigation Links */}
             <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {navLinks.map((link, idx) => (
-                <div 
+                <div
                   key={idx}
                   className="relative"
                   onMouseEnter={() => link.dropdown && handleDropdownEnter(idx)}
                   onMouseLeave={() => link.dropdown && handleDropdownLeave()}
                 >
                   {link.dropdown ? (
-                    <button 
+                    <button
                       className="flex items-center gap-1 px-3 py-2 text-sm font-semibold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors tracking-wide rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer"
-                      onClick={() => setActiveDropdown(activeDropdown === idx ? null : idx)}
+                      onClick={() =>
+                        setActiveDropdown(activeDropdown === idx ? null : idx)
+                      }
                     >
                       <span>{link.name}</span>
-                      <ChevronDown 
-                        size={14} 
-                        className={`transition-transform duration-200 text-slate-700 dark:text-cyan-300 ${activeDropdown === idx ? 'rotate-180 text-cyan-700 dark:text-cyan-300' : ''}`} 
+                      <ChevronDown
+                        size={14}
+                        className={`transition-transform duration-200 text-slate-700 dark:text-cyan-300 ${activeDropdown === idx ? "rotate-180 text-cyan-700 dark:text-cyan-300" : ""}`}
                       />
                     </button>
                   ) : (
-                    <a 
+                    <a
                       href={link.href}
                       onClick={(e) => handleLinkNavigation(e, link.href)}
                       className={`block px-3 py-2 text-sm font-semibold transition-colors tracking-wide rounded-lg cursor-pointer ${
-                        (link.href.includes('demo') && location.pathname.toLowerCase().includes('demo')) ||
-                        (link.name === 'Home' && !location.pathname.toLowerCase().includes('demo'))
-                          ? 'text-cyan-700 dark:text-cyan-300 font-bold bg-black/5 dark:bg-white/10'
-                          : 'text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/5'
+                        isLinkActive(link.href)
+                          ? "text-cyan-700 dark:text-cyan-300 font-bold bg-black/5 dark:bg-white/10"
+                          : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-black/5 dark:hover:bg-white/5"
                       }`}
                     >
                       {link.name}
@@ -232,7 +238,7 @@ export default function Navbar({
 
                   {/* Desktop Dropdown Popover */}
                   {link.dropdown && activeDropdown === idx && (
-                    <div 
+                    <div
                       className="absolute top-full left-0 mt-1.5 w-72 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150"
                       onMouseEnter={() => handleDropdownEnter(idx)}
                       onMouseLeave={handleDropdownLeave}
@@ -267,16 +273,19 @@ export default function Navbar({
             </nav>
 
             {/* Search Box (Desktop / Tablet) */}
-            <form onSubmit={handleSearchSubmit} className="hidden xl:flex items-center relative max-w-[210px] w-full">
-              <input 
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden xl:flex items-center relative max-w-[210px] w-full"
+            >
+              <input
                 type="text"
                 placeholder="Search calculus, algebra..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-full py-2 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-xs transition-all"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 aria-label="Search"
                 className="absolute right-2.5 text-slate-600 hover:text-cyan-700 dark:text-slate-300 dark:hover:text-cyan-400"
               >
@@ -286,24 +295,33 @@ export default function Navbar({
 
             {/* Right Controls & Actions */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-              
               {/* Dark / Light Mode Toggle Pill Switch */}
               <button
                 type="button"
                 onClick={toggleTheme}
                 className="relative flex items-center w-[52px] xs:w-[60px] h-[28px] xs:h-[32px] rounded-full bg-slate-800 dark:bg-slate-700 transition-colors duration-300 focus:outline-none shadow-inner ring-1 ring-slate-900/10 dark:ring-white/10 cursor-pointer shrink-0"
                 aria-label="Toggle dark mode"
-                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                title={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
               >
                 {/* Sliding White Knob */}
-                <div 
+                <div
                   className={`absolute top-[2px] xs:top-[3px] w-[24px] xs:w-[26px] h-[24px] xs:h-[26px] bg-white rounded-full shadow-md transition-transform duration-300 ease-out z-0 ${
-                    theme === 'dark' ? 'translate-x-[24px] xs:translate-x-[28px]' : 'translate-x-[3px]'
+                    theme === "dark"
+                      ? "translate-x-[24px] xs:translate-x-[28px]"
+                      : "translate-x-[3px]"
                   }`}
                 />
                 <div className="relative flex justify-between items-center w-full px-[6px] xs:px-[7px] z-10 pointer-events-none">
-                  <Sun className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === 'dark' ? 'text-slate-400' : 'text-amber-500'}`} />
-                  <Moon className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === 'dark' ? 'text-indigo-600' : 'text-slate-400'}`} />
+                  <Sun
+                    className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === "dark" ? "text-slate-400" : "text-amber-500"}`}
+                  />
+                  <Moon
+                    className={`w-3.5 h-3.5 xs:w-4 xs:h-4 transition-colors duration-300 ${theme === "dark" ? "text-indigo-600" : "text-slate-400"}`}
+                  />
                 </div>
               </button>
 
@@ -313,9 +331,11 @@ export default function Navbar({
                   <button
                     onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                     className="flex items-center justify-center h-8 w-8 xs:h-9 xs:w-9 rounded-full bg-gradient-to-tr from-cyan-600 to-sky-500 text-white text-xs font-extrabold shadow-md hover:scale-105 transition-all focus:outline-none cursor-pointer border-2 border-white dark:border-slate-800"
-                    title={currentUser.name || 'User Profile'}
+                    title={currentUser.name || "User Profile"}
                   >
-                    {currentUser.name ? currentUser.name.slice(0, 2).toUpperCase() : 'ST'}
+                    {currentUser.name
+                      ? currentUser.name.slice(0, 2).toUpperCase()
+                      : "ST"}
                   </button>
 
                   {userDropdownOpen && (
@@ -328,7 +348,7 @@ export default function Navbar({
                           {currentUser.email}
                         </p>
                         <span className="inline-block mt-1 text-[9px] font-bold text-cyan-700 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/50 px-2 py-0.5 rounded uppercase">
-                          {currentUser.role || 'Math Scholar'}
+                          {currentUser.role || "Math Scholar"}
                         </span>
                       </div>
                       <div className="py-1">
@@ -378,7 +398,10 @@ export default function Navbar({
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 via-sky-500 to-indigo-600 group-hover:opacity-100 transition-opacity"></span>
                 <span className="relative flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-[11px] bg-slate-900 text-white hover:bg-slate-800 dark:bg-cyan-700 dark:hover:bg-cyan-600 transition-all font-bold">
-                  <Sparkles size={14} className="text-cyan-300 animate-spin-slow" />
+                  <Sparkles
+                    size={14}
+                    className="text-cyan-300 animate-spin-slow"
+                  />
                   <span>Book Free Class</span>
                 </span>
               </button>
@@ -388,33 +411,32 @@ export default function Navbar({
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 className="lg:hidden p-1.5 rounded-lg text-slate-900 dark:text-slate-100 hover:bg-black/10 dark:hover:bg-white/10 transition-colors cursor-pointer"
-                aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+                aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
               >
                 {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
-
             </div>
-
           </div>
         </div>
       </header>
 
       {/* Mobile Slide-Down Drawer */}
       {mobileMenuOpen && (
-        <div 
-          className="lg:hidden fixed inset-x-0 top-[auto] z-40 bg-[#bae6fd] dark:bg-[#023e50] border-b border-black/20 dark:border-cyan-900/30 shadow-2xl overflow-y-auto max-h-[calc(100vh-100px)] py-4 px-4 animate-in slide-in-from-top duration-200"
-        >
+        <div className="lg:hidden fixed inset-x-0 top-[auto] z-40 bg-[#bae6fd] dark:bg-[#023e50] border-b border-black/20 dark:border-cyan-900/30 shadow-2xl overflow-y-auto max-h-[calc(100vh-100px)] py-4 px-4 animate-in slide-in-from-top duration-200">
           {/* Mobile Search */}
-          <form onSubmit={handleSearchSubmit} className="relative flex items-center mb-4">
-            <input 
+          <form
+            onSubmit={handleSearchSubmit}
+            className="relative flex items-center mb-4"
+          >
+            <input
               type="text"
               placeholder="Search curriculum, labs, lessons..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full text-xs bg-white dark:bg-slate-950 border border-slate-300 dark:border-cyan-800 rounded-xl py-2.5 pl-3.5 pr-9 text-slate-950 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 shadow-sm"
             />
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="absolute right-3 text-slate-600 dark:text-slate-300 hover:text-cyan-600"
             >
               <Search size={16} />
@@ -424,7 +446,10 @@ export default function Navbar({
           {/* Mobile Navigation List */}
           <div className="space-y-1">
             {navLinks.map((link, idx) => (
-              <div key={idx} className="border-b border-black/10 dark:border-cyan-900/20 last:border-b-0 pb-1">
+              <div
+                key={idx}
+                className="border-b border-black/10 dark:border-cyan-900/20 last:border-b-0 pb-1"
+              >
                 {link.dropdown ? (
                   <div>
                     <button
@@ -432,9 +457,9 @@ export default function Navbar({
                       className="w-full flex items-center justify-between py-2.5 px-2 text-sm font-bold text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
                     >
                       <span>{link.name}</span>
-                      <ChevronDown 
-                        size={16} 
-                        className={`transition-transform duration-200 ${mobileDropdowns[idx] ? 'rotate-180 text-cyan-700' : ''}`} 
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-200 ${mobileDropdowns[idx] ? "rotate-180 text-cyan-700" : ""}`}
                       />
                     </button>
                     {mobileDropdowns[idx] && (
@@ -463,10 +488,9 @@ export default function Navbar({
                       handleLinkNavigation(e, link.href);
                     }}
                     className={`block py-2.5 px-2 text-sm font-bold transition-colors cursor-pointer ${
-                      (link.href.includes('demo') && location.pathname.toLowerCase().includes('demo')) ||
-                      (link.name === 'Home' && !location.pathname.toLowerCase().includes('demo'))
-                        ? 'text-cyan-700 dark:text-cyan-300'
-                        : 'text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300'
+                      isLinkActive(link.href)
+                        ? "text-cyan-700 dark:text-cyan-300"
+                        : "text-slate-900 dark:text-slate-100 hover:text-cyan-700 dark:hover:text-cyan-300"
                     }`}
                   >
                     {link.name}
@@ -522,14 +546,8 @@ export default function Navbar({
               </button>
             )}
           </div>
-
         </div>
       )}
     </>
   );
 }
-
-
-
-
-

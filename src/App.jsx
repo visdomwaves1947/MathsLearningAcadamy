@@ -8,6 +8,7 @@ import AuthModal from './components/AuthModal';
 import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
 import MathsPage from './pages/MathsPage';
 import DemoPage from './pages/DemoPage';
+import English from './pages/English';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -148,6 +149,48 @@ export default function App() {
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              />
+            } 
+          />
+
+          {/* English Page */}
+          <Route 
+            path="/mymarks/Englsih" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/English" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/english" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/mymarks/eng" 
+            element={
+              <English 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
               />
             } 
           />
