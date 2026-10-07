@@ -125,9 +125,9 @@ export default function Navbar({
 
   const isLinkActive = (href) => {
     const p = location.pathname.toLowerCase();
-    if (href.includes("demo")) return p.includes("demo");
+    if (href.includes("demo")) return p.includes("demo") || p === "/";
     if (href.includes("english")) return p.includes("eng");
-    if (href.includes("maths")) return p.includes("maths") || p === "/";
+    if (href.includes("maths")) return p.includes("maths");
     return false;
   };
 
@@ -191,7 +191,7 @@ export default function Navbar({
           <div className="flex items-center shrink-0">
             <VisdomBrand
               onClick={() => {
-                navigate("/maths");
+                navigate("/demo");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             />

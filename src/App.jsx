@@ -66,7 +66,7 @@ export default function App() {
     } catch (e) {
       console.warn(e);
     }
-    const from = location.state?.from || '/maths';
+    const from = location.state?.from || '/demo';
     navigate(from);
   };
 
@@ -77,20 +77,20 @@ export default function App() {
     } catch (e) {
       console.warn(e);
     }
-    const from = location.state?.from || '/maths';
+    const from = location.state?.from || '/demo';
     navigate(from);
   };
 
   const handleOpenSignIn = () => {
-    navigate(currentUser ? '/portal' : '/signin', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/maths') } });
+    navigate(currentUser ? '/portal' : '/signin', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/demo') } });
   };
 
   const handleOpenSignUp = () => {
-    navigate('/signup', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/maths') } });
+    navigate('/signup', { state: { from: location.pathname !== '/signin' && location.pathname !== '/signup' && location.pathname !== '/portal' ? location.pathname : (location.state?.from || '/demo') } });
   };
   
   const handleCloseAuth = () => {
-    const from = location.state?.from || '/maths';
+    const from = location.state?.from || '/demo';
     navigate(from);
   };
 
@@ -232,11 +232,11 @@ export default function App() {
           <Route path="/mymarks/english" element={<Navigate to="/english" replace />} />
           <Route path="/mymarks/English" element={<Navigate to="/english" replace />} />
           <Route path="/mymarks/eng" element={<Navigate to="/english" replace />} />
-          <Route path="/mymarks/*" element={<Navigate to="/maths" replace />} />
+          <Route path="/mymarks/*" element={<Navigate to="/demo" replace />} />
 
-          {/* Root & Fallback: Redirect to /maths */}
-          <Route path="/" element={<Navigate to="/maths" replace />} />
-          <Route path="*" element={<Navigate to="/maths" replace />} />
+          {/* Root & Fallback: Show demo first instead of maths */}
+          <Route path="/" element={<Navigate to="/demo" replace />} />
+          <Route path="*" element={<Navigate to="/demo" replace />} />
         </Routes>
       </main>
 
