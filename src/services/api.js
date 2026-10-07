@@ -1,7 +1,7 @@
 import { courses as fallbackCourses } from '../data/coursesData';
 import { quickMathChallenges as fallbackChallenges } from '../data/quizData';
 
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://maths-learning-acadamy-backend.vercel.app';
+export const API_BASE_URL = (import.meta.env.VITE_API_URL || 'https://mymarks-backend.vercel.app').replace(/\/$/, '');
 
 /**
  * Check backend API health status
