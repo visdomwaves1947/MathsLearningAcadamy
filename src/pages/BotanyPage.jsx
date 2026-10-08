@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import BotanyHero from '../components/Botany/BotanyHero';
-import BotanyWhyChooseUs from '../components/Botany/BotanyWhyChooseUs';
-import BotanyCurriculum from '../components/Botany/BotanyCurriculum';
-import BotanyRoadmapsGrid from '../components/Botany/BotanyRoadmapsGrid';
-import BotanyTestimonials from '../components/Botany/BotanyTestimonials';
-import BotanyStatsBar from '../components/Botany/BotanyStatsBar';
-import BotanyPricingSection from '../components/Botany/BotanyPricingSection';
-import BotanyFaqSection from '../components/Botany/BotanyFaqSection';
+import BotanyHero from '../components/botany/BotanyHero';
+import BotanyWhyChooseUs from '../components/botany/BotanyWhyChooseUs';
+import BotanyCurriculum from '../components/botany/BotanyCurriculum';
+import BotanyRoadmapsGrid from '../components/botany/BotanyRoadmapsGrid';
+import BotanyTestimonials from '../components/botany/BotanyTestimonials';
+import BotanyStatsBar from '../components/botany/BotanyStatsBar';
+import BotanyPricingSection from '../components/botany/BotanyPricingSection';
+import BotanyFaqSection from '../components/botany/BotanyFaqSection';
 
 export default function BotanyPage({ onOpenBooking, onOpenVideoDemo, onSelectRoadmap }) {
   // Handle hash scrolling if navigating with hash

@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import ZoologyHero from '../components/Zoology/ZoologyHero';
-import ZoologyWhyChooseUs from '../components/Zoology/ZoologyWhyChooseUs';
-import ZoologyCurriculum from '../components/Zoology/ZoologyCurriculum';
-import ZoologyRoadmapsGrid from '../components/Zoology/ZoologyRoadmapsGrid';
-import ZoologyTestimonials from '../components/Zoology/ZoologyTestimonials';
-import ZoologyStatsBar from '../components/Zoology/ZoologyStatsBar';
-import ZoologyPricingSection from '../components/Zoology/ZoologyPricingSection';
-import ZoologyFaqSection from '../components/Zoology/ZoologyFaqSection';
+import ZoologyHero from '../components/zoology/ZoologyHero';
+import ZoologyWhyChooseUs from '../components/zoology/ZoologyWhyChooseUs';
+import ZoologyCurriculum from '../components/zoology/ZoologyCurriculum';
+import ZoologyRoadmapsGrid from '../components/zoology/ZoologyRoadmapsGrid';
+import ZoologyTestimonials from '../components/zoology/ZoologyTestimonials';
+import ZoologyStatsBar from '../components/zoology/ZoologyStatsBar';
+import ZoologyPricingSection from '../components/zoology/ZoologyPricingSection';
+import ZoologyFaqSection from '../components/zoology/ZoologyFaqSection';
 
 export default function ZoologyPage({ onOpenBooking, onOpenVideoDemo, onSelectRoadmap }) {
   // Handle hash scrolling if navigating with hash
