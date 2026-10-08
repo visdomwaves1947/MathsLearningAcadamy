@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   BookOpen, 
   ArrowRight, 
@@ -7,7 +7,8 @@ import {
   Lock, 
   LogIn, 
   X, 
-  Sparkles 
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,7 +16,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
   const [activeEnroll, setActiveEnroll] = useState(null);
   const [activeExplore, setActiveExplore] = useState(null);
   const [lockedSubject, setLockedSubject] = useState(null);
-  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
   // Determine if the user is authenticated from props or saved local storage
@@ -31,16 +31,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     })()
   );
 
-  // Auto-dismiss toast notification after 5 seconds
-  useEffect(() => {
-    if (toastMessage) {
-      const timer = setTimeout(() => {
-        setToastMessage(null);
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [toastMessage]);
-
   const subjects = [
     { id: 'maths', name: 'Mathematics', category: 'MPC', image: 'https://i.pinimg.com/736x/7e/ff/20/7eff2083afbca2a2e99a1525fcc40ce6.jpg', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', desc: 'Master algebra, calculus, geometry, and trigonometry. Interactive simulations help visualize complex functions. Essential for JEE and EAMCET preparation.' },
     { id: 'phy', name: 'Physics', category: 'MPC / BiPC', image: 'https://i.pinimg.com/736x/59/63/26/596326ea62c6f1c23ff12882c8c00e7e.jpg', color: 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400', desc: 'Understand mechanics, thermodynamics, and electromagnetism with practical real-world applications and numerical problem-solving techniques.' },
@@ -54,7 +44,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
   const handleSubjectClick = (subject) => {
     if (!isAuthenticated) {
       setLockedSubject(subject);
-      setToastMessage(`Please sign in to access the demo trial for ${subject.name}.`);
       return;
     }
 
@@ -79,7 +68,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     e.stopPropagation();
     if (!isAuthenticated) {
       setLockedSubject(subject);
-      setToastMessage(`Please sign in to access the demo trial for ${subject.name}.`);
       return;
     }
 
@@ -104,7 +92,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     e.stopPropagation();
     if (!isAuthenticated) {
       setLockedSubject(subject);
-      setToastMessage(`Please sign in to access the demo trial for ${subject.name}.`);
       return;
     }
     setActiveEnroll(subject.id);
@@ -112,7 +99,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
   const handleGoToSignIn = () => {
     setLockedSubject(null);
-    setToastMessage(null);
     if (onOpenSignIn) {
       onOpenSignIn();
     } else {
@@ -122,7 +108,6 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
   const handleGoToSignUp = () => {
     setLockedSubject(null);
-    setToastMessage(null);
     if (onOpenSignUp) {
       onOpenSignUp();
     } else {
@@ -137,76 +122,76 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     return (
       <div 
         key={subject.id} 
-        className={`flex flex-col bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border ${
+        className={`flex flex-col bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border ${
           !isAuthenticated 
-            ? 'border-slate-200/80 dark:border-slate-800 hover:border-amber-500/50 dark:hover:border-amber-500/50' 
-            : 'border-slate-100 dark:border-slate-800 hover:border-cyan-500/50 dark:hover:border-cyan-500/50'
-        } h-[380px] group hover:-translate-y-1 relative cursor-pointer`}
+            ? 'border-slate-200/80 dark:border-slate-800 hover:border-amber-500/60 dark:hover:border-amber-500/60 hover:shadow-amber-500/10' 
+            : 'border-slate-100 dark:border-slate-800 hover:border-cyan-500/60 dark:hover:border-cyan-500/60 hover:shadow-cyan-500/10'
+        } h-[390px] group hover:-translate-y-1.5 relative cursor-pointer`}
         onClick={() => handleSubjectClick(subject)}
       >
         {/* Card Thumbnail */}
-        <div className="h-40 w-full overflow-hidden relative shrink-0">
+        <div className="h-44 w-full overflow-hidden relative shrink-0">
           <img 
             src={subject.image} 
             alt={subject.name} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none"></div>
 
           {/* Subject Category Icon Badge */}
-          <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md bg-white/20 text-white shadow-md">
+          <div className="absolute bottom-3 left-3 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md bg-white/20 text-white shadow-md border border-white/20">
             <BookOpen size={20} />
           </div>
 
           {/* Lock State Indicator Badge */}
           {!isAuthenticated ? (
-            <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-amber-500/40 text-amber-300 text-xs font-semibold flex items-center gap-1.5 shadow-lg z-10">
+            <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-1.5 shadow-xl z-10 group-hover:border-amber-400 group-hover:scale-105 transition-all">
               <Lock size={12} className="text-amber-400" />
-              <span>Sign in to unlock</span>
+              <span>Locked Demo</span>
             </div>
           ) : (
-            <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-emerald-950/80 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 shadow-lg z-10">
+            <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-emerald-950/85 backdrop-blur-md border border-emerald-500/40 text-emerald-300 text-xs font-bold flex items-center gap-1.5 shadow-xl z-10">
               <Sparkles size={12} className="text-emerald-400" />
-              <span>Demo Unlocked</span>
+              <span>Unlocked</span>
             </div>
           )}
         </div>
         
         <div className="p-5 flex flex-col flex-1 relative overflow-hidden">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest">
+            <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">
               {subject.category}
             </span>
             {!isAuthenticated && (
-              <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
-                <Lock size={10} /> Locked
+              <span className="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                <Lock size={11} /> Locked
               </span>
             )}
           </div>
 
-          <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-3 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors">
+          <h4 className="text-xl font-bold text-slate-900 dark:text-white mb-2.5 group-hover:text-indigo-600 dark:group-hover:text-cyan-400 transition-colors">
             {subject.name}
           </h4>
 
           {/* Default Card View */}
           <div className={`flex flex-col mt-auto transition-opacity duration-300 ${isExploring || isEnrolling ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-            <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">
+            <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 leading-relaxed">
               {subject.desc}
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-2.5">
               <button 
                 type="button"
                 onClick={(e) => handleExploreClick(e, subject)}
-                className="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                className="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
                 {!isAuthenticated ? (
                   <>
-                    <Lock size={14} className="text-amber-500" />
+                    <Lock size={13} className="text-amber-500" />
                     <span>Explore</span>
                   </>
                 ) : (
                   <>
-                    <Info size={16} />
+                    <Info size={15} />
                     <span>Explore</span>
                   </>
                 )}
@@ -214,21 +199,21 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
               <button 
                 type="button"
                 onClick={(e) => handleEnrollClick(e, subject)}
-                className={`flex-1 py-2.5 rounded-xl text-white text-sm font-bold flex items-center justify-center gap-1.5 transition-colors shadow-sm cursor-pointer ${
+                className={`flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm cursor-pointer ${
                   !isAuthenticated 
-                    ? 'bg-amber-600 hover:bg-amber-500 shadow-amber-600/30' 
-                    : 'bg-slate-900 hover:bg-cyan-600 dark:bg-cyan-700 dark:hover:bg-cyan-500'
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold shadow-amber-500/20' 
+                    : 'bg-slate-900 hover:bg-cyan-600 dark:bg-cyan-700 dark:hover:bg-cyan-500 text-white'
                 }`}
               >
                 {!isAuthenticated ? (
                   <>
-                    <Lock size={14} />
+                    <Lock size={13} />
                     <span>Demo Trial</span>
                   </>
                 ) : (
                   <>
                     <span>Enroll</span>
-                    <ArrowRight size={16} />
+                    <ArrowRight size={15} />
                   </>
                 )}
               </button>
@@ -303,12 +288,12 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           {!isAuthenticated ? (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs sm:text-sm font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/25 text-amber-700 dark:text-amber-400 text-xs sm:text-sm font-bold mb-6 shadow-xs">
               <Lock size={14} className="text-amber-500" />
               <span>Intermediate Subjects (Demo Locked)</span>
             </div>
           ) : (
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 text-cyan-700 dark:text-cyan-300 text-xs sm:text-sm font-bold mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800 text-cyan-700 dark:text-cyan-300 text-xs sm:text-sm font-bold mb-6 shadow-xs">
               <Sparkles size={14} className="text-cyan-500" />
               <span>AP/TS Board Curriculum (Unlocked)</span>
             </div>
@@ -324,23 +309,23 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
         {/* Lock Info Banner when user is not signed in */}
         {!isAuthenticated && (
-          <div className="max-w-2xl mx-auto mb-10 p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/25 text-amber-800 dark:text-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
-            <div className="flex items-center gap-3 text-left">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-600 dark:text-amber-400">
-                <Lock size={18} />
+          <div className="max-w-2xl mx-auto mb-10 p-4 sm:p-5 rounded-3xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/25 text-amber-800 dark:text-amber-300 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm backdrop-blur-sm">
+            <div className="flex items-center gap-3.5 text-left">
+              <div className="w-11 h-11 rounded-2xl bg-amber-500/20 flex items-center justify-center shrink-0 text-amber-600 dark:text-amber-400 shadow-inner">
+                <Lock size={20} />
               </div>
               <div>
-                <p className="font-bold text-slate-900 dark:text-white text-sm">
+                <p className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base">
                   Intermediate Subject Trials are Locked
                 </p>
-                <p className="text-slate-600 dark:text-slate-400 text-xs mt-0.5">
-                  Sign in to access interactive demo trials and video lessons for any subject.
+                <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-0.5">
+                  Sign in to unlock interactive demo trials and video lessons for any subject.
                 </p>
               </div>
             </div>
             <button
               onClick={handleGoToSignIn}
-              className="w-full sm:w-auto shrink-0 px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-transform hover:scale-105 active:scale-95 shadow-sm cursor-pointer flex items-center justify-center gap-1.5"
+              className="w-full sm:w-auto shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs transition-transform hover:scale-105 active:scale-95 shadow-md shadow-amber-500/20 cursor-pointer flex items-center justify-center gap-1.5"
             >
               <LogIn size={14} />
               <span>Sign In Now</span>
@@ -354,59 +339,100 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
         </div>
       </div>
 
-      {/* Lock Warning Modal when guest clicks any subject */}
+      {/* Ultra-Premium Animated Lock Modal */}
       {lockedSubject && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-fadeIn"
           onClick={() => setLockedSubject(null)}
         >
+          {/* Ambient Glowing Background Orbs */}
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-tr from-amber-500/20 via-orange-500/15 to-indigo-500/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+
           <div 
-            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 text-center transform transition-all animate-scale-up"
+            className="relative w-full max-w-lg bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-slate-200/90 dark:border-slate-800 text-center transform transition-all animate-scaleUp overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Top Animated Gradient Accent Bar */}
+            <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-amber-400 via-orange-500 to-indigo-600"></div>
+
             {/* Close Button */}
             <button 
               onClick={() => setLockedSubject(null)}
-              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Close"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-white flex items-center justify-center transition-all duration-200 hover:rotate-90 cursor-pointer shadow-xs"
+              aria-label="Close modal"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
 
-            {/* Lock Glowing Badge */}
-            <div className="mx-auto w-16 h-16 rounded-2xl bg-amber-500/15 border-2 border-amber-500/30 flex items-center justify-center text-amber-500 mb-5 shadow-lg shadow-amber-500/10">
-              <Lock size={28} />
+            {/* Animated 3D Security Emblem */}
+            <div className="relative mx-auto w-20 h-20 mb-5 flex items-center justify-center">
+              {/* Outer pulsing glow ring */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-400 to-orange-500 opacity-30 blur-md animate-pulse"></div>
+              
+              {/* Spinning dashed ring effect */}
+              <div className="absolute -inset-1 rounded-3xl border border-amber-500/30 border-dashed animate-[spin_12s_linear_infinite]"></div>
+
+              {/* Main Badge */}
+              <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-orange-500 text-white flex items-center justify-center shadow-xl shadow-amber-500/30 ring-4 ring-amber-500/20">
+                <Lock size={30} className="stroke-[2.2] animate-bounce" />
+              </div>
+
+              {/* Corner Sparkle Badge */}
+              <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-slate-900 text-amber-400 border-2 border-white dark:border-slate-900 flex items-center justify-center shadow-md">
+                <Sparkles size={12} className="animate-pulse" />
+              </div>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-3">
-              Demo Trial Locked
+            {/* Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-500/20 border border-amber-500/25 text-amber-700 dark:text-amber-300 text-xs font-black uppercase tracking-wider mb-2.5 shadow-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              <span>Demo Trial Locked</span>
             </div>
 
-            <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2">
+            {/* Modal Heading */}
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
               Sign In Required
             </h3>
 
             {/* Targeted User-Requested Message */}
-            <p className="text-slate-600 dark:text-slate-300 text-base leading-relaxed mb-6">
-              Please <span className="font-bold text-indigo-600 dark:text-indigo-400">sign in</span> to access the demo trial for <span className="font-extrabold text-slate-900 dark:text-white underline decoration-amber-500 decoration-2 underline-offset-4">{lockedSubject.name}</span>.
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-5 max-w-md mx-auto">
+              Please <button onClick={handleGoToSignIn} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer">sign in</button> to access the demo trial for <span className="font-extrabold text-slate-900 dark:text-white underline decoration-amber-500 decoration-2 underline-offset-4">{lockedSubject.name}</span>.
             </p>
 
-            {/* Subject Preview Card */}
-            <div className="bg-slate-50 dark:bg-slate-800/60 rounded-2xl p-3.5 mb-6 text-left border border-slate-200 dark:border-slate-700/60 flex items-center gap-3">
-              <img 
-                src={lockedSubject.image} 
-                alt={lockedSubject.name} 
-                className="w-14 h-14 rounded-xl object-cover shrink-0"
-              />
-              <div className="min-w-0">
-                <div className="text-[11px] font-extrabold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-                  {lockedSubject.category}
+            {/* Subject Preview & Feature Perks Box */}
+            <div className="bg-slate-50/90 dark:bg-slate-800/60 rounded-2xl p-4 mb-6 text-left border border-slate-200/80 dark:border-slate-700/60 shadow-xs">
+              <div className="flex items-center gap-3.5 mb-3.5 pb-3 border-b border-slate-200/70 dark:border-slate-700/50">
+                <img 
+                  src={lockedSubject.image} 
+                  alt={lockedSubject.name} 
+                  className="w-14 h-14 rounded-xl object-cover shrink-0 ring-2 ring-white dark:ring-slate-700 shadow-md"
+                />
+                <div className="min-w-0">
+                  <div className="inline-block text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-700 dark:text-amber-300 tracking-wider mb-1">
+                    {lockedSubject.category} &bull; AP / TS Intermediate
+                  </div>
+                  <div className="text-base font-black text-slate-900 dark:text-white truncate">
+                    {lockedSubject.name}
+                  </div>
                 </div>
-                <div className="text-base font-bold text-slate-900 dark:text-white truncate">
-                  {lockedSubject.name}
+              </div>
+
+              {/* Perks Checklist */}
+              <div className="space-y-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+                  <span>Full Chapter Interactive Lessons & Video Concept Maps</span>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">
-                  Interactive lessons, live formulas & tests
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+                  <span>Live Formula Simulations & Solved Board Examples</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+                  <span>Timed Mock Question Sets with Instant Score Feedback</span>
                 </div>
               </div>
             </div>
@@ -415,45 +441,29 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
             <div className="flex flex-col gap-3">
               <button
                 onClick={handleGoToSignIn}
-                className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-600 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold text-base shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-bold text-base shadow-xl shadow-indigo-600/30 flex items-center justify-center gap-2.5 cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] group relative overflow-hidden"
               >
-                <LogIn size={18} />
+                {/* Continuous Shimmer Light Sweep */}
+                <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer pointer-events-none"></span>
+                <LogIn size={19} className="transition-transform group-hover:translate-x-1" />
                 <span>Sign In to Access Demo</span>
               </button>
 
               <button
                 onClick={handleGoToSignUp}
-                className="w-full py-3 px-5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold text-sm transition-colors cursor-pointer"
+                className="w-full py-3.5 px-6 rounded-2xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 font-bold text-sm transition-all duration-200 cursor-pointer border border-slate-200 dark:border-slate-700/60 flex items-center justify-center gap-2 hover:border-slate-300 dark:hover:border-slate-600 group"
               >
-                Don't have an account? Sign Up Free
+                <span>Don't have an account? Sign Up Free</span>
+                <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all" />
               </button>
             </div>
-          </div>
-        </div>
-      )}
 
-      {/* Floating Toast Notification on Subject Click */}
-      {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 max-w-md bg-slate-900 dark:bg-slate-800 text-white p-4 rounded-2xl shadow-2xl border border-amber-500/30 flex items-center gap-3 animate-slide-up">
-          <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-            <Lock size={18} />
+            {/* Instant Access Note */}
+            <p className="mt-4 text-[11px] font-medium text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1.5">
+              <Sparkles size={12} className="text-amber-500" />
+              <span>Instant activation &bull; Free demo trial across all subjects</span>
+            </p>
           </div>
-          <div className="flex-1 text-sm font-medium pr-2">
-            {toastMessage}
-          </div>
-          <button
-            onClick={handleGoToSignIn}
-            className="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-colors shrink-0 cursor-pointer"
-          >
-            Sign In
-          </button>
-          <button
-            onClick={() => setToastMessage(null)}
-            className="p-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
-            aria-label="Dismiss"
-          >
-            <X size={16} />
-          </button>
         </div>
       )}
     </section>
