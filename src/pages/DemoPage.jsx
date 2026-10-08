@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import IntermediateSubjects from '../components/IntermediateSubjects';
 import HowToUse from '../components/HowToUse';
 
-export default function DemoPage({ onOpenBooking, onOpenVideoDemo }) {
+export default function DemoPage({ onOpenBooking, onOpenVideoDemo, currentUser, onOpenSignIn, onOpenSignUp }) {
   return (
     <div className="relative overflow-hidden bg-[#EBF0F7] dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 transition-colors duration-300">
       
@@ -76,6 +76,9 @@ export default function DemoPage({ onOpenBooking, onOpenVideoDemo }) {
       {/* AP/TS Intermediate Subjects Grid */}
       <IntermediateSubjects 
         onEnroll={(subjectName) => onOpenBooking && onOpenBooking(`Enroll in ${subjectName}`)}
+        currentUser={currentUser}
+        onOpenSignIn={onOpenSignIn}
+        onOpenSignUp={onOpenSignUp}
       />
     </div>
   );

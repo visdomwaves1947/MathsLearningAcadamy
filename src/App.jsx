@@ -161,6 +161,9 @@ export default function App() {
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                currentUser={currentUser}
+                onOpenSignIn={handleOpenSignIn}
+                onOpenSignUp={handleOpenSignUp}
               />
             } 
           />
@@ -204,6 +207,9 @@ export default function App() {
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                currentUser={currentUser}
+                onOpenSignIn={handleOpenSignIn}
+                onOpenSignUp={handleOpenSignUp}
               />
             } 
           />
@@ -213,6 +219,9 @@ export default function App() {
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                currentUser={currentUser}
+                onOpenSignIn={handleOpenSignIn}
+                onOpenSignUp={handleOpenSignUp}
               />
             } 
           />
@@ -222,6 +231,9 @@ export default function App() {
               <DemoPage 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                currentUser={currentUser}
+                onOpenSignIn={handleOpenSignIn}
+                onOpenSignUp={handleOpenSignUp}
               />
             } 
           />
