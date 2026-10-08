@@ -64,6 +64,12 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     } else if (subject.id === 'eng') {
       navigate('/english');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'bot') {
+      navigate('/botany');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'zoo') {
+      navigate('/zoology');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(activeExplore === subject.id ? null : subject.id);
     }
@@ -82,6 +88,12 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'eng') {
       navigate('/english');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'bot') {
+      navigate('/botany');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'zoo') {
+      navigate('/zoology');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(subject.id);

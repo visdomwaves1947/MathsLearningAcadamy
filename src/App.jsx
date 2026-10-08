@@ -9,6 +9,8 @@ import ExamPlannerModal from './components/exam-planner/ExamPlannerModal';
 import MathsPage from './pages/MathsPage';
 import DemoPage from './pages/DemoPage';
 import English from './pages/English';
+import Botany from './pages/Botany';
+import Zoology from './pages/Zoology';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -200,6 +202,70 @@ export default function App() {
             } 
           />
 
+          {/* Botany Page */}
+          <Route 
+            path="/botany" 
+            element={
+              <Botany 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Botany" 
+            element={
+              <Botany 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/bot" 
+            element={
+              <Botany 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Zoology Page */}
+          <Route 
+            path="/zoology" 
+            element={
+              <Zoology 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Zoology" 
+            element={
+              <Zoology 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/zoo" 
+            element={
+              <Zoology 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
           {/* Auth Routes: Render DemoPage in the background so the modal overlays it nicely */}
           <Route 
             path="/signin" 
@@ -244,6 +310,12 @@ export default function App() {
           <Route path="/mymarks/english" element={<Navigate to="/english" replace />} />
           <Route path="/mymarks/English" element={<Navigate to="/english" replace />} />
           <Route path="/mymarks/eng" element={<Navigate to="/english" replace />} />
+          <Route path="/mymarks/botany" element={<Navigate to="/botany" replace />} />
+          <Route path="/mymarks/Botany" element={<Navigate to="/botany" replace />} />
+          <Route path="/mymarks/bot" element={<Navigate to="/botany" replace />} />
+          <Route path="/mymarks/zoology" element={<Navigate to="/zoology" replace />} />
+          <Route path="/mymarks/Zoology" element={<Navigate to="/zoology" replace />} />
+          <Route path="/mymarks/zoo" element={<Navigate to="/zoology" replace />} />
           <Route path="/mymarks/*" element={<Navigate to="/demo" replace />} />
 
           {/* Root & Fallback: Show demo first instead of maths */}
