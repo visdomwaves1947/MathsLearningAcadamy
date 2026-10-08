@@ -349,7 +349,7 @@ export default function App() {
         isOpen={videoDemoOpen} 
         onClose={() => setVideoDemoOpen(false)}
         onOpenBooking={() => handleOpenBooking('Classroom Experience')}
-      />
+      /> 
 
       <ExamPlannerModal 
         isOpen={isPlannerOpen}
