@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
-import Hero from '../components/Hero';
-import WhyChooseUs from '../components/WhyChooseUs';
-import RoadmapsGrid from '../components/exam-planner/RoadmapsGrid';
-import Testimonials from '../components/Testimonials';
-import StatsBar from '../components/StatsBar';
-import PricingSection from '../components/PricingSection';
-import FaqSection from '../components/FaqSection';
+import MathsHero from '../components/maths/MathsHero';
+import MathsWhyChooseUs from '../components/maths/MathsWhyChooseUs';
+import MathsCurriculum from '../components/maths/MathsCurriculum';
+import MathsRoadmapsGrid from '../components/maths/MathsRoadmapsGrid';
+import MathsTestimonials from '../components/maths/MathsTestimonials';
+import MathsStatsBar from '../components/maths/MathsStatsBar';
+import MathsPricingSection from '../components/maths/MathsPricingSection';
+import MathsFaqSection from '../components/maths/MathsFaqSection';
 
 export default function MathsPage({ onOpenBooking, onOpenVideoDemo, onSelectRoadmap }) {
   // Handle hash scrolling if navigating with hash
@@ -22,40 +23,44 @@ export default function MathsPage({ onOpenBooking, onOpenVideoDemo, onSelectRoad
 
   return (
     <>
-      {/* Hero Section */}
-      <Hero 
+      {/* Mathematics Hero Section with 3D Interactive Model */}
+      <MathsHero 
         onOpenBooking={onOpenBooking} 
         onOpenVideoDemo={onOpenVideoDemo}
       />
 
-      {/* Why Choose Us Grid */}
-      <WhyChooseUs 
+      {/* Why Choose Us Grid for Mathematics */}
+      <MathsWhyChooseUs 
         onOpenBooking={onOpenBooking} 
       />
 
+      {/* AP/TS Intermediate Mathematics Modules & Curriculum */}
+      <MathsCurriculum 
+        onEnroll={(subjectName) => onOpenBooking(`Enroll in ${subjectName}`)}
+      />
 
-      {/* Premium Roadmaps Grid */}
+      {/* Premium Mathematics Roadmaps Grid */}
       <div className="bg-[#F8FAFC] dark:bg-[#0B0F19] py-8 sm:py-16 border-t border-b border-slate-200 dark:border-slate-800">
-        <RoadmapsGrid 
+        <MathsRoadmapsGrid 
           onSelectPlan={onSelectRoadmap} 
         />
       </div>
 
-      {/* Student Results & Parent Testimonials */}
-      <Testimonials 
+      {/* Student Results & Parent Testimonials for Mathematics */}
+      <MathsTestimonials 
         onOpenBooking={onOpenBooking}
       />
 
       {/* Stats Bar under Testimonials */}
-      <StatsBar />
+      <MathsStatsBar />
 
-      {/* Tuition Plans & Pricing */}
-      <PricingSection 
-        onOpenBooking={(planName) => onOpenBooking(`Plan: ${planName}`)}
+      {/* Tuition Plans & Pricing for Mathematics */}
+      <MathsPricingSection 
+        onOpenBooking={(planName) => onOpenBooking(`Maths Plan: ${planName}`)}
       />
 
       {/* Frequently Asked Questions */}
-      <FaqSection 
+      <MathsFaqSection 
         onOpenBooking={onOpenBooking}
       />
     </>

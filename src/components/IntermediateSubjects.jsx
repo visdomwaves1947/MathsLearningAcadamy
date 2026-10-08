@@ -59,6 +59,15 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     } else if (subject.id === 'zoo') {
       navigate('/zoology');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'phy') {
+      navigate('/physics');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'chem') {
+      navigate('/chemistry');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'san') {
+      navigate('/sanskrit');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(activeExplore === subject.id ? null : subject.id);
     }
@@ -82,6 +91,15 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'zoo') {
       navigate('/zoology');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'phy') {
+      navigate('/physics');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'chem') {
+      navigate('/chemistry');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'san') {
+      navigate('/sanskrit');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(subject.id);

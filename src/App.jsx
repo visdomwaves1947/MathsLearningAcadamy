@@ -11,6 +11,9 @@ import DemoPage from './pages/DemoPage';
 import English from './pages/English';
 import Botany from './pages/Botany';
 import Zoology from './pages/Zoology';
+import Physics from './pages/Physics';
+import Chemistry from './pages/Chemistry';
+import Sanskrit from './pages/Sanskrit';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -155,6 +158,26 @@ export default function App() {
               />
             } 
           />
+          <Route 
+            path="/Maths" 
+            element={
+              <MathsPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/math" 
+            element={
+              <MathsPage 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
 
           {/* Demo Page: Keeps Navbar, Footer, and displays "Demo" on Hero section */}
           <Route 
@@ -266,6 +289,102 @@ export default function App() {
             } 
           />
 
+          {/* Physics Page */}
+          <Route 
+            path="/physics" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Physics" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/phy" 
+            element={
+              <Physics 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Chemistry Page */}
+          <Route 
+            path="/chemistry" 
+            element={
+              <Chemistry 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Chemistry" 
+            element={
+              <Chemistry 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/chem" 
+            element={
+              <Chemistry 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Sanskrit Page */}
+          <Route 
+            path="/sanskrit" 
+            element={
+              <Sanskrit 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Sanskrit" 
+            element={
+              <Sanskrit 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/san" 
+            element={
+              <Sanskrit 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
           {/* Auth Routes: Render DemoPage in the background so the modal overlays it nicely */}
           <Route 
             path="/signin" 
@@ -306,6 +425,8 @@ export default function App() {
 
           {/* Backward compatibility redirects for /mymarks/* */}
           <Route path="/mymarks/maths" element={<Navigate to="/maths" replace />} />
+          <Route path="/mymarks/Maths" element={<Navigate to="/maths" replace />} />
+          <Route path="/mymarks/math" element={<Navigate to="/maths" replace />} />
           <Route path="/mymarks/demo" element={<Navigate to="/demo" replace />} />
           <Route path="/mymarks/english" element={<Navigate to="/english" replace />} />
           <Route path="/mymarks/English" element={<Navigate to="/english" replace />} />
@@ -316,6 +437,15 @@ export default function App() {
           <Route path="/mymarks/zoology" element={<Navigate to="/zoology" replace />} />
           <Route path="/mymarks/Zoology" element={<Navigate to="/zoology" replace />} />
           <Route path="/mymarks/zoo" element={<Navigate to="/zoology" replace />} />
+          <Route path="/mymarks/physics" element={<Navigate to="/physics" replace />} />
+          <Route path="/mymarks/Physics" element={<Navigate to="/physics" replace />} />
+          <Route path="/mymarks/phy" element={<Navigate to="/physics" replace />} />
+          <Route path="/mymarks/chemistry" element={<Navigate to="/chemistry" replace />} />
+          <Route path="/mymarks/Chemistry" element={<Navigate to="/chemistry" replace />} />
+          <Route path="/mymarks/chem" element={<Navigate to="/chemistry" replace />} />
+          <Route path="/mymarks/sanskrit" element={<Navigate to="/sanskrit" replace />} />
+          <Route path="/mymarks/Sanskrit" element={<Navigate to="/sanskrit" replace />} />
+          <Route path="/mymarks/san" element={<Navigate to="/sanskrit" replace />} />
           <Route path="/mymarks/*" element={<Navigate to="/demo" replace />} />
 
           {/* Root & Fallback: Show demo first instead of maths */}
