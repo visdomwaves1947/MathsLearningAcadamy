@@ -38,7 +38,11 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     { id: 'bot', name: 'Botany', category: 'BiPC', image: 'https://i.pinimg.com/736x/73/a6/34/73a634a96be17ca114e7ac1375713492.jpg', color: 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400', desc: 'Study plant biology, anatomy, and physiology in detail. Our diagrams and notes are perfectly tailored for high NEET and Board scores.' },
     { id: 'zoo', name: 'Zoology', category: 'BiPC', image: 'https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=600&auto=format&fit=crop', color: 'bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400', desc: 'Dive into animal sciences, human anatomy, genetics, and evolution. Expert guidance for medical entrance exams.' },
     { id: 'eng', name: 'English', category: 'Languages', image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop', color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', desc: 'Improve grammar, vocabulary, and literature comprehension. Learn how to structure essays perfectly for maximum board exam marks.' },
-    { id: 'san', name: 'Sanskrit', category: 'Languages', image: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop', color: 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400', desc: 'Learn ancient texts, fundamental grammar rules, and translation strategies to score 98+ marks easily in your language board exams.' }
+    { id: 'san', name: 'Sanskrit', category: 'Languages', image: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop', color: 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400', desc: 'Learn ancient texts, fundamental grammar rules, and translation strategies to score 98+ marks easily in your language board exams.' },
+    { id: 'tel', name: 'Telugu', category: 'Languages', image: 'https://i.pinimg.com/736x/df/b6/9a/dfb69a75eb75eeee5e54e565d8f99909.jpg', color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', desc: 'Master the Telugu language, literature, and grammar to achieve excellence in your board exams.' },
+    { id: 'hin', name: 'Hindi', category: 'Languages', image: 'https://i.pinimg.com/736x/73/aa/c5/73aac5fba4a5c2fb42aacb50b88f42bd.jpg', color: 'bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400', desc: 'Enhance your Hindi reading, writing, and comprehension skills for top scores in language exams.' },
+    { id: 'urd', name: 'Urdu', category: 'Languages', image: 'https://i.pinimg.com/736x/8b/3d/42/8b3d4232e8785549760496f8dc06ba02.jpg', color: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400', desc: 'Dive into Urdu poetry, prose, and grammar with expert guidance tailored for board exam success.' },
+    { id: 'fre', name: 'French', category: 'Languages', image: 'https://i.pinimg.com/736x/13/59/a9/1359a95cbdb26f853b5e23cec0196e36.jpg', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', desc: 'Learn French vocabulary, grammar, and conjugation rules easily for perfect marks in your language subjects.' }
   ];
 
   const handleSubjectClick = (subject) => {
@@ -67,6 +71,18 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'san') {
       navigate('/sanskrit');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'tel') {
+      navigate('/telugu');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'hin') {
+      navigate('/hindi');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'urd') {
+      navigate('/urdu');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'fre') {
+      navigate('/french');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(activeExplore === subject.id ? null : subject.id);
@@ -100,6 +116,18 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else if (subject.id === 'san') {
       navigate('/sanskrit');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'tel') {
+      navigate('/telugu');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'hin') {
+      navigate('/hindi');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'urd') {
+      navigate('/urdu');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (subject.id === 'fre') {
+      navigate('/french');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       setActiveExplore(subject.id);
