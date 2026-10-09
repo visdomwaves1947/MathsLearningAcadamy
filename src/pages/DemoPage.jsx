@@ -1,11 +1,9 @@
 import React from 'react';
 import { 
   Play, 
-  Sparkles, 
-  ArrowLeft,
-  Laptop
+  Laptop,
+  Sparkles
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import IntermediateSubjects from '../components/IntermediateSubjects';
 import HowToUse from '../components/HowToUse';
 
@@ -20,50 +18,68 @@ export default function DemoPage({ onOpenBooking, onOpenVideoDemo, currentUser, 
 
       {/* Hero Section */}
       <section className="relative">
-          <div className="w-full relative group min-h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden">
+          <div className="w-full relative group min-h-[calc(100vh-86px)] flex items-center justify-center overflow-hidden py-12 sm:py-20">
+            {/* Clear Hero Background Image */}
             <img 
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2400&auto=format&fit=crop" 
-              alt="Interactive Learning Dashboard" 
+              src="/image.png" 
+              alt="Hero Background" 
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
             />
-            {/* Dark Overlay for better text readability */}
-            <div className="absolute inset-0 bg-slate-900/60 transition-colors duration-300"></div>
+            {/* Balanced Overlay for Ultra-Crisp Bright Text & Logo Contrast */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/50 transition-colors duration-300"></div>
             
             {/* Content Overlay */}
-            <div className="relative z-10 text-center px-4 py-16 max-w-4xl mx-auto flex flex-col items-center">
-              {/* Live Demo Pill Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold shadow-xs mb-6">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Visdom Waves Live Demo</span>
-                <Sparkles size={14} className="text-indigo-300" />
+            <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto flex flex-col items-center justify-center w-full">
+              
+              {/* Plain Visdom Waves Brand Layout (Logo + Bright Clear Typography, Refined Font Weight) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-7 text-center sm:text-left mb-8 sm:mb-10">
+                {/* Logo Beside */}
+                <img 
+                  src="/Visdomlogo.png" 
+                  alt="Visdom Waves Logo" 
+                  className="h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 w-auto object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.8)] hover:scale-105 transition-transform duration-300 shrink-0"
+                />
+
+                {/* Brand Typography - Bright, Crisp, Refined Weight */}
+                <div className="flex flex-col items-center sm:items-start">
+                  <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-white tracking-tight leading-tight font-sans drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
+                    Visdom Waves
+                  </h1>
+
+                  <h2 className="text-lg sm:text-2xl md:text-3xl font-medium text-cyan-300 tracking-wide mt-1.5 sm:mt-2.5 font-sans drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+                    Innovations Private Limited
+                  </h2>
+
+                  {/* Slogan: Driven by vision */}
+                  <div className="flex items-center gap-3 mt-2 sm:mt-3">
+                    <span className="h-[2px] w-6 sm:w-10 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                    <span className="text-xs sm:text-sm md:text-base font-semibold text-cyan-200 tracking-[0.25em] uppercase font-sans drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                      Driven by vision
+                    </span>
+                    <span className="h-[2px] w-6 sm:w-10 rounded-full bg-cyan-400 shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
+                  </div>
+                </div>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg">
-                State-of-the-Art Platform
-              </h1>
-
-              <p className="text-base sm:text-xl md:text-2xl font-medium text-slate-200 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-md">
-                Experience the interactive learning environment, real-time formula simulations, and smart question practice.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+              {/* Action Buttons & Options */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-5 w-full sm:w-auto">
                 <button
                   onClick={() => onOpenVideoDemo && onOpenVideoDemo()}
-                  className="w-full sm:w-auto px-8 py-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-base sm:text-lg shadow-xl shadow-indigo-600/40 hover:scale-[1.02] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer border border-indigo-500/50"
+                  className="w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-medium text-sm sm:text-base shadow-xl shadow-indigo-950/60 hover:scale-[1.03] active:scale-95 transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer border border-blue-400/40"
                 >
-                  <Play size={20} fill="currentColor" />
+                  <Play size={18} fill="currentColor" />
                   <span>Watch Video Demo</span>
                 </button>
 
                 <button
                   onClick={() => onOpenBooking && onOpenBooking('Demo Session')}
-                  className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 hover:bg-white/20 backdrop-blur-md text-white font-bold text-base sm:text-lg border border-white/30 shadow-lg flex items-center justify-center gap-2.5 transition-all hover:border-white/50 cursor-pointer"
+                  className="w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 rounded-xl bg-white/95 hover:bg-white text-slate-950 font-medium text-sm sm:text-base border border-white/90 shadow-xl shadow-black/40 flex items-center justify-center gap-2.5 transition-all hover:scale-[1.03] active:scale-95 cursor-pointer"
                 >
-                  <Laptop size={20} />
+                  <Laptop size={18} />
                   <span>Book 1-on-1 Live Demo</span>
                 </button>
               </div>
+
             </div>
           </div>
       </section>
