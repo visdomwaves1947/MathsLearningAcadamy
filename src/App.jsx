@@ -14,6 +14,7 @@ import Zoology from './pages/Zoology';
 import Physics from './pages/Physics';
 import Chemistry from './pages/Chemistry';
 import Sanskrit from './pages/Sanskrit';
+import ProfilePage from './pages/ProfilePage';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -52,7 +53,7 @@ export default function App() {
   const location = useLocation();
   const path = location.pathname.toLowerCase();
   
-  const isAuthRoute = ['/signin', '/signup', '/portal'].includes(path);
+  const isAuthRoute = ['/signin', '/signup'].includes(path);
   const authMode = isAuthRoute ? path.substring(1) : 'signin'; 
 
   const [currentUser, setCurrentUser] = useState(() => {
@@ -410,18 +411,22 @@ export default function App() {
               />
             } 
           />
+          {/* Profile Route: Dedicated student profile page */}
           <Route 
-            path="/portal" 
+            path="/profile" 
             element={
-              <DemoPage 
-                onOpenBooking={handleOpenBooking}
-                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+              <ProfilePage 
                 currentUser={currentUser}
+                onLogout={handleLogout}
+                onOpenBooking={handleOpenBooking}
                 onOpenSignIn={handleOpenSignIn}
                 onOpenSignUp={handleOpenSignUp}
               />
             } 
           />
+          <Route path="/Profile" element={<Navigate to="/profile" replace />} />
+          <Route path="/portal" element={<Navigate to="/profile" replace />} />
+          <Route path="/Portal" element={<Navigate to="/profile" replace />} />
 
           {/* Backward compatibility redirects for /mymarks/* */}
           <Route path="/mymarks/maths" element={<Navigate to="/maths" replace />} />
@@ -472,7 +477,6 @@ export default function App() {
         initialMode={authMode}
         currentUser={currentUser}
         onLoginSuccess={handleLoginSuccess}
-        onLogout={handleLogout}
       />
 
       <VideoDemoModal 

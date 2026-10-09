@@ -20,7 +20,6 @@ import {
   BookOpen,
   Clock,
   Award,
-  LogOut,
   AlertCircle,
   LogIn,
   UserPlus,
@@ -44,7 +43,6 @@ export default function AuthModal({
   initialMode = "signin",
   currentUser = null,
   onLoginSuccess,
-  onLogout,
 }) {
   const [mode, setMode] = useState(initialMode); // 'signin' | 'signup' | 'portal'
   const [step, setStep] = useState(1);
@@ -1663,78 +1661,7 @@ export default function AuthModal({
                   }}
                   className="w-full py-3.5 px-6 rounded-2xl bg-sky-500 hover:bg-sky-400 text-white font-extrabold text-sm cursor-pointer shadow-lg shadow-sky-500/30 active:scale-98 transition-all"
                 >
-                  Enter Classroom Portal →
-                </button>
-              </div>
-            )}
-
-            {/* ======================================================== */}
-            {/* LOGGED IN PORTAL SNAPSHOT */}
-            {/* ======================================================== */}
-            {mode === "portal" && (
-              <div className="animate-fadeIn space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                  <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center">
-                      {currentUser?.name
-                        ? currentUser.name.substring(0, 2).toUpperCase()
-                        : "JS"}
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-base">
-                        {currentUser?.name || formData.fullName || "Student"}
-                      </h4>
-                      <span className="text-emerald-400 text-xs font-semibold">
-                        ● Active Student •{" "}
-                        {currentUser?.board || formData.board}
-                      </span>
-                    </div>
-                  </div>
-                  {onLogout && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        onLogout();
-                        setMode("signin");
-                      }}
-                      className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-white/10 cursor-pointer transition-colors"
-                      title="Sign Out"
-                    >
-                      <LogOut size={18} />
-                    </button>
-                  )}
-                </div>
-
-                <div className="space-y-2 text-xs">
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-slate-200">
-                      <Clock size={16} className="text-sky-400" />
-                      <span>
-                        Next Live Class: Math 1A (Calculus & Functions)
-                      </span>
-                    </div>
-                    <span className="bg-sky-500 text-white font-bold px-2.5 py-1 rounded-md text-[11px]">
-                      Join in 35m
-                    </span>
-                  </div>
-
-                  <div className="p-3 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-slate-200">
-                      <BookOpen size={16} className="text-cyan-400" />
-                      <span>Intermediate Math Practice Problem Set #4</span>
-                    </div>
-                    <span className="text-emerald-400 font-bold font-mono text-sm">
-                      A+ (98%)
-                    </span>
-                  </div>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs cursor-pointer transition-all"
-                >
-                  Close & Return to Website
+                  View My Student Profile →
                 </button>
               </div>
             )}

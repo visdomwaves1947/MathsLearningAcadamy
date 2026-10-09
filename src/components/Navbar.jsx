@@ -15,9 +15,9 @@ import {
   GraduationCap,
   CheckCircle,
   PhoneCall,
-  LogOut,
   Layers,
   Award,
+  ChevronRight,
 } from "lucide-react";
 import { VisdomBrand } from "./VisdomBrand";
 
@@ -31,7 +31,6 @@ export default function Navbar({
   toggleTheme,
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileDropdowns, setMobileDropdowns] = useState({});
@@ -294,55 +293,44 @@ export default function Navbar({
                 </div>
               </button>
 
-              {/* User Account / Unified Auth Action */}
+              {/* User Account / Professional Profile Navigation Action */}
               {currentUser ? (
-                <div className="relative">
-                  <button
-                    onClick={() => setUserDropdownOpen(!userDropdownOpen)}
-                    className="flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-tr from-cyan-600 to-sky-500 text-white text-xs font-extrabold shadow-sm hover:scale-105 transition-all focus:outline-none cursor-pointer border border-white dark:border-slate-800"
-                    title={currentUser.name || "User Profile"}
-                  >
+                <button
+                  onClick={() => navigate("/profile")}
+                  className="flex items-center gap-2.5 pl-1.5 pr-3 py-1.5 rounded-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-2xs hover:shadow-xs transition-all duration-200 cursor-pointer group shrink-0"
+                  title="View Student Profile"
+                  aria-label="View Student Profile"
+                >
+                  {/* Clean Monogram Avatar with Status Indicator */}
+                  <div className="relative shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-tr from-blue-700 via-indigo-600 to-sky-500 text-white text-xs font-bold shadow-2xs ring-1 ring-white dark:ring-slate-800">
                     {currentUser.name
-                      ? currentUser.name.slice(0, 2).toUpperCase()
+                      ? currentUser.name
+                          .trim()
+                          .split(" ")
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()
                       : "ST"}
-                  </button>
+                    <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1.5 ring-white dark:ring-slate-900"></span>
+                  </div>
 
-                  {userDropdownOpen && (
-                    <div className="absolute right-0 mt-2.5 w-60 rounded-2xl bg-white dark:bg-slate-950 border-2 border-black/80 dark:border-cyan-800 shadow-2xl py-3 z-50 text-slate-950 dark:text-white animate-in fade-in duration-150">
-                      <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
-                        <p className="text-sm font-bold text-slate-950 dark:text-white truncate">
-                          {currentUser.name}
-                        </p>
-                        <p className="text-[11px] text-slate-600 dark:text-slate-400 truncate">
-                          {currentUser.email}
-                        </p>
-                        <span className="inline-block mt-1 text-[9px] font-bold text-cyan-800 dark:text-cyan-300 bg-cyan-100 dark:bg-cyan-900/50 px-2 py-0.5 rounded uppercase">
-                          {currentUser.role || "Math Scholar"}
-                        </span>
-                      </div>
-                      <div className="py-1">
-                        <button
-                          onClick={() => {
-                            setUserDropdownOpen(false);
-                            handleSignInClick();
-                          }}
-                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-800 dark:hover:text-cyan-300 transition-colors cursor-pointer"
-                        >
-                          My Student Portal
-                        </button>
-                        <button
-                          onClick={() => {
-                            setUserDropdownOpen(false);
-                            onOpenBooking();
-                          }}
-                          className="w-full text-left px-4 py-2 text-xs font-bold hover:bg-cyan-50 dark:hover:bg-slate-900 hover:text-cyan-800 dark:hover:text-cyan-300 transition-colors cursor-pointer"
-                        >
-                          Book 1-on-1 Mentorship
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                  {/* Clean Professional Typography */}
+                  <div className="flex flex-col text-left leading-tight hidden sm:flex max-w-[150px] md:max-w-[190px]">
+                    <span className="text-[12.5px] font-semibold text-slate-900 dark:text-slate-100 truncate tracking-tight group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors">
+                      {currentUser.name || "Student"}
+                    </span>
+                    <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 truncate">
+                      {currentUser.role || "Student Scholar"}
+                    </span>
+                  </div>
+
+                  {/* Subtle navigation arrow */}
+                  <ChevronRight
+                    size={13}
+                    className="text-slate-400 dark:text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300 group-hover:translate-x-0.5 transition-all hidden sm:inline shrink-0"
+                  />
+                </button>
               ) : (
                 /* Clean Simple Sign In / Sign Up Button (Icon-only on mobile) */
                 <button
@@ -467,11 +455,33 @@ export default function Navbar({
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  handleSignInClick();
+                  navigate("/profile");
                 }}
-                className="w-full py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs flex items-center justify-center transition-colors shadow-xs"
+                className="w-full py-2.5 px-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white font-medium text-xs flex items-center justify-between transition-colors shadow-2xs"
               >
-                Open Student Portal ({currentUser.name})
+                <div className="flex items-center gap-2.5">
+                  <div className="relative flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-tr from-blue-700 via-indigo-600 to-sky-500 text-white text-xs font-bold shadow-xs">
+                    {currentUser.name
+                      ? currentUser.name
+                          .trim()
+                          .split(" ")
+                          .map((n) => n[0])
+                          .slice(0, 2)
+                          .join("")
+                          .toUpperCase()
+                      : "ST"}
+                    <span className="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1.5 ring-white dark:ring-slate-900"></span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-semibold text-slate-900 dark:text-white truncate max-w-[200px]">
+                      {currentUser.name}
+                    </div>
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400">
+                      {currentUser.role || "Student Scholar"} • View Profile
+                    </div>
+                  </div>
+                </div>
+                <ChevronRight size={15} className="text-slate-400" />
               </button>
             )}
           </div>
