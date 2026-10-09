@@ -14,6 +14,10 @@ import Zoology from './pages/Zoology';
 import Physics from './pages/Physics';
 import Chemistry from './pages/Chemistry';
 import Sanskrit from './pages/Sanskrit';
+import Telugu from './pages/Telugu';
+import Hindi from './pages/Hindi';
+import Urdu from './pages/Urdu';
+import French from './pages/French';
 import ProfilePage from './pages/ProfilePage';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
@@ -379,6 +383,134 @@ export default function App() {
             path="/san" 
             element={
               <Sanskrit 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Telugu Page */}
+          <Route 
+            path="/telugu" 
+            element={
+              <Telugu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Telugu" 
+            element={
+              <Telugu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/tel" 
+            element={
+              <Telugu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Hindi Page */}
+          <Route 
+            path="/hindi" 
+            element={
+              <Hindi 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Hindi" 
+            element={
+              <Hindi 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/hin" 
+            element={
+              <Hindi 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* Urdu Page */}
+          <Route 
+            path="/urdu" 
+            element={
+              <Urdu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/Urdu" 
+            element={
+              <Urdu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/urd" 
+            element={
+              <Urdu 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+
+          {/* French Page */}
+          <Route 
+            path="/french" 
+            element={
+              <French 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/French" 
+            element={
+              <French 
+                onOpenBooking={handleOpenBooking}
+                onOpenVideoDemo={() => setVideoDemoOpen(true)}
+                onSelectRoadmap={handleSelectRoadmap}
+              />
+            } 
+          />
+          <Route 
+            path="/fre" 
+            element={
+              <French 
                 onOpenBooking={handleOpenBooking}
                 onOpenVideoDemo={() => setVideoDemoOpen(true)}
                 onSelectRoadmap={handleSelectRoadmap}
