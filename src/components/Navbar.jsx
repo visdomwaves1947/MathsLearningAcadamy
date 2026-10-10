@@ -118,7 +118,7 @@ export default function Navbar({
     },
     {
       name: "About Us",
-      href: "#about",
+      href: "/aboutus",
     },
     {
       name: "Languages",
@@ -128,7 +128,7 @@ export default function Navbar({
         { name: "Hindi (हिन्दी)", desc: "हिन्दी में सम्पूर्ण पाठ और अभ्यास", href: "/demo?lang=hi" },
         { name: "Tamil (தமிழ்)", desc: "தமிழில் முழுமையான விளக்கம்", href: "/demo?lang=ta" },
         { name: "Kannada (ಕನ್ನಡ)", desc: "ಕನ್ನಡದಲ್ಲಿ ಪರಿಪೂರ್ಣ ಕಲಿಕೆ", href: "/demo?lang=kn" },
-        { name: "Malayalam (മലയാളം)", desc: "മലയാളത്തിൽ ലളിതമായ ക്ലാസുകൾ", href: "/demo?lang=ml" },
+        { name: "Malayalam (മലയാളം)", desc: "മലയാളത്തിൽ ലളിതമായ ക്ലാసുകൾ", href: "/demo?lang=ml" },
         { name: "Marathi (मराठी)", desc: "मराठीमध्ये सोपे शिक्षण", href: "/demo?lang=mr" },
         { name: "Bengali (বাংলা)", desc: "বাংলা ভাষায় সম্পূর্ণ প্রস্তুতি", href: "/demo?lang=bn" },
         { name: "Gujarati (ગુજરાતી)", desc: "ગુજરાતીમાં ઉત્તમ માર્ગદર્શન", href: "/demo?lang=gu" },
@@ -142,7 +142,7 @@ export default function Navbar({
   const isLinkActive = (href) => {
     const p = location.pathname.toLowerCase();
     if (href === "/demo" || href === "/") return p === "/demo" || p === "/";
-    if (href.includes("about")) return location.hash === "#about";
+    if (href.includes("about")) return p === "/aboutus" || p === "/about" || p === "/about-us";
     return false;
   };
 

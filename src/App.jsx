@@ -19,6 +19,7 @@ import Hindi from './pages/Hindi';
 import Urdu from './pages/Urdu';
 import French from './pages/French';
 import ProfilePage from './pages/ProfilePage';
+import AboutUsPage from './pages/AboutUs';
 
 // Automatic scroll-to-top on route changes unless an anchor hash exists
 function ScrollToTop() {
@@ -26,6 +27,11 @@ function ScrollToTop() {
   useEffect(() => {
     if (!hash) {
       window.scrollTo(0, 0);
+    } else {
+      const el = document.querySelector(hash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+      }
     }
   }, [pathname, hash]);
   return null;
@@ -584,6 +590,13 @@ export default function App() {
           <Route path="/mymarks/Sanskrit" element={<Navigate to="/sanskrit" replace />} />
           <Route path="/mymarks/san" element={<Navigate to="/sanskrit" replace />} />
           <Route path="/mymarks/*" element={<Navigate to="/demo" replace />} />
+
+          {/* Standalone About Us Page Routes */}
+          <Route path="/aboutus" element={<AboutUsPage />} />
+          <Route path="/AboutUs" element={<AboutUsPage />} />
+          <Route path="/about" element={<AboutUsPage />} />
+          <Route path="/About" element={<AboutUsPage />} />
+          <Route path="/about-us" element={<AboutUsPage />} />
 
           {/* Root & Fallback: Show demo first instead of maths */}
           <Route path="/" element={<Navigate to="/demo" replace />} />

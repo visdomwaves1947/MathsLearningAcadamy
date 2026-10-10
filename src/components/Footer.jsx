@@ -260,7 +260,7 @@ export default function Footer({ onOpenBooking }) {
 
           {/* Quick Legal Links */}
           <div className="flex gap-3 text-xs text-slate-900 dark:text-cyan-100 md:flex-1 justify-center md:justify-end font-semibold">
-            <a href="#methodology" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
+            <a href="/aboutus" className="hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors">
               About Us
             </a>
             <span>•</span>
