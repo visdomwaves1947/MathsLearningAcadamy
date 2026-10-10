@@ -1655,6 +1655,7 @@ export default function AuthModal({
                 </p>
                 <button
                   type="button"
+                  onClick={() => {
                     setRegSuccess(false);
                   }}
                   className="w-full py-3.5 px-6 rounded-2xl bg-sky-500 hover:bg-sky-400 text-white font-extrabold text-sm cursor-pointer shadow-lg shadow-sky-500/30 active:scale-98 transition-all"

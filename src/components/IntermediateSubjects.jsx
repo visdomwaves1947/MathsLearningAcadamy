@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { 
-  BookOpen, 
-  ArrowRight, 
-  Info, 
-  ChevronLeft, 
-  Lock, 
-  LogIn, 
-  X, 
+import React, { useState } from "react";
+import {
+  BookOpen,
+  ArrowRight,
+  Info,
+  ChevronLeft,
+  Lock,
+  LogIn,
+  X,
   Sparkles,
-  CheckCircle2
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+  CheckCircle2,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSignIn, onOpenSignUp }) {
+export default function IntermediateSubjects({
+  onEnroll,
+  currentUser,
+  onOpenSignIn,
+  onOpenSignUp,
+}) {
   const [activeEnroll, setActiveEnroll] = useState(null);
   const [activeExplore, setActiveExplore] = useState(null);
   const [lockedSubject, setLockedSubject] = useState(null);
@@ -20,29 +25,123 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
   // Determine if the user is authenticated from props or saved local storage
   const isAuthenticated = Boolean(
-    currentUser || 
+    currentUser ||
     (() => {
       try {
-        const stored = localStorage.getItem('mla_user');
+        const stored = localStorage.getItem("mla_user");
         return stored ? JSON.parse(stored) : null;
       } catch {
         return null;
       }
-    })()
+    })(),
   );
 
   const subjects = [
-    { id: 'maths', name: 'Mathematics', category: 'MPC', image: 'https://i.pinimg.com/736x/7e/ff/20/7eff2083afbca2a2e99a1525fcc40ce6.jpg', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', desc: 'Master algebra, calculus, geometry, and trigonometry. Interactive simulations help visualize complex functions. Essential for JEE and EAMCET preparation.' },
-    { id: 'phy', name: 'Physics', category: 'MPC / BiPC', image: 'https://i.pinimg.com/736x/59/63/26/596326ea62c6f1c23ff12882c8c00e7e.jpg', color: 'bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400', desc: 'Understand mechanics, thermodynamics, and electromagnetism with practical real-world applications and numerical problem-solving techniques.' },
-    { id: 'chem', name: 'Chemistry', category: 'MPC / BiPC', image: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=600&auto=format&fit=crop', color: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400', desc: 'Explore organic, inorganic, and physical chemistry. Memorize reactions easily with our curated cheat sheets and molecular models.' },
-    { id: 'bot', name: 'Botany', category: 'BiPC', image: 'https://i.pinimg.com/736x/73/a6/34/73a634a96be17ca114e7ac1375713492.jpg', color: 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400', desc: 'Study plant biology, anatomy, and physiology in detail. Our diagrams and notes are perfectly tailored for high NEET and Board scores.' },
-    { id: 'zoo', name: 'Zoology', category: 'BiPC', image: 'https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=600&auto=format&fit=crop', color: 'bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400', desc: 'Dive into animal sciences, human anatomy, genetics, and evolution. Expert guidance for medical entrance exams.' },
-    { id: 'eng', name: 'English', category: 'Languages', image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop', color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', desc: 'Improve grammar, vocabulary, and literature comprehension. Learn how to structure essays perfectly for maximum board exam marks.' },
-    { id: 'san', name: 'Sanskrit', category: 'Languages', image: 'https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop', color: 'bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400', desc: 'Learn ancient texts, fundamental grammar rules, and translation strategies to score 98+ marks easily in your language board exams.' },
-    { id: 'tel', name: 'Telugu', category: 'Languages', image: 'https://i.pinimg.com/736x/df/b6/9a/dfb69a75eb75eeee5e54e565d8f99909.jpg', color: 'bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400', desc: 'Master the Telugu language, literature, and grammar to achieve excellence in your board exams.' },
-    { id: 'hin', name: 'Hindi', category: 'Languages', image: 'https://i.pinimg.com/736x/73/aa/c5/73aac5fba4a5c2fb42aacb50b88f42bd.jpg', color: 'bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400', desc: 'Enhance your Hindi reading, writing, and comprehension skills for top scores in language exams.' },
-    { id: 'urd', name: 'Urdu', category: 'Languages', image: 'https://i.pinimg.com/736x/8b/3d/42/8b3d4232e8785549760496f8dc06ba02.jpg', color: 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400', desc: 'Dive into Urdu poetry, prose, and grammar with expert guidance tailored for board exam success.' },
-    { id: 'fre', name: 'French', category: 'Languages', image: 'https://i.pinimg.com/736x/13/59/a9/1359a95cbdb26f853b5e23cec0196e36.jpg', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400', desc: 'Learn French vocabulary, grammar, and conjugation rules easily for perfect marks in your language subjects.' }
+    {
+      id: "maths",
+      name: "Mathematics",
+      category: "MPC",
+      image:
+        "https://i.pinimg.com/736x/7e/ff/20/7eff2083afbca2a2e99a1525fcc40ce6.jpg",
+      color: "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+      desc: "Master algebra, calculus, geometry, and trigonometry. Interactive simulations help visualize complex functions. Essential for JEE and EAMCET preparation.",
+    },
+    {
+      id: "phy",
+      name: "Physics",
+      category: "MPC / BiPC",
+      image:
+        "https://i.pinimg.com/736x/59/63/26/596326ea62c6f1c23ff12882c8c00e7e.jpg",
+      color:
+        "bg-purple-50 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400",
+      desc: "Understand mechanics, thermodynamics, and electromagnetism with practical real-world applications and numerical problem-solving techniques.",
+    },
+    {
+      id: "chem",
+      name: "Chemistry",
+      category: "MPC / BiPC",
+      image:
+        "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=600&auto=format&fit=crop",
+      color:
+        "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
+      desc: "Explore organic, inorganic, and physical chemistry. Memorize reactions easily with our curated cheat sheets and molecular models.",
+    },
+    {
+      id: "bot",
+      name: "Botany",
+      category: "BiPC",
+      image:
+        "https://i.pinimg.com/736x/73/a6/34/73a634a96be17ca114e7ac1375713492.jpg",
+      color:
+        "bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400",
+      desc: "Study plant biology, anatomy, and physiology in detail. Our diagrams and notes are perfectly tailored for high NEET and Board scores.",
+    },
+    {
+      id: "zoo",
+      name: "Zoology",
+      category: "BiPC",
+      image:
+        "https://images.unsplash.com/photo-1555169062-013468b47731?q=80&w=600&auto=format&fit=crop",
+      color: "bg-teal-50 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400",
+      desc: "Dive into animal sciences, human anatomy, genetics, and evolution. Expert guidance for medical entrance exams.",
+    },
+    {
+      id: "eng",
+      name: "English",
+      category: "Languages",
+      image:
+        "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=600&auto=format&fit=crop",
+      color:
+        "bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
+      desc: "Improve grammar, vocabulary, and literature comprehension. Learn how to structure essays perfectly for maximum board exam marks.",
+    },
+    {
+      id: "san",
+      name: "Sanskrit",
+      category: "Languages",
+      image:
+        "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?q=80&w=600&auto=format&fit=crop",
+      color: "bg-rose-50 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400",
+      desc: "Learn ancient texts, fundamental grammar rules, and translation strategies to score 98+ marks easily in your language board exams.",
+    },
+    {
+      id: "tel",
+      name: "Telugu",
+      category: "Languages",
+      image:
+        "https://i.pinimg.com/736x/df/b6/9a/dfb69a75eb75eeee5e54e565d8f99909.jpg",
+      color:
+        "bg-orange-50 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400",
+      desc: "Master the Telugu language, literature, and grammar to achieve excellence in your board exams.",
+    },
+    {
+      id: "hin",
+      name: "Hindi",
+      category: "Languages",
+      image:
+        "https://i.pinimg.com/736x/73/aa/c5/73aac5fba4a5c2fb42aacb50b88f42bd.jpg",
+      color: "bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400",
+      desc: "Enhance your Hindi reading, writing, and comprehension skills for top scores in language exams.",
+    },
+    {
+      id: "urd",
+      name: "Urdu",
+      category: "Languages",
+      image:
+        "https://i.pinimg.com/736x/8b/3d/42/8b3d4232e8785549760496f8dc06ba02.jpg",
+      color:
+        "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400",
+      desc: "Dive into Urdu poetry, prose, and grammar with expert guidance tailored for board exam success.",
+    },
+    {
+      id: "fre",
+      name: "French",
+      category: "Languages",
+      image:
+        "https://i.pinimg.com/736x/13/59/a9/1359a95cbdb26f853b5e23cec0196e36.jpg",
+      color: "bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400",
+      desc: "Learn French vocabulary, grammar, and conjugation rules easily for perfect marks in your language subjects.",
+    },
   ];
 
   const handleSubjectClick = (subject) => {
@@ -51,39 +150,39 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       return;
     }
 
-    if (subject.id === 'maths') {
-      navigate('/maths');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'eng') {
-      navigate('/english');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'bot') {
-      navigate('/botany');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'zoo') {
-      navigate('/zoology');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'phy') {
-      navigate('/physics');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'chem') {
-      navigate('/chemistry');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'san') {
-      navigate('/sanskrit');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'tel') {
-      navigate('/telugu');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'hin') {
-      navigate('/hindi');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'urd') {
-      navigate('/urdu');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'fre') {
-      navigate('/french');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (subject.id === "maths") {
+      navigate("/maths");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "eng") {
+      navigate("/english");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "bot") {
+      navigate("/botany");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "zoo") {
+      navigate("/zoology");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "phy") {
+      navigate("/physics");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "chem") {
+      navigate("/chemistry");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "san") {
+      navigate("/sanskrit");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "tel") {
+      navigate("/telugu");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "hin") {
+      navigate("/hindi");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "urd") {
+      navigate("/urdu");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "fre") {
+      navigate("/french");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setActiveExplore(activeExplore === subject.id ? null : subject.id);
     }
@@ -96,39 +195,39 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
       return;
     }
 
-    if (subject.id === 'maths') {
-      navigate('/maths');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'eng') {
-      navigate('/english');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'bot') {
-      navigate('/botany');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'zoo') {
-      navigate('/zoology');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'phy') {
-      navigate('/physics');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'chem') {
-      navigate('/chemistry');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'san') {
-      navigate('/sanskrit');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'tel') {
-      navigate('/telugu');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'hin') {
-      navigate('/hindi');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'urd') {
-      navigate('/urdu');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (subject.id === 'fre') {
-      navigate('/french');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (subject.id === "maths") {
+      navigate("/maths");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "eng") {
+      navigate("/english");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "bot") {
+      navigate("/botany");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "zoo") {
+      navigate("/zoology");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "phy") {
+      navigate("/physics");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "chem") {
+      navigate("/chemistry");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "san") {
+      navigate("/sanskrit");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "tel") {
+      navigate("/telugu");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "hin") {
+      navigate("/hindi");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "urd") {
+      navigate("/urdu");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else if (subject.id === "fre") {
+      navigate("/french");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setActiveExplore(subject.id);
     }
@@ -148,7 +247,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     if (onOpenSignIn) {
       onOpenSignIn();
     } else {
-      navigate('/signin');
+      navigate("/signin");
     }
   };
 
@@ -157,7 +256,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     if (onOpenSignUp) {
       onOpenSignUp();
     } else {
-      navigate('/signup');
+      navigate("/signup");
     }
   };
 
@@ -166,21 +265,21 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
     const isExploring = activeExplore === subject.id;
 
     return (
-      <div 
-        key={subject.id} 
+      <div
+        key={subject.id}
         className={`flex flex-col bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border ${
-          !isAuthenticated 
-            ? 'border-slate-200/80 dark:border-slate-800 hover:border-amber-500/60 dark:hover:border-amber-500/60 hover:shadow-amber-500/10' 
-            : 'border-slate-100 dark:border-slate-800 hover:border-cyan-500/60 dark:hover:border-cyan-500/60 hover:shadow-cyan-500/10'
+          !isAuthenticated
+            ? "border-slate-200/80 dark:border-slate-800 hover:border-amber-500/60 dark:hover:border-amber-500/60 hover:shadow-amber-500/10"
+            : "border-slate-100 dark:border-slate-800 hover:border-cyan-500/60 dark:hover:border-cyan-500/60 hover:shadow-cyan-500/10"
         } h-[390px] group hover:-translate-y-1.5 relative cursor-pointer`}
         onClick={() => handleSubjectClick(subject)}
       >
         {/* Card Thumbnail */}
         <div className="h-44 w-full overflow-hidden relative shrink-0">
-          <img 
-            src={subject.image} 
-            alt={subject.name} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+          <img
+            src={subject.image}
+            alt={subject.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none"></div>
 
@@ -202,7 +301,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
             </div>
           )}
         </div>
-        
+
         <div className="p-5 flex flex-col flex-1 relative overflow-hidden">
           <div className="flex items-center justify-between mb-1.5">
             <span className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">
@@ -220,12 +319,14 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
           </h4>
 
           {/* Default Card View */}
-          <div className={`flex flex-col mt-auto transition-opacity duration-300 ${isExploring || isEnrolling ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+          <div
+            className={`flex flex-col mt-auto transition-opacity duration-300 ${isExploring || isEnrolling ? "opacity-0 pointer-events-none" : "opacity-100"}`}
+          >
             <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 leading-relaxed">
               {subject.desc}
             </p>
             <div className="flex gap-2.5">
-              <button 
+              <button
                 type="button"
                 onClick={(e) => handleExploreClick(e, subject)}
                 className="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-sm font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
@@ -242,13 +343,13 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
                   </>
                 )}
               </button>
-              <button 
+              <button
                 type="button"
                 onClick={(e) => handleEnrollClick(e, subject)}
                 className={`flex-1 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm cursor-pointer ${
-                  !isAuthenticated 
-                    ? 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold shadow-amber-500/20' 
-                    : 'bg-slate-900 hover:bg-cyan-600 dark:bg-cyan-700 dark:hover:bg-cyan-500 text-white'
+                  !isAuthenticated
+                    ? "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold shadow-amber-500/20"
+                    : "bg-slate-900 hover:bg-cyan-600 dark:bg-cyan-700 dark:hover:bg-cyan-500 text-white"
                 }`}
               >
                 {!isAuthenticated ? (
@@ -268,12 +369,16 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
           {/* Explore View (when authenticated) */}
           {isAuthenticated && (
-            <div className={`absolute inset-0 bg-white dark:bg-slate-900 p-5 flex flex-col z-10 transition-transform duration-300 ${isExploring ? 'translate-y-0' : 'translate-y-full'}`}>
-              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{subject.name} Overview</h4>
+            <div
+              className={`absolute inset-0 bg-white dark:bg-slate-900 p-5 flex flex-col z-10 transition-transform duration-300 ${isExploring ? "translate-y-0" : "translate-y-full"}`}
+            >
+              <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
+                {subject.name} Overview
+              </h4>
               <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed overflow-y-auto pr-1 mb-4 flex-1 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-700">
                 {subject.desc}
               </p>
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveExplore(null);
@@ -287,10 +392,14 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
           {/* Enroll View (when authenticated) */}
           {isAuthenticated && (
-            <div className={`absolute inset-0 bg-white dark:bg-slate-900 p-5 flex flex-col z-10 transition-transform duration-300 ${isEnrolling ? 'translate-y-0' : 'translate-y-full'}`}>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4 text-center">Select Year for {subject.name}</h4>
+            <div
+              className={`absolute inset-0 bg-white dark:bg-slate-900 p-5 flex flex-col z-10 transition-transform duration-300 ${isEnrolling ? "translate-y-0" : "translate-y-full"}`}
+            >
+              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-4 text-center">
+                Select Year for {subject.name}
+              </h4>
               <div className="flex flex-col gap-2 flex-1 justify-center">
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setActiveEnroll(null);
@@ -300,7 +409,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
                 >
                   1st Year (Junior)
                 </button>
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setActiveEnroll(null);
@@ -311,7 +420,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
                   2nd Year (Senior)
                 </button>
               </div>
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveEnroll(null);
@@ -328,9 +437,11 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
   };
 
   return (
-    <section className="py-16 sm:py-24 bg-slate-50 dark:bg-[#0B0F19] border-t border-slate-200 dark:border-slate-800 relative" id="courses">
+    <section
+      className="py-16 sm:py-24 bg-slate-50 dark:bg-[#0B0F19] border-t border-slate-200 dark:border-slate-800 relative"
+      id="courses"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           {!isAuthenticated ? (
@@ -349,7 +460,9 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
             Intermediate Subjects
           </h2>
           <p className="text-slate-500 dark:text-slate-400 text-base sm:text-xl font-medium">
-            Complete subject-wise mastery for Intermediate students. Explore our subjects and select your year to enroll and boost your board exam scores.
+            Complete subject-wise mastery for Intermediate students. Explore our
+            subjects and select your year to enroll and boost your board exam
+            scores.
           </p>
         </div>
 
@@ -365,7 +478,8 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
                   Intermediate Subject Trials are Locked
                 </p>
                 <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm mt-0.5">
-                  Sign in to unlock interactive demo trials and video lessons for any subject.
+                  Sign in to unlock interactive demo trials and video lessons
+                  for any subject.
                 </p>
               </div>
             </div>
@@ -379,22 +493,52 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
           </div>
         )}
 
-        {/* Subjects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-          {subjects.map(renderSubjectCard)}
+        {/* Core Sciences Section */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-10 w-2.5 bg-gradient-to-b from-cyan-400 to-blue-600 rounded-full shadow-sm"></div>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              Core Groups{" "}
+              <span className="text-slate-400 dark:text-slate-500 font-bold text-lg sm:text-xl ml-2">
+                (MPC & BiPC)
+              </span>
+            </h3>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-slate-800 ml-4"></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            {subjects
+              .filter((s) => s.category !== "Languages")
+              .map(renderSubjectCard)}
+          </div>
+        </div>
+
+        {/* Languages Section */}
+        <div className="mb-10">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="h-10 w-2.5 bg-gradient-to-b from-orange-400 to-rose-600 rounded-full shadow-sm"></div>
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              Languages
+            </h3>
+            <div className="hidden sm:block h-px flex-1 bg-gradient-to-r from-slate-200 to-transparent dark:from-slate-800 ml-4"></div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+            {subjects
+              .filter((s) => s.category === "Languages")
+              .map(renderSubjectCard)}
+          </div>
         </div>
       </div>
 
       {/* Ultra-Premium Animated Lock Modal */}
       {lockedSubject && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-xl animate-fadeIn"
           onClick={() => setLockedSubject(null)}
         >
           {/* Ambient Glowing Background Orbs */}
           <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-tr from-amber-500/20 via-orange-500/15 to-indigo-500/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
 
-          <div 
+          <div
             className="relative w-full max-w-lg bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-[0_25px_70px_rgba(0,0,0,0.35)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.7)] border border-slate-200/90 dark:border-slate-800 text-center transform transition-all animate-scaleUp overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
@@ -402,7 +546,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-amber-400 via-orange-500 to-indigo-600"></div>
 
             {/* Close Button */}
-            <button 
+            <button
               onClick={() => setLockedSubject(null)}
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-400 hover:text-slate-700 dark:hover:text-white flex items-center justify-center transition-all duration-200 hover:rotate-90 cursor-pointer shadow-xs"
               aria-label="Close modal"
@@ -414,7 +558,7 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
             <div className="relative mx-auto w-20 h-20 mb-5 flex items-center justify-center">
               {/* Outer pulsing glow ring */}
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-400 to-orange-500 opacity-30 blur-md animate-pulse"></div>
-              
+
               {/* Spinning dashed ring effect */}
               <div className="absolute -inset-1 rounded-3xl border border-amber-500/30 border-dashed animate-[spin_12s_linear_infinite]"></div>
 
@@ -445,15 +589,26 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
 
             {/* Targeted User-Requested Message */}
             <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed mb-5 max-w-md mx-auto">
-              Please <button onClick={handleGoToSignIn} className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer">sign in</button> to access the demo trial for <span className="font-extrabold text-slate-900 dark:text-white underline decoration-amber-500 decoration-2 underline-offset-4">{lockedSubject.name}</span>.
+              Please{" "}
+              <button
+                onClick={handleGoToSignIn}
+                className="font-bold text-indigo-600 dark:text-indigo-400 hover:underline cursor-pointer"
+              >
+                sign in
+              </button>{" "}
+              to access the demo trial for{" "}
+              <span className="font-extrabold text-slate-900 dark:text-white underline decoration-amber-500 decoration-2 underline-offset-4">
+                {lockedSubject.name}
+              </span>
+              .
             </p>
 
             {/* Subject Preview & Feature Perks Box */}
             <div className="bg-slate-50/90 dark:bg-slate-800/60 rounded-2xl p-4 mb-6 text-left border border-slate-200/80 dark:border-slate-700/60 shadow-xs">
               <div className="flex items-center gap-3.5 mb-3.5 pb-3 border-b border-slate-200/70 dark:border-slate-700/50">
-                <img 
-                  src={lockedSubject.image} 
-                  alt={lockedSubject.name} 
+                <img
+                  src={lockedSubject.image}
+                  alt={lockedSubject.name}
                   className="w-14 h-14 rounded-xl object-cover shrink-0 ring-2 ring-white dark:ring-slate-700 shadow-md"
                 />
                 <div className="min-w-0">
@@ -469,16 +624,29 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
               {/* Perks Checklist */}
               <div className="space-y-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
-                  <span>Full Chapter Interactive Lessons & Video Concept Maps</span>
+                  <CheckCircle2
+                    size={14}
+                    className="text-emerald-500 shrink-0"
+                  />
+                  <span>
+                    Full Chapter Interactive Lessons & Video Concept Maps
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+                  <CheckCircle2
+                    size={14}
+                    className="text-emerald-500 shrink-0"
+                  />
                   <span>Live Formula Simulations & Solved Board Examples</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
-                  <span>Timed Mock Question Sets with Instant Score Feedback</span>
+                  <CheckCircle2
+                    size={14}
+                    className="text-emerald-500 shrink-0"
+                  />
+                  <span>
+                    Timed Mock Question Sets with Instant Score Feedback
+                  </span>
                 </div>
               </div>
             </div>
@@ -491,7 +659,10 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
               >
                 {/* Continuous Shimmer Light Sweep */}
                 <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer pointer-events-none"></span>
-                <LogIn size={19} className="transition-transform group-hover:translate-x-1" />
+                <LogIn
+                  size={19}
+                  className="transition-transform group-hover:translate-x-1"
+                />
                 <span>Sign In to Access Demo</span>
               </button>
 
@@ -500,14 +671,19 @@ export default function IntermediateSubjects({ onEnroll, currentUser, onOpenSign
                 className="w-full py-3.5 px-6 rounded-2xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-200 font-bold text-sm transition-all duration-200 cursor-pointer border border-slate-200 dark:border-slate-700/60 flex items-center justify-center gap-2 hover:border-slate-300 dark:hover:border-slate-600 group"
               >
                 <span>Don't have an account? Sign Up Free</span>
-                <ArrowRight size={16} className="text-slate-400 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all" />
+                <ArrowRight
+                  size={16}
+                  className="text-slate-400 group-hover:text-indigo-500 group-hover:translate-x-1 transition-all"
+                />
               </button>
             </div>
 
             {/* Instant Access Note */}
             <p className="mt-4 text-[11px] font-medium text-slate-400 dark:text-slate-500 flex items-center justify-center gap-1.5">
               <Sparkles size={12} className="text-amber-500" />
-              <span>Instant activation &bull; Free demo trial across all subjects</span>
+              <span>
+                Instant activation &bull; Free demo trial across all subjects
+              </span>
             </p>
           </div>
         </div>
