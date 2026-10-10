@@ -11,8 +11,10 @@ import {
   ChevronRight, 
   ArrowRight,
   Tv,
-  Tag
+  Tag,
+  Sparkles
 } from 'lucide-react';
+
 
 const TOPICS_DATA = [
   {
@@ -711,6 +713,31 @@ export default function MathsCurriculum({ onEnroll }) {
           <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-medium">
             Explore topic-by-topic concept explanations and theorem proofs for Functions, Mathematical Induction, Matrices, and Vectors with high-yield video solutions.
           </p>
+
+          {/* Sample Demo Notice Banner */}
+          <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-400 dark:border-amber-600/70 shadow-md text-amber-950 dark:text-amber-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div className="flex items-center sm:items-start gap-3">
+              <div className="p-2.5 rounded-xl bg-amber-500 text-white shrink-0 shadow-sm">
+                <Sparkles size={20} className="animate-pulse" />
+              </div>
+              <div>
+                <h4 className="text-sm sm:text-base font-extrabold text-amber-900 dark:text-amber-200">
+                  Sample Demo Video Lectures
+                </h4>
+                <p className="text-xs sm:text-sm text-amber-800 dark:text-amber-300/90 mt-0.5 leading-relaxed">
+                  These are sample demo videos. <strong>Enroll now</strong> to get full access to detailed all chapters, formula sheets, and live 1-on-1 doubt clearing!
+                </p>
+              </div>
+            </div>
+            
+            <button
+              onClick={() => onEnroll && onEnroll('Mathematics Full Course - All Chapters Access')}
+              className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs sm:text-sm font-extrabold shadow-md shadow-amber-500/30 transition-all hover:scale-105 cursor-pointer shrink-0 inline-flex items-center gap-1.5"
+            >
+              <span>Enroll Now</span>
+              <ArrowRight size={15} />
+            </button>
+          </div>
         </div>
 
         {/* Filter Controls: Topic Tabs & Smart Keyword Search Bar */}
